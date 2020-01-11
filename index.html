@@ -66,7 +66,33 @@
 		</div>
 	</footer>
 
-    
+    <!-- searchModal -->
+    <div class="modal fade modal-container" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="searchModalTitle"
+		aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title color-white" id="searchModalTitle">Search</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true" class="color-white">&times;</span>
+                    </button>
+				</div>
+				<div class="modal-body">
+					<form>
+						<div class="form-row">
+							<div class="form-group col-12">
+								<input type="text" class="form-control" id="location" name="location" placeholder="Location" required>
+                            </div>
+							<div class="form-group col-12">
+								<input type="text" class="form-control" id="artist" name="artist" placeholder="Artist" required>
+                            </div>
+						</div>
+						<button type="submit" class="btn btn-primary btn-block">Search</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/popper.min.js"></script>

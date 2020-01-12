@@ -1,0 +1,17 @@
+/*html*/
+html {
+    scroll-behavior: smooth;
+}
+
+/*Navbar*/
+
+/*Hero Section*/
+#hero-scroll {
+    padding: 0px;
+}
+
+.hero-col > img{
+    margin: auto;
+    width: 100vw;
+    height: 75vh;
+}

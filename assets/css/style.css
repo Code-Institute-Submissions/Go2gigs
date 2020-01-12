@@ -4,9 +4,24 @@ html {
 }
 
 /*Navbar*/
+#hero-scroll{
+    padding: 0px;
+}
+
+.navbar{
+    padding: 8px 15px 8px 15px;
+}
+
+.navbar-brand{
+    margin: 0px;
+    transform: translateX(-50%);
+    left: 50%;
+    position: absolute;
+}
+
 
 /*Hero Section*/
-#hero-scroll {
+.hero-col{
     padding: 0px;
 }
 
@@ -14,4 +29,38 @@ html {
     margin: auto;
     width: 100vw;
     height: 75vh;
+}
+
+/*Footer*/
+#footer-container{
+    height: 56px;
+    background-color: #ffffff;
+}
+
+#social-links{
+    text-align: center;
+}
+
+#social-links li {
+    display: inline;
+    padding-left: 5%;
+    padding-right: 5%;
+}
+
+#social-links i {
+    font-size: 26px;
+    margin-top: 13px;
+    -webkit-transition-property: color;
+    -o-transition-property: color;
+    transition-property: color;
+    -webkit-transition-duration: 0.5s;
+    -o-transition-duration: 0.5s;
+    transition-duration: 0.5s;
+}
+
+#social-links i:hover {
+    color: #d32f2f;
+    -webkit-transition-timing-function: ease-in-out;
+    -o-transition-timing-function: ease-in-out;
+    transition-timing-function: ease-in-out;
 }

@@ -34,6 +34,8 @@ html{
 /* Map Section */
 #map{
     height: 300px;
+    width: 66%;
+    margin: auto;
 }
 
 /*Footer*/

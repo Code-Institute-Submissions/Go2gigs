@@ -14,21 +14,21 @@
 <body>
 	<!-- Navbar -->
 	<section class="container-fluid" id="hero-scroll">
-		<nav class="navbar navbar-light bg-light">
+		<nav class="navbar fixed-top navbar-light bg-light">
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
 
 			<a class="navbar-brand" href="#">Go2Gigs</a>
 
-			<form class="form-inline my-2 my-lg-0">
-				<input class="form-control mr-sm-2" type="search" placeholder="City or Artist" aria-label="Search">
+			<form id="gigForm" class="form-inline my-2 my-lg-0">
+				<input id="gigInput" class="form-control mr-sm-2" type="search" placeholder="City or Artist" aria-label="Search">
 				<button class="btn btn-outline-success my-2 my-sm-0" type="submit"><i class="fas fa-search"></i></button>
 			</form>
 
 			<div class="collapse navbar-collapse" id="navbarToggler">
 				<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-					<li class="nav-item active">
+					<li class="nav-item">
 						<a class="nav-link" href="#">Home</a>
 					</li>
 					<li class="nav-item">
@@ -98,5 +98,6 @@
     <script
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCEpPkjqOvCqa0kghMNInbffbMj8STkhB4&callback=initMap">
     </script>
+    <script src="assets/js/script.js"></script>
 </body>
 </html>

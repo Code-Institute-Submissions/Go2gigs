@@ -18,9 +18,8 @@ $(document).ready(function () {
             }
         })
         .then(function (response) {
-            // console.log(response.data.results[0].geometry.location.lat);
-            var latitude = response.data.results[0].geometry.location.lat;
-            var longitude = response.data.results[0].geometry.location.lng;
+            var latitude = parseFloat(response.data.results[0].geometry.location.lat);
+            var longitude = parseFloat(response.data.results[0].geometry.location.lng);
             console.log(latitude);
             console.log(longitude);
         })

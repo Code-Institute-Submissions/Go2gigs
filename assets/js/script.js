@@ -1,15 +1,15 @@
 
     // Initialize and add the map
     function initMap() {
-        // The map, centered at 0,0
+        // The map, centered at central europe lat and long
         var map = new google.maps.Map(
-            document.getElementById('map'), { zoom: 4, center: { lat: 0, lng: 0 } });
-        // The marker, positioned at 0,0
+            document.getElementById('map'), { zoom: 4, center: { lat: 50.3785, lng: 14.9706 } });
+        // The marker, positioned at central europe lat and long
         var marker = new google.maps.Marker({
             map: map,
             draggable: true,
             animation: google.maps.Animation.drop,
-            position: { lat: 0, lng: 0 }
+            position: { lat: 50.3785, lng: 14.9706 }
         });
 
         // save user input to a variable when submitted
@@ -31,8 +31,7 @@
             .then(function (response) {
                 var latitude = parseFloat(response.data.results[0].geometry.location.lat);
                 var longitude = parseFloat(response.data.results[0].geometry.location.lng);
-                console.log(latitude);
-                console.log(longitude);
+                // call DisplayPoint function with lat and long
                 DisplayPoint(map, latitude, longitude);
             })
             .catch(function (error) {
@@ -45,7 +44,6 @@
             var latLng = new google.maps.LatLng(latitude, longitude);
             marker.setPosition(latLng);
             map.panTo(latLng);
-
         }
     }
 

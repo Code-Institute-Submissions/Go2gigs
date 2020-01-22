@@ -3,7 +3,7 @@
     function initMap() {
         // The map, centered at central europe lat and long
         var map = new google.maps.Map(
-            document.getElementById('map'), { zoom: 4, center: { lat: 50.3785, lng: 14.9706 } });
+            document.getElementById('map'), { zoom: 8, center: { lat: 50.3785, lng: 14.9706 } });
         // The marker, positioned at central europe lat and long
         var marker = new google.maps.Marker({
             map: map,
@@ -18,6 +18,7 @@
             event.preventDefault();
             // call geocode function with userInput
             geocode(userInput);
+            FindSkId(userInput);
         });
 
         // Geocode the user input location into latitude and longitude using google geocode api
@@ -40,10 +41,26 @@
         }
 
         function DisplayPoint(map, latitude, longitude){
-
             var latLng = new google.maps.LatLng(latitude, longitude);
             marker.setPosition(latLng);
             map.panTo(latLng);
+        }
+        // First find a songkick metro area id using the songkick locations api, then use this id to find events in that area
+        function FindSkId(userInput){
+            axios.get('https://api.songkick.com/api/3.0/search/locations.json', {
+                params: {
+                    query: userInput,
+                    apikey: 'bguT074ohahXwEwu'
+                }
+            })
+            .then(function (response) {
+                console.log(response);
+                var metroId = response.data.resultsPage.results.location[0].metroArea.id;
+                console.log(metroId);
+            })
+            .catch(function (error) {
+                console.log(error);
+            })
         }
     }
 

@@ -1,5 +1,5 @@
 
-    // Initialize and add the map
+    // Initialize and add the map, centre it and add a marker at the default position of central europe
     function initMap() {
         // The map, centered at central europe lat and long
         var map = new google.maps.Map(
@@ -12,7 +12,7 @@
             position: { lat: 50.3785, lng: 14.9706 }
         });
 
-        // save user input to a variable when submitted
+        // When a user submits input save that input to a variable and call the FindSkId function to find a songkick id
         $("#gigForm").submit(function (event) {
             var userInput = String($("#gigInput").val());
             event.preventDefault();
@@ -54,9 +54,26 @@
                 }
             })
             .then(function (response) {
-                console.log(response);
-                var metroId = response.data.resultsPage.results.location[0].metroArea.id;
+                var metroId = parseInt(response.data.resultsPage.results.location[0].metroArea.id);
                 console.log(metroId);
+                FindAreaEvents(metroId);
+            })
+            .catch(function (error) {
+                console.log(error);
+            })
+        }
+
+        // Use this metro area id to find events in that area
+        function FindAreaEvents(metroId){
+            axios.get('https://api.songkick.com/api/3.0/metro_areas/{metro_area_id}/calendar.json', {
+                params: {
+                    metro_area_id: metroId,
+                    apikey: 'bguT074ohahXwEwu',
+                }
+            })
+            .then(function (response2) {
+                console.log(response2);
+                // var events = response.data.resultsPage.results.location[0].metroArea.id;
             })
             .catch(function (error) {
                 console.log(error);

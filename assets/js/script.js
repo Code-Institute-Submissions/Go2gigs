@@ -73,7 +73,7 @@
             })
             .then(function (response2) {
                 console.log(response2);
-                // var events = response.data.resultsPage.results.location[0].metroArea.id;
+                var events = response2.data.resultsPage.results.event.type;
             })
             .catch(function (error) {
                 console.log(error);

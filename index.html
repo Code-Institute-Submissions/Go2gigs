@@ -6,6 +6,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.15.5/dist/bootstrap-table.min.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
 	<link rel="stylesheet" href="assets/css/style.css">
 	<title>Go2Gigs</title>
@@ -53,35 +54,15 @@
 
     <!-- Data Table Secion -->
     <section class="container-fluid" id="data-table">
-        <table class="table table-sm table-hover table-striped table-dark">
+        <table data-toggle="table" class="table table-sm table-hover table-striped table-dark">
             <thead>
                 <tr>
-                    <th scope="col">Artist</th>
-                    <th scope="col">Date</th>
-                    <th scope="col">Venue</th>
-                    <th scope="col" id="linkcol"><img src="assets/images/by-songkick-white.png" alt="by songkick image" id="skimg"></th>
+                    <th data-field="col">Artist</th>
+                    <th data-field="col">Date</th>
+                    <th data-field="col">Venue</th>
+                    <th data-field="col" id="linkcol"><img src="assets/images/by-songkick-white.png" alt="by songkick image" id="skimg"></th>
                 </tr>
             </thead>
-            <tbody>
-                <tr>
-                    <th scope="row">Artist blank 1</th>
-                    <td>Date blank 1</td>
-                    <td>Venue blank 1</td>
-                    <td>Link blank 1</td>
-                </tr>
-                <tr>
-                    <th scope="row">Artist blank 2</th>
-                    <td>Date blank 2</td>
-                    <td>Venue blank 2</td>
-                    <td>Link blank 2</td>
-                </tr>
-                <tr>
-                    <th scope="row">Artist blank 3</th>
-                    <td>Date blank 3</td>
-                    <td>Venue blank 3</td>
-                    <td>Link blank 3</td>
-                </tr>
-            </tbody>
         </table>
     </section>
 
@@ -120,6 +101,7 @@
     <script src="assets/js/script.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/popper.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <script src="https://unpkg.com/bootstrap-table@1.15.5/dist/bootstrap-table.min.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <!-- <script 
         src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js">

@@ -31,6 +31,20 @@ html{
     height: 75vh;
 }
 
+/* Table Section */
+#data-table{
+    padding: 0px;
+}
+
+#linkcol{
+    padding-left: 0px;
+}
+
+#skimg{
+    width: 100px;
+    height: auto;
+}
+
 /* Map Section */
 #map{
     height: 300px;

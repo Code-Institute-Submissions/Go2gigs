@@ -18,7 +18,6 @@ function initMap() {
         event.preventDefault();
         // call geocode function with userInput
         geocode(userInput);
-        FindSkId(userInput);
     });
 
     // Geocode the user input location into latitude and longitude using google geocode api
@@ -33,7 +32,10 @@ function initMap() {
                 var latitude = parseFloat(response.data.results[0].geometry.location.lat);
                 var longitude = parseFloat(response.data.results[0].geometry.location.lng);
                 // call DisplayPoint function with lat and long
+                console.log(latitude);
+                console.log(longitude);
                 DisplayPoint(map, latitude, longitude);
+                findEvents(latitude, longitude);
             })
             .catch(function (error) {
                 console.log(error);
@@ -45,46 +47,29 @@ function initMap() {
         marker.setPosition(latLng);
         map.panTo(latLng);
     }
-    // First find a songkick metro area id using the songkick locations api, then use this id to find events in that area
-    function FindSkId(userInput) {
-        axios.get('https://api.songkick.com/api/3.0/search/locations.json', {
-            params: {
-                query: userInput,
-                apikey: 'bguT074ohahXwEwu'
-            }
-        })
-            .then(function (response) {
-                var metroId = parseInt(response.data.resultsPage.results.location[0].metroArea.id);
-                console.log(metroId);
-                FindAreaEvents(metroId);
-            })
-            .catch(function (error) {
-                console.log(error);
-            })
-    }
 
-    // Use this metro area id to find events in that area
-    function FindAreaEvents(metroId) {
-        axios.get('https://api.songkick.com/api/3.0/metro_areas/{metro_area_id}/calendar.json', {
+    // Function to find events at a location when passed lat and lng
+    function findEvents(lat, lng) {
+        axios.get('https://api.songkick.com/api/3.0/events.json', {
             params: {
-                metro_area_id: metroId,
-                apikey: 'bguT074ohahXwEwu',
+                geo: lat, lng,
+                apikey: 'bguT074ohahXwEwu'
             }
         })
             .then(function (response2) {
                 console.log(response2);
-                tabulate(response2);
+                // tabulate(response2);
             })
             .catch(function (error) {
                 console.log(error);
             })
     }
 
-    $(function tabulate(data) {
-        $('#table').bootstrapTable({
-            data: data
-        });
-    });
+    // $(function tabulate(data) {
+    //     $('#table').bootstrapTable({
+    //         data: data
+    //     });
+    // });
 }
 
 

@@ -52,8 +52,8 @@ function initMap() {
     function findEvents(lat, lng) {
         axios.get('https://api.songkick.com/api/3.0/events.json', {
             params: {
-                geo: lat, lng,
-                apikey: 'bguT074ohahXwEwu'
+                apikey: 'bguT074ohahXwEwu',
+                ip: '2a02:c7d:3151:c600:7044:e72c:1f2d:6c52'
             }
         })
             .then(function (response2) {

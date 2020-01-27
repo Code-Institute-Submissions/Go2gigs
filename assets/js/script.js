@@ -17,7 +17,8 @@ function initMap() {
         var userInput = String($("#gigInput").val());
         event.preventDefault();
         // call geocode function with userInput
-        geocode(userInput);
+        // geocode(userInput);
+        findEvents(userInput);
     });
 
     // Geocode the user input location into latitude and longitude using google geocode api
@@ -35,7 +36,6 @@ function initMap() {
                 console.log(latitude);
                 console.log(longitude);
                 DisplayPoint(map, latitude, longitude);
-                findEvents(latitude, longitude);
             })
             .catch(function (error) {
                 console.log(error);
@@ -48,12 +48,11 @@ function initMap() {
         map.panTo(latLng);
     }
 
-    // Function to find events at a location when passed lat and lng
-    function findEvents(lat, lng) {
+    function findEvents(userInput) {
         axios.get('https://api.songkick.com/api/3.0/events.json', {
             params: {
                 apikey: 'bguT074ohahXwEwu',
-                ip: '2a02:c7d:3151:c600:7044:e72c:1f2d:6c52'
+                artist_name: userInput
             }
         })
             .then(function (response2) {

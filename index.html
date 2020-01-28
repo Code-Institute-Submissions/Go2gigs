@@ -6,68 +6,50 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.15.5/dist/bootstrap-table.min.css">
+	<link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.15.5/dist/bootstrap-table.min.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
 	<link rel="stylesheet" href="assets/css/style.css">
 	<title>Go2Gigs</title>
 </head>
 
 <body>
-	<!-- Navbar -->
-	<section class="container-fluid" id="hero-scroll">
-		<nav class="navbar fixed-top navbar-light bg-light">
-			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-			<a class="navbar-brand" href="#">Go2Gigs</a>
-
-			<form id="gigForm" class="form-inline my-2 my-lg-0">
-				<input id="gigInput" class="form-control mr-sm-2" type="search" placeholder="City or Artist" aria-label="Search">
-				<button id="searchBtn" class="btn btn-outline-success my-2 my-sm-0" type="submit"><i class="fas fa-search"></i></button>
-			</form>
-
-			<div class="collapse navbar-collapse" id="navbarToggler">
-				<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-					<li class="nav-item">
-						<a class="nav-link" href="#">Home</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="#">In Your City</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="#">Alert Me</a>
-					</li>
-				</ul>
-			</div>
-		</nav>
-	</section>
-
 	<!-- Hero Section -->
-	<section class="container-fluid" id="hero-container">
-		<div class="row hero-row">
-			<div class="col-12 hero-col">
-				<img src="assets/images/gig2.jpg" alt="hero image live gig"></img>
+	<section class="hero">
+		<div class="jumbotron jumbotron-fluid">
+			<div class="container-fluid">
+				<h1>Go 2 Gigs Anywhere Anytime</h1>
+				<form>
+					<div class="form-group form-inline">
+						<i class="fas fa-search" aria-hidden="true"></i>
+						<input class="form-control" type="text" placeholder="Artist Search" aria-label="Artist Search">
+                </div>
+						<div class="form-group form-inline">
+							<i class="fas fa-search" aria-hidden="true"></i>
+							<input class="form-control" type="text" placeholder="Location Search" aria-label="Location Search">
+                </div>
+							<button type="submit" class="btn btn-primary">Submit</button>
+				</form>
 			</div>
 		</div>
 	</section>
 
-    <!-- Data Table Secion -->
-    <section class="container-fluid" id="data-table">
-        <table id="table" data-toggle="table" class="table table-sm table-hover table-striped table-dark">
-            <thead>
-                <tr>
-                    <th data-field="displayName">Artist</th>
-                    <th data-field="date">Date</th>
-                    <th data-field="venue">Venue</th>
-                    <th data-field="uri" id="linkcol"><img src="assets/images/by-songkick-white.png" alt="by songkick image" id="skimg"></th>
-                </tr>
-            </thead>
-        </table>
-    </section>
+	<!-- Data Table Secion -->
+	<section class="container-fluid" id="data-table">
+		<table id="table" data-toggle="table" class="table table-sm table-hover table-striped table-dark">
+			<thead>
+				<tr>
+					<th data-field="displayName">Artist</th>
+					<th data-field="date">Date</th>
+					<th data-field="venue">Venue</th>
+					<th data-field="uri" id="linkcol">
+						<img src="assets/images/by-songkick-white.png" alt="by songkick image" id="skimg"></th>
+				</tr>
+			</thead>
+		</table>
+	</section>
 
-    <!-- Map Section -->
-    <div id="map"></div>
+	<!-- Map Section -->
+	<div id="map"></div>
 
 	<!-- Footer -->
 	<footer class="container-fluid" id="footer-container">
@@ -97,18 +79,18 @@
 		</div>
 	</footer>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="assets/js/script.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script src="assets/js/script.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/popper.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.min.js"></script>
-    <script src="https://unpkg.com/bootstrap-table@1.15.5/dist/bootstrap-table.min.js"></script>
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <!-- <script 
+	<script src="https://unpkg.com/bootstrap-table@1.15.5/dist/bootstrap-table.min.js"></script>
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+	<!-- <script 
         src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js">
     </script> -->
-    <script
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCEpPkjqOvCqa0kghMNInbffbMj8STkhB4&callback=initMap">
-    </script>
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCEpPkjqOvCqa0kghMNInbffbMj8STkhB4&callback=initMap">
+	</script>
 
 </body>
+
 </html>

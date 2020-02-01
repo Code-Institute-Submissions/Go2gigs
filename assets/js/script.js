@@ -18,7 +18,9 @@ $( document ).ready(function(){
         })
             .then(function (response) {
                 console.log(response);
-                getData(response);
+                $(function() {
+                    $('#table').bootstrapTable({data: getData(response)})
+                })
 
             })
             .catch(function (error) {
@@ -43,7 +45,7 @@ $( document ).ready(function(){
             });
         }
         console.log(data);
-        return data
+        return data;
     }
 
     // $(function() {

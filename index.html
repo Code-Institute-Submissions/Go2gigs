@@ -18,18 +18,18 @@
 	<!-- Hero Section -->
 	<section class="hero">
 		<div class="opaque-overlay">
-        <div class="container" id="search-box-outer">
-        <div class="row">
-				<div class="container" id="search-box-inner">
-					<div class="row">
-						<div class="col-lg-2 col-md-2 col-sm-12 p-0">
-							<select class="form-control search-slt" id="search-by">
+			<div class="container" id="search-box-outer">
+				<form id="search-form">
+					<div class="form-row align-items-center" id="search-row">
+						<div class="col-lg-3 col-md-3 col-sm-12 p-0">
+							<select class="form-control" id="search-by">
+                                <option selected>Choose...</option>
                                 <option>Search by City</option>
                                 <option>Search by Artist</option>
 							</select>
 						</div>
 						<div class="col-lg-3 col-md-3 col-sm-12 p-0">
-							<input type="text" class="form-control search-slt" id="user-input" placeholder="Enter City">
+							<input type="text" class="form-control" id="user-input" placeholder="Enter City">
                         </div>
 							<div class="col-lg-2 col-md-2 col-sm-12 p-0">
 								<div class="input-group date">
@@ -41,14 +41,13 @@
 										<input type="text" class="form-control datepicker" id="date-to" placeholder="Date to">
                         </div>
 									</div>
-									<div class="col-lg-2 col-md-2 col-sm-12">
+									<div class="col-lg-2 col-md-2 col-sm-12 p-0">
 										<button type="button" class="btn btn-danger wrn-btn" id="search-btn">Search</button>
 									</div>
-								</div>
-							</div>
-                            </div>
-                            </div>
 					</div>
+				</form>
+			</div>
+		</div>
 	</section>
 
 	<!-- Data Table Secion -->
@@ -100,12 +99,14 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/popper.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js">
+	</script>
 	<script src="https://unpkg.com/bootstrap-table@1.15.5/dist/bootstrap-table.min.js"></script>
 	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCEpPkjqOvCqa0kghMNInbffbMj8STkhB4&callback=initMap"></script>
-    <script src="assets/js/script.js"></script>
-    <script src="assets/js/datepicker.js"></script>
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCEpPkjqOvCqa0kghMNInbffbMj8STkhB4&callback=initMap">
+	</script>
+	<script src="assets/js/script.js"></script>
+	<script src="assets/js/datepicker.js"></script>
 </body>
 
 </html>

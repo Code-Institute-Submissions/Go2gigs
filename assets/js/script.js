@@ -1,6 +1,6 @@
 $( document ).ready(function(){
 
-// When a user submits input save that input to a variable and call the findEvents function
+    // When a user submits input save that input to a variable and call the findEvents function
     $("#search-form").submit(function(event){
         var userInput = String($("#user-input").val());
         console.log(userInput);
@@ -18,14 +18,20 @@ $( document ).ready(function(){
         })
             .then(function (response) {
                 console.log(response);
-                // tabulate(response2);
+                getData(response);
+
             })
             .catch(function (error) {
                 console.log(error);
             })
     }
 
-    // $(function tabulate(data) {
+    function getData(response) {
+        var total = parseInt(response.data.resultsPage.totalEntries);
+        console.log(total);
+    }
+
+    // $(function() {
     //     $('#table').bootstrapTable({
     //         data: data
     //     });

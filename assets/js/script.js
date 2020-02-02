@@ -4,9 +4,7 @@ $( document ).ready(function(){
     $("#search-form").submit(function(event){
         var userInput = String($("#user-input").val());
         var dateFrom = $("#date-from").val();
-        console.log(dateFrom);
         var dateTo = $("#date-to").val();
-        console.log(dateTo);
         findEvents(userInput, dateFrom, dateTo);
         event.preventDefault();
     });

@@ -3,17 +3,22 @@ $( document ).ready(function(){
     // When a user submits input save that input to a variable and call the findEvents function
     $("#search-form").submit(function(event){
         var userInput = String($("#user-input").val());
-        console.log(userInput);
+        var dateFrom = $("#date-from").val();
+        console.log(dateFrom);
+        var dateTo = $("#date-to").val();
+        console.log(dateTo);
+        findEvents(userInput, dateFrom, dateTo);
         event.preventDefault();
-        findEvents(userInput);
     });
 
     // FindEvents takes user artist input passes that and apikey to songkick api and obtains a response
-    function findEvents(userInput) {
+    function findEvents(userInput, dateFrom, dateTo) {
         axios.get('https://api.songkick.com/api/3.0/events.json', {
             params: {
                 apikey: 'bguT074ohahXwEwu',
-                artist_name: userInput
+                artist_name: userInput,
+                min_date: dateFrom,
+                max_date: dateTo
             }
         })
             .then(function (response) {

@@ -12,6 +12,8 @@ function initMap() {
         position: { lat: 50.3785, lng: 14.9706 }
     });
 }
+
+
     // DisplayPoint(map, latitude, longitude);
 
     // function DisplayPoint(map, latitude, longitude) {

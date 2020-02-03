@@ -20,7 +20,6 @@ $( document ).ready(function(){
             }
         })
             .then(function (response) {
-                console.log(response);
                 $(function() {
                     $('#table').bootstrapTable({data: getData(response)})
                 })
@@ -32,10 +31,7 @@ $( document ).ready(function(){
 
     function getData(response) {
         var total = parseInt(response.data.resultsPage.totalEntries);
-        console.log(total);
-
-        var second = response.data.resultsPage.results.event[1].displayName
-        console.log(second);
+        console.log(total); // remove this********
 
         var data = [];
         for(var i = 0; i < total; i++){
@@ -49,7 +45,7 @@ $( document ).ready(function(){
                 'Lng': response.data && response.data.resultsPage && response.data.resultsPage.results && response.data.resultsPage.results.event[i] && response.data.resultsPage.results.event[i].location && response.data.resultsPage.results.event[i].location.lng
             });
         }
-        console.log(data);
+        console.log(data); // remove this**********
         return data;
     }
 

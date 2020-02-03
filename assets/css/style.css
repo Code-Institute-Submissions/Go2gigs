@@ -30,6 +30,10 @@
     margin: 0;
 }
 
+#search-btn{
+    width: 145px;
+}
+
 
 /* Table Section */
 #data-table{

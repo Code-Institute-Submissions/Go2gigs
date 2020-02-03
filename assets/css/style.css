@@ -34,15 +34,15 @@
 /* Table Section */
 #data-table{
     padding: 0px;
-    background-color: #d32f2f;
+    background-color: rgba(25, 70,105, 0.5);
 }
 
 .fixed-table-toolbar{
-    background-color: #d32f2f;
+    background-color: rgba(25, 70,105, 0.5);
 }
 
 #table{
-    background-color: #d32f2f;
+    background-color: rgba(25, 70,105, 0.5);
 }
 
 #linkcol{

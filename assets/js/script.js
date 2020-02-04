@@ -34,6 +34,9 @@ $( document ).ready(function(){
         console.log(total); // remove this********
 
         var data = [];
+        var labels = [];
+        var locations = [];
+
         for(var i = 0; i < total; i++){
             data.push({
                 '#': i+1,
@@ -44,8 +47,17 @@ $( document ).ready(function(){
                 'Lat': response.data && response.data.resultsPage && response.data.resultsPage.results && response.data.resultsPage.results.event[i] && response.data.resultsPage.results.event[i].location && response.data.resultsPage.results.event[i].location.lat,
                 'Lng': response.data && response.data.resultsPage && response.data.resultsPage.results && response.data.resultsPage.results.event[i] && response.data.resultsPage.results.event[i].location && response.data.resultsPage.results.event[i].location.lng
             });
+
+            labels.push(i+1);
+
+            locations.push({
+                'lat': response.data && response.data.resultsPage && response.data.resultsPage.results && response.data.resultsPage.results.event[i] && response.data.resultsPage.results.event[i].location && response.data.resultsPage.results.event[i].location.lat,
+                'lng': response.data && response.data.resultsPage && response.data.resultsPage.results && response.data.resultsPage.results.event[i] && response.data.resultsPage.results.event[i].location && response.data.resultsPage.results.event[i].location.lng
+            })
         }
         console.log(data); // remove this**********
+        console.log(labels);  // remove this**********
+        console.log(locations);  // remove this**********
         return data;
     }
 

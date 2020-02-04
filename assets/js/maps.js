@@ -13,7 +13,6 @@ function initMap() {
     });
 }
 
-
     // DisplayPoint(map, latitude, longitude);
 
     // function DisplayPoint(map, latitude, longitude) {

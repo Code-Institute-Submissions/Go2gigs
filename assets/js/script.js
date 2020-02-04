@@ -29,13 +29,14 @@ $( document ).ready(function(){
             })
     }
 
-    var labels = [];
-    var locations = [];
+
 
     function getData(response) {
         var total = parseInt(response.data.resultsPage.totalEntries);
         console.log(total); // remove this********
 
+        var labels = [];
+        var locations = [];
         var data = [];
 
         for(var i = 0; i < total; i++){
@@ -59,7 +60,7 @@ $( document ).ready(function(){
         console.log(data); // remove this**********
         console.log(labels);  // remove this**********
         console.log(locations);  // remove this**********
-        // displayMarkers();
+        // displayMarkers(labels, locations);
         return data;
     }
 

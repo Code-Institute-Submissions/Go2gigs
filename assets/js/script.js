@@ -26,9 +26,6 @@ $( document ).ready(function(){
 
                     // The array data returned from function getData is tabulated using the bootstrap table function
                     $('#table').bootstrapTable({data: myData.tableData})
-
-                    displayMarkers(myData.labelData, myData.locationData)
-
                 })
             })
             .catch(function (error) {
@@ -36,14 +33,14 @@ $( document ).ready(function(){
             })
     }
 
+    var labels = [];
+    var locations = [];
 
     // getData takes the response, loops thru the response and push the required response data into array containers
     function getData(response) {
         var total = parseInt(response.data.resultsPage.totalEntries);
         console.log(total); // remove this********
 
-        var labels = [];
-        var locations = [];
         var data = [];
 
         for(var i = 0; i < total; i++){

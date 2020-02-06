@@ -21,7 +21,14 @@ $( document ).ready(function(){
         })
             .then(function (response) {
                 $(function() {
-                    $('#table').bootstrapTable({data: getData(response)})
+                    // The function getData is called here and saved to a variable
+                    var myData = getData(response);
+
+                    // The array data returned from function getData is tabulated using the bootstrap table function
+                    $('#table').bootstrapTable({data: myData.tableData})
+
+                    displayMarkers(myData.labelData, myData.locationData)
+
                 })
             })
             .catch(function (error) {
@@ -30,7 +37,7 @@ $( document ).ready(function(){
     }
 
 
-
+    // getData takes the response, loops thru the response and push the required response data into array containers
     function getData(response) {
         var total = parseInt(response.data.resultsPage.totalEntries);
         console.log(total); // remove this********
@@ -61,7 +68,13 @@ $( document ).ready(function(){
         console.log(labels);  // remove this**********
         console.log(locations);  // remove this**********
         // displayMarkers(labels, locations);
-        return data;
+
+        // The function returns an object of all array containers
+        return {
+            tableData: data,
+            labelData: labels,
+            locationData: locations
+        };
     }
 
 });

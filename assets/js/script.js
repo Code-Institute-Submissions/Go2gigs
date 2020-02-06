@@ -26,6 +26,9 @@ $( document ).ready(function(){
 
                     // The array data returned from function getData is tabulated using the bootstrap table function
                     $('#table').bootstrapTable({data: myData.tableData})
+
+                    // Add markers to the map
+                    addMarker(myData.labelData, myData.locationData, map)
                 })
             })
             .catch(function (error) {
@@ -33,14 +36,13 @@ $( document ).ready(function(){
             })
     }
 
-    var labels = [];
-    var locations = [];
-
     // getData takes the response, loops thru the response and push the required response data into array containers
     function getData(response) {
         var total = parseInt(response.data.resultsPage.totalEntries);
         console.log(total); // remove this********
 
+        var labels = '';
+        var locations = [];
         var data = [];
 
         for(var i = 0; i < total; i++){
@@ -54,7 +56,7 @@ $( document ).ready(function(){
                 'Lng': response.data && response.data.resultsPage && response.data.resultsPage.results && response.data.resultsPage.results.event[i] && response.data.resultsPage.results.event[i].location && response.data.resultsPage.results.event[i].location.lng
             });
 
-            labels.push(i+1);
+            labels = labels + i.toString();
 
             locations.push({
                 'lat': response.data && response.data.resultsPage && response.data.resultsPage.results && response.data.resultsPage.results.event[i] && response.data.resultsPage.results.event[i].location && response.data.resultsPage.results.event[i].location.lat,

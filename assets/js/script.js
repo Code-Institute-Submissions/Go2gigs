@@ -1,4 +1,12 @@
 $( document ).ready(function(){
+    // When the user changes the select option change the user input placeholder
+    $('#search-by').change(function(){       
+        if($(this).val() == '0'){
+            $('#user-input').attr('placeholder','Enter City');
+        }else if($(this).val() == '1'){
+            $('#user-input').attr('placeholder','Enter Artist');
+        }    
+    });
 
     // When a user submits input save that input to a variable and call the findEvents function
     $("#search-form").submit(function(event){

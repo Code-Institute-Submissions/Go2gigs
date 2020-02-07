@@ -1,20 +1,28 @@
 $( document ).ready(function(){
     // When the user changes the select option change the user input placeholder
     $('#search-by').change(function(){       
-        if($(this).val() == '0'){
+        if($(this).val() == '0'){ // search by city
             $('#user-input').attr('placeholder','Enter City');
-        }else if($(this).val() == '1'){
+        }else if($(this).val() == '1'){ // search by artist
             $('#user-input').attr('placeholder','Enter Artist');
         }    
     });
 
     // When a user submits input save that input to a variable and call the findEvents function
     $("#search-form").submit(function(event){
-        var userInput = String($("#user-input").val());
-        var dateFrom = $("#date-from").val();
-        var dateTo = $("#date-to").val();
-        findEvents(userInput, dateFrom, dateTo);
-        event.preventDefault();
+        if($('#search-by').val() == '0'){ // search by city
+            var userInput = String($("#user-input").val());
+            var dateFrom = $("#date-from").val();
+            var dateTo = $("#date-to").val();
+            findEvents(userInput, dateFrom, dateTo);
+            event.preventDefault();
+        }else if($('#search-by').val() == '1'){ // search by artist
+            var userInput = String($("#user-input").val());
+            var dateFrom = $("#date-from").val();
+            var dateTo = $("#date-to").val();
+            // findEvents(userInput, dateFrom, dateTo); new function here to find by location
+            event.preventDefault();
+        }
     });
 
     // FindEvents takes user artist input passes that and apikey to songkick api and obtains a response

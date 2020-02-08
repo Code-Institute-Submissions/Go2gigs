@@ -15,7 +15,8 @@ $( document ).ready(function(){
             var userInput = String($("#user-input").val());
             var dateFrom = $("#date-from").val();
             var dateTo = $("#date-to").val();
-            findLocation(userInput);
+            var locId = findLocation(userInput);
+            findEventLoc(locId, dateFrom, dateTo);
             event.preventDefault();
         }else if($('#search-by').val() == '1'){ // search by artist
             var userInput = String($("#user-input").val());
@@ -26,7 +27,8 @@ $( document ).ready(function(){
         }
     });
 
-    // FindLocation takes user location input passes that and apikey to songkick api and obtains a response
+    // FindLocation takes user location input passes that and apikey to songkick api and obtains a location id response
+    // This id is then used to find events by location with function findEventLoc
     function findLocation(userInput) {
         axios.get('https://api.songkick.com/api/3.0/search/locations.json?', {
             params: {
@@ -38,6 +40,34 @@ $( document ).ready(function(){
                 $(function() {
                     var id = response.data && response.data.resultsPage && response.data.resultsPage.results && response.data.resultsPage.results.location[0] && response.data.resultsPage.results.location[0].metroArea && response.data.resultsPage.results.location[0].metroArea.id
                     console.log(id);
+                    return id;
+                })
+            })
+            .catch(function (error) {
+                console.log(error);
+            })
+    }
+
+    function findEventLoc(locId, dateFrom, dateTo){
+        axios.get('https://api.songkick.com/api/3.0/events.json', {
+            params: {
+                apikey: 'bguT074ohahXwEwu',
+                location: locId,
+                min_date: dateFrom,
+                max_date: dateTo
+            }
+        })
+            .then(function (response) {
+                $(function() {
+                    console.log(response);
+                    // The function getData is called here and saved to a variable
+                    // var myData = getData(response);
+
+                    // The array data returned from function getData is tabulated using the bootstrap table function
+                    // $('#table').bootstrapTable({data: myData.tableData})
+
+                    // Add markers to the map
+                    // addMarker(myData.labelData, myData.locationData, map)
                 })
             })
             .catch(function (error) {

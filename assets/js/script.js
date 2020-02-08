@@ -52,7 +52,7 @@ $( document ).ready(function(){
         axios.get('https://api.songkick.com/api/3.0/events.json', {
             params: {
                 apikey: 'bguT074ohahXwEwu',
-                location: locId,
+                location:locId,
                 min_date: dateFrom,
                 max_date: dateTo
             }

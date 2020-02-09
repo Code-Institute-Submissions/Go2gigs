@@ -15,7 +15,7 @@ $( document ).ready(function(){
             var userInput = String($("#user-input").val());
             var dateFrom = $("#date-from").val();
             var dateTo = $("#date-to").val();
-            var locId = findLocation(userInput);
+            findLocation(userInput, dateFrom, dateTo, findEventLoc);
             console.log(locId);
             // var locId = 24475;
             findEventLoc(locId, dateFrom, dateTo);
@@ -31,8 +31,7 @@ $( document ).ready(function(){
 
     // FindLocation takes user location input passes that and apikey to songkick api and obtains a location id response
     // This id is then used to find events by location with function findEventLoc
-    function findLocation(userInput) {
-        var id
+    function findLocation(userInput, dateFrom, dateTo, cb) {
 
         axios.get('https://api.songkick.com/api/3.0/search/locations.json?', {
             params: {
@@ -42,8 +41,10 @@ $( document ).ready(function(){
         })
             .then(function (response) {
                 $(function() {
-                    id = response.data && response.data.resultsPage && response.data.resultsPage.results && response.data.resultsPage.results.location[0] && response.data.resultsPage.results.location[0].metroArea && response.data.resultsPage.results.location[0].metroArea.id
+                    var id = response.data && response.data.resultsPage && response.data.resultsPage.results && response.data.resultsPage.results.location[0] && response.data.resultsPage.results.location[0].metroArea && response.data.resultsPage.results.location[0].metroArea.id
                     console.log(id);
+                    cb(id, dateFrom, dateTo);
+
                 })
             })
             .catch(function (error) {

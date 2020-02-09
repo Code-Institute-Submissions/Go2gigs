@@ -15,8 +15,10 @@ $( document ).ready(function(){
             var userInput = String($("#user-input").val());
             var dateFrom = $("#date-from").val();
             var dateTo = $("#date-to").val();
-            var locId = findLocation(userInput);
-            findEventLoc(locId);
+            // var locId = findLocation(userInput);
+            // console.log(locId);
+            var locId = 24475;
+            findEventLoc(locId, dateFrom, dateTo);
             event.preventDefault();
         }else if($('#search-by').val() == '1'){ // search by artist
             var userInput = String($("#user-input").val());
@@ -48,50 +50,50 @@ $( document ).ready(function(){
             })
     }
 
-    function findEventLoc(locId){
+    function findEventLoc(locId, dateFrom, dateTo){
         // var url = "https://api.songkick.com/api/3.0/metro_areas/"+locId+"/calendar.json?apikey=bguT074ohahXwEwu&min_date="+dateFrom+"&max_date="+dateTo;
-        var metro_area_id = locId;
+        // var metro_area_id = locId;
         // var dateF = dateFrom;
         // var dateT = dateTo;
 
-        $.ajax({
-            // "https://api.songkick.com/api/3.0/metro_areas/"+metro_area_id+"/calendar.json?apikey=bguT074ohahXwEwu&min_date="+dateF+"&max_date="+dateT,
-            url : "https://api.songkick.com/api/3.0/metro_areas/"+metro_area_id+"/calendar.json?apikey=bguT074ohahXwEwu",
-            type: "GET",
-            success: function(result){
-                console.log(result);
-            },
-            error: function(error){
-                console.log('Error ${error}');
+    //     $.ajax({
+    //         // "https://api.songkick.com/api/3.0/metro_areas/"+metro_area_id+"/calendar.json?apikey=bguT074ohahXwEwu&min_date="+dateF+"&max_date="+dateT,
+    //         url : "https://api.songkick.com/api/3.0/metro_areas/"+metro_area_id+"/calendar.json?apikey=bguT074ohahXwEwu",
+    //         type: "GET",
+    //         success: function(result){
+    //             console.log(result);
+    //         },
+    //         error: function(error){
+    //             console.log(error);
+    //         }
+    //     })
+    // }
+
+        axios.get('https://api.songkick.com/api/3.0/metro_areas/{metro_area_id}/calendar.json?apikey={your_api_key}', {
+            params: {
+                apikey: 'bguT074ohahXwEwu',
+                metro_area_id: locId,
+                min_date: dateFrom,
+                max_date: dateTo
             }
         })
+            .then(function (response) {
+                $(function() {
+                    console.log(response);
+                    // The function getData is called here and saved to a variable
+                    // var myData = getData(response);
+
+                    // The array data returned from function getData is tabulated using the bootstrap table function
+                    // $('#table').bootstrapTable({data: myData.tableData})
+
+                    // Add markers to the map
+                    // addMarker(myData.labelData, myData.locationData, map)
+                })
+            })
+            .catch(function (error) {
+                console.log(error);
+            })
     }
-
-        // axios.get('https://api.songkick.com/api/3.0/metro_areas/{metro_area_id}/calendar.json?apikey={your_api_key}', {
-        //     params: {
-        //         apikey: 'bguT074ohahXwEwu',
-        //         metro_areas: locId,
-        //         min_date: dateFrom,
-        //         max_date: dateTo
-        //     }
-        // })
-        //     .then(function (response) {
-        //         $(function() {
-        //             console.log(response);
-        //             // The function getData is called here and saved to a variable
-        //             // var myData = getData(response);
-
-        //             // The array data returned from function getData is tabulated using the bootstrap table function
-        //             // $('#table').bootstrapTable({data: myData.tableData})
-
-        //             // Add markers to the map
-        //             // addMarker(myData.labelData, myData.locationData, map)
-        //         })
-        //     })
-        //     .catch(function (error) {
-        //         console.log(error);
-        //     })
-    // }
 
     // FindEvents takes user artist input passes that and apikey to songkick api and obtains a response
     function findEvents(userInput, dateFrom, dateTo) {

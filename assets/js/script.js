@@ -15,10 +15,7 @@ $( document ).ready(function(){
             var userInput = String($("#user-input").val());
             var dateFrom = $("#date-from").val();
             var dateTo = $("#date-to").val();
-            findLocation(userInput, dateFrom, dateTo, findEventLoc);
-            console.log(locId);
-            // var locId = 24475;
-            findEventLoc(locId, dateFrom, dateTo);
+            findLocation(userInput, dateFrom, dateTo, findEventLoc); // call findLocation function with callback function findEventLoc
             event.preventDefault();
         }else if($('#search-by').val() == '1'){ // search by artist
             var userInput = String($("#user-input").val());
@@ -31,6 +28,7 @@ $( document ).ready(function(){
 
     // FindLocation takes user location input passes that and apikey to songkick api and obtains a location id response
     // This id is then used to find events by location with function findEventLoc
+    // cb is a callback function to be called once metro_area_id found
     function findLocation(userInput, dateFrom, dateTo, cb) {
 
         axios.get('https://api.songkick.com/api/3.0/search/locations.json?', {
@@ -50,7 +48,6 @@ $( document ).ready(function(){
             .catch(function (error) {
                 console.log(error);
             })
-        return id;
     }
 
     function findEventLoc(locId, dateFrom, dateTo){

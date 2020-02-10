@@ -13,6 +13,8 @@
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
 }
 
 .opaque-overlay{
@@ -45,15 +47,6 @@
 /* Table Section */
 #data-table{
     padding: 0px;
-    background-color: rgba(25, 70,105, 0.5);
-}
-
-.fixed-table-toolbar{
-    background-color: rgba(25, 70,105, 0.5);
-}
-
-#table{
-    background-color: rgba(25, 70,105, 0.5);
 }
 
 #linkcol{

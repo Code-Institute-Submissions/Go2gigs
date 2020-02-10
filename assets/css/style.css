@@ -47,6 +47,7 @@
 /* Table Section */
 #data-table{
     padding: 0px;
+    background-color: #343a40;
 }
 
 #linkcol{
@@ -56,6 +57,14 @@
 #skimg{
     width: 100px;
     height: auto;
+}
+
+.pagination-info{
+    color: #fff;
+}
+
+.page-list{
+    color: #fff;
 }
 
 /* Map Section */

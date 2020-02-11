@@ -5,6 +5,9 @@ function initMap() {
     map = new google.maps.Map(
         document.getElementById('map'), { zoom: 8, center: { lat: 50.3785, lng: 14.9706 } });
 }
+
+var markers = []; // an array to store markers
+
 // Adds a marker to the map.
 function addMarker(labels, locations, map) {
     for(var i = 0; i < labels.length; i++){
@@ -13,17 +16,13 @@ function addMarker(labels, locations, map) {
             label: labels[i],
             map: map
         });
+        markers.push(marker);
     }
+
+    var bounds = new google.maps.LatLngBounds();
+    for (var i = 0; i < markers.length; i++){
+        bounds.extend(markers[i]);
+    }
+    map.fitBounds(bounds);
 }
 
-    // // Add a marker clusterer to manage the markers.
-    // var markerCluster = new MarkerClusterer(map, markers,
-    //     {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
-
-    // DisplayPoint(map, latitude, longitude);
-
-    // function DisplayPoint(map, latitude, longitude) {
-    //     var latLng = new google.maps.LatLng(latitude, longitude);
-    //     marker.setPosition(latLng);
-    //     map.panTo(latLng);
-    // }

@@ -9,7 +9,7 @@ $( document ).ready(function(){
         }    
     });
 
-    // When a user submits input save that input to a variable and call the findEvents function
+    // When a user submits input save that input to variables and call the findEvents function
     $("#search-form").submit(function(event){
         if($('#search-by').val() == '0'){ // search by city
             var userInput = String($("#user-input").val());
@@ -17,12 +17,14 @@ $( document ).ready(function(){
             var dateTo = $("#date-to").val();
             findLocation(userInput, dateFrom, dateTo, findEventLoc); // call findLocation function with callback function findEventLoc
             event.preventDefault();
+            $("#search-form")[0].reset();
         }else if($('#search-by').val() == '1'){ // search by artist
             var userInput = String($("#user-input").val());
             var dateFrom = $("#date-from").val();
             var dateTo = $("#date-to").val();
             findEvents(userInput, dateFrom, dateTo);
             event.preventDefault();
+            $("#search-form")[0].reset();
         }
     });
 

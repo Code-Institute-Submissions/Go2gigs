@@ -1,3 +1,4 @@
+
 /*Hero Section*/
 #hero-heading{
     color: #fff;
@@ -8,7 +9,7 @@
 
 .hero{
     height: 100vh;
-    background: url("../images/gig2.jpg") no-repeat bottom right fixed; 
+    background: url("../images/gig2.jpg") center center; 
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -49,6 +50,10 @@
     padding: 0px;
     background-color: #343a40;
 }
+
+/* #table tr td, #table tr th{
+    background-color: rgba(210,130,240, 0.3) !important;
+} */
 
 #linkcol{
     padding-left: 0px;

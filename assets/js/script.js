@@ -53,28 +53,10 @@ $( document ).ready(function(){
     }
 
     function findEventLoc(locId, dateFrom, dateTo){
-        // var url = "https://api.songkick.com/api/3.0/metro_areas/"+locId+"/calendar.json?apikey=bguT074ohahXwEwu&min_date="+dateFrom+"&max_date="+dateTo;
-        // var metro_area_id = locId;
-        // var dateF = dateFrom;
-        // var dateT = dateTo;
 
-    //     $.ajax({
-    //         // "https://api.songkick.com/api/3.0/metro_areas/"+metro_area_id+"/calendar.json?apikey=bguT074ohahXwEwu&min_date="+dateF+"&max_date="+dateT,
-    //         url : "https://api.songkick.com/api/3.0/metro_areas/"+metro_area_id+"/calendar.json?apikey=bguT074ohahXwEwu",
-    //         type: "GET",
-    //         success: function(result){
-    //             console.log(result);
-    //         },
-    //         error: function(error){
-    //             console.log(error);
-    //         }
-    //     })
-    // }
-
-        axios.get('https://api.songkick.com/api/3.0/metro_areas/{metro_area_id}/calendar.json?apikey={your_api_key}', {
+        axios.get(`https://api.songkick.com/api/3.0/metro_areas/${locId}/calendar.json?`, {
             params: {
                 apikey: 'bguT074ohahXwEwu',
-                metro_area_id: locId,
                 min_date: dateFrom,
                 max_date: dateTo
             }
@@ -82,14 +64,13 @@ $( document ).ready(function(){
             .then(function (response) {
                 $(function() {
                     console.log(response);
-                    // The function getData is called here and saved to a variable
-                    // var myData = getData(response);
+                    var myData = getData(response);
 
                     // The array data returned from function getData is tabulated using the bootstrap table function
-                    // $('#table').bootstrapTable({data: myData.tableData})
+                    $('#table').bootstrapTable({data: myData.tableData})
 
                     // Add markers to the map
-                    // addMarker(myData.labelData, myData.locationData, map)
+                    addMarker(myData.labelData, myData.locationData, map)
                 })
             })
             .catch(function (error) {

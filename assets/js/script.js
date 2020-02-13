@@ -106,45 +106,6 @@ $( document ).ready(function(){
             })
     }
 
-    // getLocData takes the response, loops thru the response and push the required response data into array containers
-    function getLocData(response) {
-        var total = parseInt(response.data.resultsPage.totalEntries);
-        console.log(total); // remove this********
-
-        var labels = '';
-        var locations = [];
-        var data = [];
-
-        for(var i = 0; i < total; i++){
-            data.push({
-                '#': i+1,
-                'Artist': response.data && response.data.resultsPage && response.data.resultsPage.results && response.data.resultsPage.results.event[i] && response.data.resultsPage.results.event[i].displayName,
-                'Date': response.data && response.data.resultsPage && response.data.resultsPage.results && response.data.resultsPage.results.event[i] && response.data.resultsPage.results.event[i].start && response.data.resultsPage.results.event[i].start.date,
-                'City': response.data && response.data.resultsPage && response.data.resultsPage.results && response.data.resultsPage.results.event[i] && response.data.resultsPage.results.event[i].location && response.data.resultsPage.results.event[i].location.city,
-                'Venue': response.data && response.data.resultsPage && response.data.resultsPage.results && response.data.resultsPage.results.event[i] && response.data.resultsPage.results && response.data.resultsPage.results.event[i] && response.data.resultsPage.results.event[i].venue && response.data.resultsPage.results.event[i].venue.displayName,
-                'Lat': response.data && response.data.resultsPage && response.data.resultsPage.results && response.data.resultsPage.results.event[i] && response.data.resultsPage.results.event[i].location && response.data.resultsPage.results.event[i].location.lat,
-                'Lng': response.data && response.data.resultsPage && response.data.resultsPage.results && response.data.resultsPage.results.event[i] && response.data.resultsPage.results.event[i].location && response.data.resultsPage.results.event[i].location.lng
-            });
-
-            labels = labels + i.toString();
-
-            locations.push({
-                'lat': response.data && response.data.resultsPage && response.data.resultsPage.results && response.data.resultsPage.results.event[i] && response.data.resultsPage.results.event[i].location && response.data.resultsPage.results.event[i].location.lat,
-                'lng': response.data && response.data.resultsPage && response.data.resultsPage.results && response.data.resultsPage.results.event[i] && response.data.resultsPage.results.event[i].location && response.data.resultsPage.results.event[i].location.lng
-            })
-        }
-        console.log(data); // remove this**********
-        console.log(labels);  // remove this**********
-        console.log(locations);  // remove this**********
-
-        // The function returns an object of all array containers
-        return {
-            tableData: data,
-            labelData: labels,
-            locationData: locations
-        };
-    }
-
     // getData takes the response, loops thru the response and push the required response data into array containers
     function getData(response) {
         var total = parseInt(response.data.resultsPage.totalEntries);

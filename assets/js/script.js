@@ -70,7 +70,7 @@ $( document ).ready(function(){
                     $('#table').bootstrapTable({data: myData.tableData})
 
                     // Add markers to the map
-                    addMarker(myData.labelData, myData.locationData, map)
+                    addMarker(myData.locationData, map)
                 })
             })
             .catch(function (error) {

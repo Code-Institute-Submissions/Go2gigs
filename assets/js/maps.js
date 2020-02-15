@@ -8,7 +8,7 @@ function initMap() {
         document.getElementById('map'), { zoom: 8, center: { lat: 50.3785, lng: 14.9706 } });
 }
 
-// Adds a marker to the map.
+// Adds markers to the map then sets to map zoom to fit the bounds of all markers
 function addMarker(locations, map) {
     var bounds = new google.maps.LatLngBounds();
 

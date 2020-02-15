@@ -9,7 +9,7 @@ function initMap() {
 }
 
 // Adds a marker to the map.
-function addMarker(labels, locations, map) {
+function addMarker(locations, map) {
     var bounds = new google.maps.LatLngBounds();
 
     for(var i = 0; i < locations.length; i++){
@@ -22,7 +22,7 @@ function addMarker(labels, locations, map) {
         bounds.extend(loc);
     }
 
-    map.fitBounds(bounds);
+    map.fitBounds(bounds, {top:50}); // top padding of 50px
     map.panToBounds(bounds);
 }
 

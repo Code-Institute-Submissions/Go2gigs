@@ -98,7 +98,7 @@ $( document ).ready(function(){
                     $('#table').bootstrapTable({data: myData.tableData})
 
                     // Add markers to the map
-                    addMarker(myData.labelData, myData.locationData, map)
+                    addMarker(myData.locationData, map)
                 })
             })
             .catch(function (error) {
@@ -111,20 +111,16 @@ $( document ).ready(function(){
         var total = parseInt(response.data.resultsPage.totalEntries);
         console.log(total); // remove this********
 
-        var labels = '';
         var locations = [];
         var data = [];
 
         for(var i = 0; i < total; i++){
             data.push({
-                '#': i+1,
                 'Artist': response.data && response.data.resultsPage && response.data.resultsPage.results && response.data.resultsPage.results.event[i] && response.data.resultsPage.results.event[i].performance[0] && response.data.resultsPage.results.event[i].performance[0].displayName,
                 'Date': response.data && response.data.resultsPage && response.data.resultsPage.results && response.data.resultsPage.results.event[i] && response.data.resultsPage.results.event[i].start && response.data.resultsPage.results.event[i].start.date,
                 'City': response.data && response.data.resultsPage && response.data.resultsPage.results && response.data.resultsPage.results.event[i] && response.data.resultsPage.results.event[i].location && response.data.resultsPage.results.event[i].location.city,
                 'Venue': response.data && response.data.resultsPage && response.data.resultsPage.results && response.data.resultsPage.results.event[i] && response.data.resultsPage.results && response.data.resultsPage.results.event[i] && response.data.resultsPage.results.event[i].venue && response.data.resultsPage.results.event[i].venue.displayName,
             });
-
-            labels = labels + i.toString();
 
             locations.push({
                 'lat': response.data && response.data.resultsPage && response.data.resultsPage.results && response.data.resultsPage.results.event[i] && response.data.resultsPage.results.event[i].location && response.data.resultsPage.results.event[i].location.lat,
@@ -132,13 +128,11 @@ $( document ).ready(function(){
             })
         }
         console.log(data); // remove this**********
-        console.log(labels);  // remove this**********
         console.log(locations);  // remove this**********
 
         // The function returns an object of all array containers
         return {
             tableData: data,
-            labelData: labels,
             locationData: locations
         };
     }

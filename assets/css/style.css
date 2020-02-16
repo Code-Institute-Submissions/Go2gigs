@@ -3,7 +3,7 @@
     width: 200px;
     height: 30vh;
     position: fixed;
-    top: 0;
+    top: 0px;
     right: -205px;
     z-index: 999;
     background: #333;
@@ -95,10 +95,6 @@
     background-color: #343a40;
 }
 
-/* #table tr td, #table tr th{
-    background-color: rgba(210,130,240, 0.3) !important;
-} */
-
 #linkcol{
     padding-left: 0px;
 }
@@ -119,7 +115,7 @@
 /* Map Section */
 #map{
     height: 300px;
-    width: 66%;
+    width: 33%;
     margin: auto;
 }
 

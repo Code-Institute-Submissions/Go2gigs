@@ -21,7 +21,7 @@ function addMarker(locations, map) {
         loc = new google.maps.LatLng(locations[i].lat, locations[i].lng);
         bounds.extend(loc);
     }
-
+    // Fit all markers inside map zoom level and pan to center all markers
     map.fitBounds(bounds, {top:50}); // top padding of 50px
     map.panToBounds(bounds);
 }

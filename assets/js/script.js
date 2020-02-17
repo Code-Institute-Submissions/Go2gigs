@@ -23,6 +23,7 @@ $( document ).ready(function(){
             var dateFrom = $("#date-from").val();
             var dateTo = $("#date-to").val();
             findEvents(userInput, dateFrom, dateTo);
+            findChannelId(userInput);
             event.preventDefault();
             $("#search-form")[0].reset();
         }
@@ -32,7 +33,6 @@ $( document ).ready(function(){
     // This id is then used to find events by location with function findEventLoc
     // cb is a callback function to be called once metro_area_id found
     function findLocation(userInput, dateFrom, dateTo, cb) {
-
         axios.get('https://api.songkick.com/api/3.0/search/locations.json?', {
             params: {
                 query: userInput,
@@ -53,7 +53,6 @@ $( document ).ready(function(){
     }
 
     function findEventLoc(locId, dateFrom, dateTo){
-
         axios.get(`https://api.songkick.com/api/3.0/metro_areas/${locId}/calendar.json?`, {
             params: {
                 apikey: 'P21PoIr1LmuJzJI7',
@@ -91,7 +90,6 @@ $( document ).ready(function(){
             .then(function (response) {
                 $(function() {
                     // The function getData is called here and saved to a variable
-                    console.log(response);
                     var myData = getData(response);
 
                     // The array data returned from function getData is tabulated using the bootstrap table function
@@ -106,11 +104,9 @@ $( document ).ready(function(){
             })
     }
 
-    // getData takes the response, loops thru the response and push the required response data into array containers
+    // getData takes the response, loops thru the response and pushes the required response data into array containers
     function getData(response) {
         var total = parseInt(response.data.resultsPage.totalEntries);
-        console.log(total); // remove this********
-
         var locations = [];
         var data = [];
 
@@ -127,8 +123,6 @@ $( document ).ready(function(){
                 'lng': response.data && response.data.resultsPage && response.data.resultsPage.results && response.data.resultsPage.results.event[i] && response.data.resultsPage.results.event[i].location && response.data.resultsPage.results.event[i].location.lng
             })
         }
-        console.log(data); // remove this**********
-        console.log(locations);  // remove this**********
 
         // The function returns an object of all array containers
         return {

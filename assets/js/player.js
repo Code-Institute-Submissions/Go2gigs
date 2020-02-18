@@ -18,16 +18,19 @@ function onYouTubeIframeAPIReady() {
 }
 
 // Function finds a Youtube channel ID with searchTerm and API Key params
-function findChannelId(searchTerm) {
+function ytSearch(searchTerm) {
     axios.get('https://www.googleapis.com/youtube/v3/search?part=snippet', {
         params: {
-            search_query: searchTerm,
+            q: `mix ${searchTerm}`,
+            type: 'playlist',
             key: 'AIzaSyBM28Mpnwfy8kj3KF8QJF24LsnTMvgqR68'
         }
     })
         .then(function (response) {
             $(function () {
                 console.log(response);
+                var plist = response.data && response.data.items[0] && response.data.items[0].id && response.data.items[0].id.playlistId
+                console.log(plist);
             })
         })
         .catch(function (error) {

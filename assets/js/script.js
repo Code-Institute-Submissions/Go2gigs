@@ -23,7 +23,7 @@ $( document ).ready(function(){
             var dateFrom = $("#date-from").val();
             var dateTo = $("#date-to").val();
             findEvents(userInput, dateFrom, dateTo);
-            findChannelId(userInput);
+            ytSearch(userInput);
             event.preventDefault();
             $("#search-form")[0].reset();
         }

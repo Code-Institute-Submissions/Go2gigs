@@ -21,14 +21,13 @@ function onYouTubeIframeAPIReady() {
 function ytSearch(searchTerm) {
     axios.get('https://www.googleapis.com/youtube/v3/search?part=snippet', {
         params: {
-            q: `mix ${searchTerm}`,
+            q: `mix ${searchTerm}`, // string mix with search term returns better playlist results
             type: 'playlist',
             key: 'AIzaSyBM28Mpnwfy8kj3KF8QJF24LsnTMvgqR68'
         }
     })
         .then(function (response) {
             $(function () {
-                console.log(response);
                 var plist = response.data && response.data.items[0] && response.data.items[0].id && response.data.items[0].id.playlistId
                 console.log(plist);
             })

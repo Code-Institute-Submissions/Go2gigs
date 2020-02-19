@@ -1,5 +1,5 @@
 /* Navbar and Sidebar */
-.sidebar {
+/* .sidebar {
     width: 200px;
     height: 30vh;
     position: fixed;
@@ -11,8 +11,8 @@
     transition: all .3s;
     box-shadow: 3px 3px 3px rgba(51, 51, 51, 0.5);
     text-align: left;
-}
- 
+} */
+/*  
 .sidebar.active {
     right: 0;
 }
@@ -41,7 +41,7 @@
 .dismiss:focus {
     background: #555;
     color: #fff;
-}
+} */
 
 /*Hero Section*/
 #hero-heading{
@@ -53,13 +53,11 @@
 
 .hero{
     height: 100vh;
-    background: url("../images/gig2.jpg") center center; 
+    background: url("../images/gig2.jpg") no-repeat center center fixed; 
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
 }
 
 .opaque-overlay{
@@ -90,9 +88,51 @@
 
 
 /* Table Section */
+#results-section{
+    padding: 0px;
+}
+
 #data-table{
     padding: 0px;
     background-color: #343a40;
+}
+
+#data-col{
+    padding: 0px 0px 0px 15px;
+}
+
+#mapandvid-col{
+    padding: 0px;
+}
+
+#map-col{
+    overflow: hidden;
+    padding-bottom: 56.25%;
+    position: relative;
+    height: 0;
+}
+
+#map-col iframe{
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+}
+
+#ytvid-col{
+    overflow: hidden;
+    padding-bottom: 56.25%;
+    position: relative;
+    height: 0;
+}
+
+#ytvid-col iframe{
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    position: absolute;
 }
 
 #linkcol{

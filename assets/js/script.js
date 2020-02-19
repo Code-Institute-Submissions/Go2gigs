@@ -90,6 +90,7 @@ $( document ).ready(function(){
             .then(function (response) {
                 $(function() {
                     // The function getData is called here and saved to a variable
+                    console.log(response);
                     var myData = getData(response);
 
                     // The array data returned from function getData is tabulated using the bootstrap table function

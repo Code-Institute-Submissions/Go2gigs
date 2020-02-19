@@ -48,8 +48,8 @@
 }
 
 #data-table{
-    padding: 0px;
-    background-color: #343a40;
+    padding: 10px;
+    /* background-color: #343a40; */
 }
 
 #data-col{
@@ -93,11 +93,11 @@
 }
 
 .pagination-info{
-    color: #fff;
+    /* color: #fff; */
 }
 
 .page-list{
-    color: #fff;
+    /* color: #fff; */
 }
 
 /* Map Section */

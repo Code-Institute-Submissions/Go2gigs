@@ -56,31 +56,8 @@
     padding: 0px;
 }
 
-#mapandvid-col{
-    padding: 0px;
-}
-
 #map-col{
-    padding: 0px;
-    overflow: hidden;
-}
-
-#map-col iframe{
-    padding: 0;
-    height: 100%;
-    width: 100%;
-    overflow: hidden;
-}
-
-#ytvid-col{
-    padding: 0px;
-    height: 300px;
-    overflow: hidden;
-}
-
-#ytvid-col iframe{
-    width: 100%;
-    padding: 0;
+    height: 420px;
 }
 
 #linkcol{

@@ -22,7 +22,7 @@ function addMarker(locations, map) {
         bounds.extend(loc);
     }
     // Fit all markers inside map zoom level and pan to center all markers
-    map.fitBounds(bounds, { top: 50 }); // top padding of 50px
+    map.fitBounds(bounds);
     map.panToBounds(bounds);
 }
 
@@ -47,7 +47,7 @@ $(document).ready(function () {
         todayHighlight: true
     });
 
-    // When the user changes the select option change the user input placeholder
+    // User Input Form - When the user changes the select option change the user input placeholder
     $('#search-by').change(function () {
         if ($(this).val() == '0') { // search by city
             $('#user-input').attr('placeholder', 'Enter City');
@@ -56,7 +56,7 @@ $(document).ready(function () {
         }
     });
 
-    // When a user submits input save that input to variables and call the findEvents function
+    // User Input Form - When a user submits input save that input to variables and call the findEvents function
     $("#search-btn").on("click", function () {
         if ($('#search-by').val() == '0') { // search by city
             var userInput = String($("#user-input").val());
@@ -126,30 +126,36 @@ $(document).ready(function () {
 
     // FindEvents takes user artist input passes that and apikey to songkick api and obtains a response
     function findEvents(userInput, dateFrom, dateTo) {
-        axios.get('https://api.songkick.com/api/3.0/events.json', {
-            params: {
-                apikey: 'P21PoIr1LmuJzJI7',
-                artist_name: userInput,
-                min_date: dateFrom,
-                max_date: dateTo
-            }
+        fetch(`https://api.songkick.com/api/3.0/events.json?apikey=P21PoIr1LmuJzJI7&artist_name=${userInput}&min_date=${dateFrom}&max_date=${dateTo}`)
+        .then((res) => res.json())
+        .then((data) => {
+            console.log(data)
         })
-            .then(function (response) {
-                $(function () {
-                    // The function getData is called here and saved to a variable
-                    console.log(response);
-                    var myData = getData(response);
+        .catch((err) => console.log(err))
+        // axios.get('https://api.songkick.com/api/3.0/events.json', {
+        //     params: {
+        //         apikey: 'P21PoIr1LmuJzJI7',
+        //         artist_name: userInput,
+        //         min_date: dateFrom,
+        //         max_date: dateTo
+        //     }
+        // })
+        //     .then(function (response) {
+        //         $(function () {
+        //             // The function getData is called here and saved to a variable
+        //             console.log(response);
+        //             var myData = getData(response);
 
-                    // The array data returned from function getData is tabulated using the bootstrap table function
-                    $('#table').bootstrapTable({ data: myData.tableData })
+        //             // The array data returned from function getData is tabulated using the bootstrap table function
+        //             $('#table').bootstrapTable({ data: myData.tableData })
 
-                    // Add markers to the map
-                    addMarker(myData.locationData, map)
-                })
-            })
-            .catch(function (error) {
-                console.log(error);
-            })
+        //             // Add markers to the map
+        //             addMarker(myData.locationData, map)
+        //         })
+        //     })
+        //     .catch(function (error) {
+        //         console.log(error);
+        //     })
     }
 
     // getData takes the response, loops thru the response and pushes the required response data into array containers

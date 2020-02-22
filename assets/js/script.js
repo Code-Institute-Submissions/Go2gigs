@@ -127,11 +127,33 @@ $(document).ready(function () {
     // FindEvents takes user artist input passes that and apikey to songkick api and obtains a response
     function findEvents(userInput, dateFrom, dateTo) {
         fetch(`https://api.songkick.com/api/3.0/events.json?apikey=P21PoIr1LmuJzJI7&artist_name=${userInput}&min_date=${dateFrom}&max_date=${dateTo}`)
-        .then((res) => res.json())
-        .then((data) => {
-            console.log(data)
-        })
-        .catch((err) => console.log(err))
+            .then((res) => res.json())
+            .then((data) => {
+                console.log(data)
+                let event = data.resultsPage.results.event;
+                let dataArr = [];
+                let locations = [];
+
+                event.forEach(function(entry) {
+                    dataArr.push({
+                        'Artist': entry.performance[0].displayName,
+                        'Date': entry.start.date,
+                        'City': entry.location.city,
+                        'Venue': entry.venue.displayName,
+                    })
+
+                    locations.push({
+                        'lat': entry.location.lat,
+                        'lng': entry.location.lng
+                    })
+                })
+
+                $('#table').bootstrapTable({ data: dataArr })
+
+                addMarker(locations, map)
+
+            })
+            .catch((err) => console.log(err))
         // axios.get('https://api.songkick.com/api/3.0/events.json', {
         //     params: {
         //         apikey: 'P21PoIr1LmuJzJI7',

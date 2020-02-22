@@ -154,30 +154,6 @@ $(document).ready(function () {
 
             })
             .catch((err) => console.log(err))
-        // axios.get('https://api.songkick.com/api/3.0/events.json', {
-        //     params: {
-        //         apikey: 'P21PoIr1LmuJzJI7',
-        //         artist_name: userInput,
-        //         min_date: dateFrom,
-        //         max_date: dateTo
-        //     }
-        // })
-        //     .then(function (response) {
-        //         $(function () {
-        //             // The function getData is called here and saved to a variable
-        //             console.log(response);
-        //             var myData = getData(response);
-
-        //             // The array data returned from function getData is tabulated using the bootstrap table function
-        //             $('#table').bootstrapTable({ data: myData.tableData })
-
-        //             // Add markers to the map
-        //             addMarker(myData.locationData, map)
-        //         })
-        //     })
-        //     .catch(function (error) {
-        //         console.log(error);
-        //     })
     }
 
     // getData takes the response, loops thru the response and pushes the required response data into array containers

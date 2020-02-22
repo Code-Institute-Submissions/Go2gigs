@@ -48,7 +48,7 @@
 }
 
 #data-table{
-    padding: 10px;
+    padding: 10px 10px 0px 10px;
     /* background-color: #343a40; */
 }
 
@@ -56,25 +56,11 @@
     padding: 0px;
 }
 
-#map-col{
-    height: 420px;
-}
-
-#linkcol{
-    padding-left: 0px;
-}
-
-#skimg{
-    width: 100px;
-    height: auto;
-}
-
-/* Map Section */
+/* Map */
 #map{
-    height: 300px;
+    height: 100%;
     width: 100%;
     overflow: hidden;
-    /* margin: auto; */
 }
 
 /*Footer*/

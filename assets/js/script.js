@@ -81,13 +81,14 @@ $(document).ready(function () {
     // cb is a callback function to be called once metro_area_id found
     function findLocation(userInput, dateFrom, dateTo, cb) {
         fetch(`https://api.songkick.com/api/3.0/search/locations.json?query=${userInput}&apikey=P21PoIr1LmuJzJI7`)
-        .then(function(res){
-            return res.json();
-        })
-        .then(function(data){
-            let location = data.resultsPage.results.location[0].metroArea.id;
-            cb(location, dateFrom, dateTo);
-        })
+            .then(function (res) {
+                return res.json();
+            })
+            .then(function (data) {
+                let location = data.resultsPage.results.location[0].metroArea.id;
+                cb(location, dateFrom, dateTo);
+            })
+            .catch((err) => console.log(err))
     }
 
     function findEventLoc(locId, dateFrom, dateTo) {
@@ -95,7 +96,29 @@ $(document).ready(function () {
             .then((res) => res.json())
             .then((data) => {
                 console.log(data);
+                let event = data.resultsPage.results.event;
+                let dataArr = [];
+                let locations = [];
+
+                event.forEach(function (entry) {
+                    dataArr.push({
+                        'Artist': entry.performance[0].displayName,
+                        'Date': entry.start.date,
+                        'City': entry.location.city,
+                        'Venue': entry.venue.displayName,
+                    })
+
+                    locations.push({
+                        'lat': entry.location.lat,
+                        'lng': entry.location.lng
+                    })
+                })
+
+                $('#table').bootstrapTable({ data: dataArr })
+
+                addMarker(locations, map)
             })
+            .catch((err) => console.log(err))
     }
 
     // FindEvents takes user artist input passes that and apikey to songkick api and obtains a response
@@ -108,7 +131,7 @@ $(document).ready(function () {
                 let dataArr = [];
                 let locations = [];
 
-                event.forEach(function(entry) {
+                event.forEach(function (entry) {
                     dataArr.push({
                         'Artist': entry.performance[0].displayName,
                         'Date': entry.start.date,

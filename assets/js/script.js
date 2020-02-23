@@ -81,11 +81,22 @@ $(document).ready(function () {
     // FindLocation takes user location input passes that and apikey to songkick api and obtains a location id response
     // This id is then used to find events by location with function findEventLoc
     // cb is a callback function to be called once metro_area_id found
-    async function findLocation(userInput) {
-        let response = await fetch(`https://api.songkick.com/api/3.0/search/locations.json?query=${userInput}&apikey=P21PoIr1LmuJzJI7`)
-        let data = await response.json();
-        console.log(data);
-        return data.resultsPage.results.location[0].metroArea.id;
+    // async function findLocation(userInput) {
+    //     let response = await fetch(`https://api.songkick.com/api/3.0/search/locations.json?query=${userInput}&apikey=P21PoIr1LmuJzJI7`)
+    //     let data = await response.json();
+    //     console.log(data);
+    //     return data.resultsPage.results.location[0].metroArea.id;
+    // }
+
+    function findLocation(userInput) {
+        fetch(`https://api.songkick.com/api/3.0/search/locations.json?query=${userInput}&apikey=P21PoIr1LmuJzJI7`)
+        .then(function(res){
+            return res.text();
+        })
+        .then(function(data){
+            let location = data.resultsPage.results.location[0].metroArea.id;
+            console.log(`This is the location ID ${location}`);
+        })
     }
 
     function findEventLoc(locId, dateFrom, dateTo) {

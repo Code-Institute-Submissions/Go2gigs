@@ -63,7 +63,8 @@ $(document).ready(function () {
             var dateFrom = $("#date-from").val();
             var dateTo = $("#date-to").val();
             let locID = findLocation(userInput); // call findLocation with user input query to find Songkick location ID and assign to variable
-
+            console.log(locID);
+            findEventLoc(locID, dateFrom, dateTo);
             event.preventDefault();
             $("#search-form")[0].reset();
         } else if ($('#search-by').val() == '1') { // search by artist
@@ -80,38 +81,18 @@ $(document).ready(function () {
     // FindLocation takes user location input passes that and apikey to songkick api and obtains a location id response
     // This id is then used to find events by location with function findEventLoc
     // cb is a callback function to be called once metro_area_id found
-    function findLocation(userInput) {
-        fetch(`https://api.songkick.com/api/3.0/search/locations.json?query=${userInput}&apikey=P21PoIr1LmuJzJI7`)
-            .then((res) => res.json())
-            .then((data) => {
-                console.log(data);
-                return data.resultsPage.results.location[0].metroArea.id;
-            })
-            .catch((err) => console.log(err))
+    async function findLocation(userInput) {
+        let response = await fetch(`https://api.songkick.com/api/3.0/search/locations.json?query=${userInput}&apikey=P21PoIr1LmuJzJI7`)
+        let data = await response.json();
+        console.log(data);
+        return data.resultsPage.results.location[0].metroArea.id;
     }
 
     function findEventLoc(locId, dateFrom, dateTo) {
-        axios.get(`https://api.songkick.com/api/3.0/metro_areas/${locId}/calendar.json?`, {
-            params: {
-                apikey: 'P21PoIr1LmuJzJI7',
-                min_date: dateFrom,
-                max_date: dateTo
-            }
-        })
-            .then(function (response) {
-                $(function () {
-                    console.log(response);
-                    var myData = getData(response);
-
-                    // The array data returned from function getData is tabulated using the bootstrap table function
-                    $('#table').bootstrapTable({ data: myData.tableData })
-
-                    // Add markers to the map
-                    addMarker(myData.locationData, map)
-                })
-            })
-            .catch(function (error) {
-                console.log(error);
+        fetch(`https://api.songkick.com/api/3.0/metro_areas/${locId}/calendar.json?apikey=P21PoIr1LmuJzJI7&min_date=${dateFrom}&max_date=${dateTo}`)
+            .then((res) => res.json())
+            .then((data) => {
+                console.log(data);
             })
     }
 

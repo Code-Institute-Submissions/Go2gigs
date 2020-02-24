@@ -123,89 +123,107 @@ $(document).ready(function () {
 
     // FindEvents takes user artist input passes that and apikey to songkick api and obtains a response
     function findEvents(userInput, dateFrom, dateTo) {
+        let dataArr = [];
+        let locations = [];
+        let pages = 0;
+
         fetch(`https://api.songkick.com/api/3.0/events.json?apikey=P21PoIr1LmuJzJI7&artist_name=${userInput}&min_date=${dateFrom}&max_date=${dateTo}`)
             .then((res) => res.json())
             .then((data) => {
-                console.log(data)
-                let event = data.resultsPage.results.event;
-                let dataArr = [];
-                let locations = [];
+                console.log(data);
+                let total = data.resultsPage.totalEntries;
+                console.log(`Total entries is ${total%50}`);
 
-                event.forEach(function (entry) {
-                    dataArr.push({
-                        'Artist': entry.performance[0].displayName,
-                        'Date': entry.start.date,
-                        'City': entry.location.city,
-                        'Venue': entry.venue.displayName,
-                    })
-
-                    locations.push({
-                        'lat': entry.location.lat,
-                        'lng': entry.location.lng
-                    })
-                })
-
-                $('#table').bootstrapTable({ data: dataArr })
-
-                addMarker(locations, map)
-
+                if((total%50) > 0){
+                    pages = (total/50) +1;
+                }else{
+                    pages = total/50;
+                }
+                console.log(`Num of pages is ${pages}`);
             })
-            .catch((err) => console.log(err))
+
+        // fetch(`https://api.songkick.com/api/3.0/events.json?apikey=P21PoIr1LmuJzJI7&artist_name=${userInput}&min_date=${dateFrom}&max_date=${dateTo}`)
+        //     .then((res) => res.json())
+        //     .then((data) => {
+        //         console.log(data)
+        //         let event = data.resultsPage.results.event;
+
+
+        //         event.forEach(function (entry) {
+        //             dataArr.push({
+        //                 'Artist': entry.performance[0].displayName,
+        //                 'Date': entry.start.date,
+        //                 'City': entry.location.city,
+        //                 'Venue': entry.venue.displayName,
+        //             })
+
+        //             locations.push({
+        //                 'lat': entry.location.lat,
+        //                 'lng': entry.location.lng
+        //             })
+        //         })
+
+        //         $('#table').bootstrapTable({ data: dataArr })
+
+        //         addMarker(locations, map)
+
+        //     })
+        //     .catch((err) => console.log(err))
     }
 
     // getData takes the response, loops thru the response and pushes the required response data into array containers
     function getData(response) {
-        var total = parseInt(response.data.resultsPage.totalEntries);
-        var locations = [];
-        var data = [];
+                    var total = parseInt(response.data.resultsPage.totalEntries);
+                    var locations = [];
+                    var data = [];
 
-        for (var i = 0; i < total; i++) {
-            data.push({
-                'Artist': response.data && response.data.resultsPage && response.data.resultsPage.results && response.data.resultsPage.results.event[i] && response.data.resultsPage.results.event[i].performance[0] && response.data.resultsPage.results.event[i].performance[0].displayName,
-                'Date': response.data && response.data.resultsPage && response.data.resultsPage.results && response.data.resultsPage.results.event[i] && response.data.resultsPage.results.event[i].start && response.data.resultsPage.results.event[i].start.date,
-                'City': response.data && response.data.resultsPage && response.data.resultsPage.results && response.data.resultsPage.results.event[i] && response.data.resultsPage.results.event[i].location && response.data.resultsPage.results.event[i].location.city,
-                'Venue': response.data && response.data.resultsPage && response.data.resultsPage.results && response.data.resultsPage.results.event[i] && response.data.resultsPage.results && response.data.resultsPage.results.event[i] && response.data.resultsPage.results.event[i].venue && response.data.resultsPage.results.event[i].venue.displayName,
-            });
+                    for (var i = 0; i < total; i++) {
+                        data.push({
+                            'Artist': response.data && response.data.resultsPage && response.data.resultsPage.results && response.data.resultsPage.results.event[i] && response.data.resultsPage.results.event[i].performance[0] && response.data.resultsPage.results.event[i].performance[0].displayName,
+                            'Date': response.data && response.data.resultsPage && response.data.resultsPage.results && response.data.resultsPage.results.event[i] && response.data.resultsPage.results.event[i].start && response.data.resultsPage.results.event[i].start.date,
+                            'City': response.data && response.data.resultsPage && response.data.resultsPage.results && response.data.resultsPage.results.event[i] && response.data.resultsPage.results.event[i].location && response.data.resultsPage.results.event[i].location.city,
+                            'Venue': response.data && response.data.resultsPage && response.data.resultsPage.results && response.data.resultsPage.results.event[i] && response.data.resultsPage.results && response.data.resultsPage.results.event[i] && response.data.resultsPage.results.event[i].venue && response.data.resultsPage.results.event[i].venue.displayName,
+                        });
 
-            locations.push({
-                'lat': response.data && response.data.resultsPage && response.data.resultsPage.results && response.data.resultsPage.results.event[i] && response.data.resultsPage.results.event[i].location && response.data.resultsPage.results.event[i].location.lat,
-                'lng': response.data && response.data.resultsPage && response.data.resultsPage.results && response.data.resultsPage.results.event[i] && response.data.resultsPage.results.event[i].location && response.data.resultsPage.results.event[i].location.lng
-            })
-        }
+                        locations.push({
+                            'lat': response.data && response.data.resultsPage && response.data.resultsPage.results && response.data.resultsPage.results.event[i] && response.data.resultsPage.results.event[i].location && response.data.resultsPage.results.event[i].location.lat,
+                            'lng': response.data && response.data.resultsPage && response.data.resultsPage.results && response.data.resultsPage.results.event[i] && response.data.resultsPage.results.event[i].location && response.data.resultsPage.results.event[i].location.lng
+                        })
+                    }
 
-        // The function returns an object of all array containers
-        return {
-            tableData: data,
-            locationData: locations
-        };
-    }
+                    // The function returns an object of all array containers
+                    return {
+                        tableData: data,
+                        locationData: locations
+                    };
+                }
 
     // Youtube video
     // This code loads the IFrame Player API code asynchronously.
     var tag = document.createElement('script');
 
-    tag.src = "https://www.youtube.com/iframe_api";
-    var firstScriptTag = document.getElementsByTagName('script')[0];
-    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+        tag.src = "https://www.youtube.com/iframe_api";
+        var firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
-    // Function finds a Youtube channel ID with searchTerm and API Key params
-    function ytSearch(searchTerm) {
-        axios.get('https://www.googleapis.com/youtube/v3/search?part=snippet', {
-            params: {
-                q: `mix ${searchTerm}`, // string mix with search term returns better playlist results
-                type: 'playlist',
-                key: 'AIzaSyBM28Mpnwfy8kj3KF8QJF24LsnTMvgqR68'
-            }
-        })
-            .then(function (response) {
-                $(function () {
-                    var plist = response.data && response.data.items[0] && response.data.items[0].id && response.data.items[0].id.playlistId
-                    console.log(plist);
+        // Function finds a Youtube channel ID with searchTerm and API Key params
+        function ytSearch(searchTerm) {
+            axios.get('https://www.googleapis.com/youtube/v3/search?part=snippet', {
+                params: {
+                    q: `mix ${searchTerm}`, // string mix with search term returns better playlist results
+                    type: 'playlist',
+                    key: 'AIzaSyBM28Mpnwfy8kj3KF8QJF24LsnTMvgqR68'
+                }
+            })
+                .then(function (response) {
+                    $(function () {
+                        var plist = response.data && response.data.items[0] && response.data.items[0].id && response.data.items[0].id.playlistId
+                        console.log(plist);
+                    })
                 })
-            })
-            .catch(function (error) {
-                console.log(error);
-            })
-    }
+                .catch(function (error) {
+                    console.log(error);
+                })
+        }
 
-});
+    });

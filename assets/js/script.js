@@ -125,50 +125,55 @@ $(document).ready(function () {
     function findEvents(userInput, dateFrom, dateTo) {
         let dataArr = [];
         let locations = [];
-        let pages = 0;
+        let pages = 1;
 
-        fetch(`https://api.songkick.com/api/3.0/events.json?apikey=P21PoIr1LmuJzJI7&artist_name=${userInput}&min_date=${dateFrom}&max_date=${dateTo}`)
-            .then((res) => res.json())
-            .then((data) => {
-                console.log(data);
-                let total = data.resultsPage.totalEntries;
-                console.log(`Total entries is ${total%50}`);
-
-                if((total%50) > 0){
-                    pages = (total/50) +1;
-                }else{
-                    pages = total/50;
-                }
-                console.log(`Num of pages is ${pages}`);
-            })
-
+        // Find the total number of pages in the paginated response
         // fetch(`https://api.songkick.com/api/3.0/events.json?apikey=P21PoIr1LmuJzJI7&artist_name=${userInput}&min_date=${dateFrom}&max_date=${dateTo}`)
         //     .then((res) => res.json())
         //     .then((data) => {
-        //         console.log(data)
-        //         let event = data.resultsPage.results.event;
+        //         console.log(data);
+        //         let total = data.resultsPage.totalEntries;
+        //         console.log(`Total entries is ${total}`);
 
-
-        //         event.forEach(function (entry) {
-        //             dataArr.push({
-        //                 'Artist': entry.performance[0].displayName,
-        //                 'Date': entry.start.date,
-        //                 'City': entry.location.city,
-        //                 'Venue': entry.venue.displayName,
-        //             })
-
-        //             locations.push({
-        //                 'lat': entry.location.lat,
-        //                 'lng': entry.location.lng
-        //             })
-        //         })
-
-        //         $('#table').bootstrapTable({ data: dataArr })
-
-        //         addMarker(locations, map)
-
+        //         if(total > 50){
+        //             pages = Math.ceil(total/50);
+        //         }
+        //         console.log(`Num of pages is ${pages}`);
         //     })
-        //     .catch((err) => console.log(err))
+        // Loop thru the pages in the paginated response and push the relevant data into arrays
+        // for(let i=1; i<=pages; i++){
+        let i;
+        for(i = 1; i <= pages; i++){
+            fetch(`https://api.songkick.com/api/3.0/events.json?apikey=P21PoIr1LmuJzJI7&artist_name=${userInput}&min_date=${dateFrom}&max_date=${dateTo}&page=${i}`)
+                .then((res) => res.json())
+                .then((data) => {
+                    console.log(data)
+                    let event = data.resultsPage.results.event;
+
+
+                    event.forEach(function (entry) {
+                        dataArr.push({
+                            'Artist': entry.performance[0].displayName,
+                            'Date': entry.start.date,
+                            'City': entry.location.city,
+                            'Venue': entry.venue.displayName,
+                        })
+
+                        locations.push({
+                            'lat': entry.location.lat,
+                            'lng': entry.location.lng
+                        })
+                    })
+                    console.log(dataArr);
+                    console.log(locations);
+
+                    $('#table').bootstrapTable({ data: dataArr })
+
+                    addMarker(locations, map)
+
+                })
+                .catch((err) => console.log(err))
+        }
     }
 
     // getData takes the response, loops thru the response and pushes the required response data into array containers

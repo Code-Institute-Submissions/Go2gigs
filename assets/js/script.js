@@ -133,11 +133,32 @@ $(document).ready(function () {
             let data = await response.json();
             console.log(data);
             let total = data.resultsPage.totalEntries;
-            console.log(`Total entries is ${total}`);
             if (total > 50) {
                 pages = Math.ceil(total / 50);
             }
-            console.log(`Num of pages is ${pages}`);
+
+            for (i = 1; i <= pages; i++) {
+                let responsePage = await fetch(`https://api.songkick.com/api/3.0/events.json?apikey=P21PoIr1LmuJzJI7&artist_name=${userInput}&min_date=${dateFrom}&max_date=${dateTo}&page=${i}`)
+                let responsePageJson = await responsePage.json();
+
+                let event = responsePageJson.resultsPage.results.event;
+
+                event.forEach(function (entry) {
+                    dataArr.push({
+                        'Artist': entry.performance[0].displayName,
+                        'Date': entry.start.date,
+                        'City': entry.location.city,
+                        'Venue': entry.venue.displayName,
+                    })
+
+                    locations.push({
+                        'lat': entry.location.lat,
+                        'lng': entry.location.lng
+                    })
+                })
+            }
+            console.log(`data array is ${dataArr}`);
+            console.log(`locations array is ${locations}`);
         }
         catch (err) {
             console.log('fetch failed', err);

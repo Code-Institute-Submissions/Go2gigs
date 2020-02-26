@@ -130,109 +130,105 @@ $(document).ready(function () {
         // Find the total number of pages in the paginated response
         try {
             const response = await fetch(`https://api.songkick.com/api/3.0/events.json?apikey=P21PoIr1LmuJzJI7&artist_name=${userInput}&min_date=${dateFrom}&max_date=${dateTo}`)
-            console.log(response.json());
+            let data = await response.json();
+            console.log(data);
+            let total = data.resultsPage.totalEntries;
+            console.log(`Total entries is ${total}`);
+            if (total > 50) {
+                pages = Math.ceil(total / 50);
+            }
+            console.log(`Num of pages is ${pages}`);
         }
         catch (err) {
             console.log('fetch failed', err);
         }
-        // fetch(`https://api.songkick.com/api/3.0/events.json?apikey=P21PoIr1LmuJzJI7&artist_name=${userInput}&min_date=${dateFrom}&max_date=${dateTo}`)
-        //     .then((res) => res.json())
-        //     .then((data) => {
-        //         console.log(data);
-        //         let total = data.resultsPage.totalEntries;
-        //         console.log(`Total entries is ${total}`);
-
-        // if (total > 50) {
-        //     pages = Math.ceil(total / 50);
-        // }
-        // console.log(`Num of pages is ${pages}`);
     }
 
-// Loop thru the pages in the paginated response and push the relevant data into arrays
-// let i;
-// let responses = [];
-// let fetches = [];
-// for (i = 1; i <= pages; i++) {
-//     fetches.push(fetch(`https://api.songkick.com/api/3.0/events.json?apikey=P21PoIr1LmuJzJI7&artist_name=${userInput}&min_date=${dateFrom}&max_date=${dateTo}&page=${i}`));
-// }
-// .then((res) => res.json())
-// .then((data) => {
-//     responses.push(data);
-// let event = data.resultsPage.results.event;
+    // Loop thru the pages in the paginated response and push the relevant data into arrays
+    // let i;
+    // let responses = [];
+    // let fetches = [];
+    // for (i = 1; i <= pages; i++) {
+    //     fetches.push(fetch(`https://api.songkick.com/api/3.0/events.json?apikey=P21PoIr1LmuJzJI7&artist_name=${userInput}&min_date=${dateFrom}&max_date=${dateTo}&page=${i}`));
+    // }
+    // .then((res) => res.json())
+    // .then((data) => {
+    //     responses.push(data);
+    // let event = data.resultsPage.results.event;
 
-// event.forEach(function (entry) {
-//     dataArr.push({
-//         'Artist': entry.performance[0].displayName,
-//         'Date': entry.start.date,
-//         'City': entry.location.city,
-//         'Venue': entry.venue.displayName,
-//     })
+    // event.forEach(function (entry) {
+    //     dataArr.push({
+    //         'Artist': entry.performance[0].displayName,
+    //         'Date': entry.start.date,
+    //         'City': entry.location.city,
+    //         'Venue': entry.venue.displayName,
+    //     })
 
-//     locations.push({
-//         'lat': entry.location.lat,
-//         'lng': entry.location.lng
-//     })
-// })
-// $('#table').bootstrapTable({ data: dataArr })
+    //     locations.push({
+    //         'lat': entry.location.lat,
+    //         'lng': entry.location.lng
+    //     })
+    // })
+    // $('#table').bootstrapTable({ data: dataArr })
 
-// addMarker(locations, map)
-// })
-// .catch((err) => console.log(err))
-// );
+    // addMarker(locations, map)
+    // })
+    // .catch((err) => console.log(err))
+    // );
 
-// getData takes the response, loops thru the response and pushes the required response data into array containers
-function getData(response) {
-    var total = parseInt(response.data.resultsPage.totalEntries);
-    var locations = [];
-    var data = [];
+    // getData takes the response, loops thru the response and pushes the required response data into array containers
+    function getData(response) {
+        var total = parseInt(response.data.resultsPage.totalEntries);
+        var locations = [];
+        var data = [];
 
-    for (var i = 0; i < total; i++) {
-        data.push({
-            'Artist': response.data && response.data.resultsPage && response.data.resultsPage.results && response.data.resultsPage.results.event[i] && response.data.resultsPage.results.event[i].performance[0] && response.data.resultsPage.results.event[i].performance[0].displayName,
-            'Date': response.data && response.data.resultsPage && response.data.resultsPage.results && response.data.resultsPage.results.event[i] && response.data.resultsPage.results.event[i].start && response.data.resultsPage.results.event[i].start.date,
-            'City': response.data && response.data.resultsPage && response.data.resultsPage.results && response.data.resultsPage.results.event[i] && response.data.resultsPage.results.event[i].location && response.data.resultsPage.results.event[i].location.city,
-            'Venue': response.data && response.data.resultsPage && response.data.resultsPage.results && response.data.resultsPage.results.event[i] && response.data.resultsPage.results && response.data.resultsPage.results.event[i] && response.data.resultsPage.results.event[i].venue && response.data.resultsPage.results.event[i].venue.displayName,
-        });
+        for (var i = 0; i < total; i++) {
+            data.push({
+                'Artist': response.data && response.data.resultsPage && response.data.resultsPage.results && response.data.resultsPage.results.event[i] && response.data.resultsPage.results.event[i].performance[0] && response.data.resultsPage.results.event[i].performance[0].displayName,
+                'Date': response.data && response.data.resultsPage && response.data.resultsPage.results && response.data.resultsPage.results.event[i] && response.data.resultsPage.results.event[i].start && response.data.resultsPage.results.event[i].start.date,
+                'City': response.data && response.data.resultsPage && response.data.resultsPage.results && response.data.resultsPage.results.event[i] && response.data.resultsPage.results.event[i].location && response.data.resultsPage.results.event[i].location.city,
+                'Venue': response.data && response.data.resultsPage && response.data.resultsPage.results && response.data.resultsPage.results.event[i] && response.data.resultsPage.results && response.data.resultsPage.results.event[i] && response.data.resultsPage.results.event[i].venue && response.data.resultsPage.results.event[i].venue.displayName,
+            });
 
-        locations.push({
-            'lat': response.data && response.data.resultsPage && response.data.resultsPage.results && response.data.resultsPage.results.event[i] && response.data.resultsPage.results.event[i].location && response.data.resultsPage.results.event[i].location.lat,
-            'lng': response.data && response.data.resultsPage && response.data.resultsPage.results && response.data.resultsPage.results.event[i] && response.data.resultsPage.results.event[i].location && response.data.resultsPage.results.event[i].location.lng
-        })
-    }
-
-    // The function returns an object of all array containers
-    return {
-        tableData: data,
-        locationData: locations
-    };
-}
-
-// Youtube video
-// This code loads the IFrame Player API code asynchronously.
-var tag = document.createElement('script');
-
-tag.src = "https://www.youtube.com/iframe_api";
-var firstScriptTag = document.getElementsByTagName('script')[0];
-firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
-// Function finds a Youtube channel ID with searchTerm and API Key params
-function ytSearch(searchTerm) {
-    axios.get('https://www.googleapis.com/youtube/v3/search?part=snippet', {
-        params: {
-            q: `mix ${searchTerm}`, // string mix with search term returns better playlist results
-            type: 'playlist',
-            key: 'AIzaSyBM28Mpnwfy8kj3KF8QJF24LsnTMvgqR68'
-        }
-    })
-        .then(function (response) {
-            $(function () {
-                var plist = response.data && response.data.items[0] && response.data.items[0].id && response.data.items[0].id.playlistId
-                console.log(plist);
+            locations.push({
+                'lat': response.data && response.data.resultsPage && response.data.resultsPage.results && response.data.resultsPage.results.event[i] && response.data.resultsPage.results.event[i].location && response.data.resultsPage.results.event[i].location.lat,
+                'lng': response.data && response.data.resultsPage && response.data.resultsPage.results && response.data.resultsPage.results.event[i] && response.data.resultsPage.results.event[i].location && response.data.resultsPage.results.event[i].location.lng
             })
+        }
+
+        // The function returns an object of all array containers
+        return {
+            tableData: data,
+            locationData: locations
+        };
+    }
+
+    // Youtube video
+    // This code loads the IFrame Player API code asynchronously.
+    var tag = document.createElement('script');
+
+    tag.src = "https://www.youtube.com/iframe_api";
+    var firstScriptTag = document.getElementsByTagName('script')[0];
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+    // Function finds a Youtube channel ID with searchTerm and API Key params
+    function ytSearch(searchTerm) {
+        axios.get('https://www.googleapis.com/youtube/v3/search?part=snippet', {
+            params: {
+                q: `mix ${searchTerm}`, // string mix with search term returns better playlist results
+                type: 'playlist',
+                key: 'AIzaSyBM28Mpnwfy8kj3KF8QJF24LsnTMvgqR68'
+            }
         })
-        .catch(function (error) {
-            console.log(error);
-        })
-}
+            .then(function (response) {
+                $(function () {
+                    var plist = response.data && response.data.items[0] && response.data.items[0].id && response.data.items[0].id.playlistId
+                    console.log(plist);
+                })
+            })
+            .catch(function (error) {
+                console.log(error);
+            })
+    }
 
 });

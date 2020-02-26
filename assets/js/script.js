@@ -130,7 +130,7 @@ $(document).ready(function () {
         // Find the total number of pages in the paginated response
         try {
             const response = await fetch(`https://api.songkick.com/api/3.0/events.json?apikey=P21PoIr1LmuJzJI7&artist_name=${userInput}&min_date=${dateFrom}&max_date=${dateTo}`)
-            console.log(response);
+            console.log(response.json());
         }
         catch (err) {
             console.log('fetch failed', err);

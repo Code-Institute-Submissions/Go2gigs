@@ -1,6 +1,7 @@
 var map;
 var bounds;
 var loc;
+let locations = [];
 // Initialize and add the map, centre it and add a marker at the default position of central europe
 function initMap() {
     // The map, centered at central europe lat and long
@@ -78,7 +79,6 @@ $(document).ready(function () {
 
     async function findLocEvents(userInput, dateFrom, dateTo) {
         let dataArr = [];
-        let locations = [];
         let pages = 1;
 
         try {
@@ -131,7 +131,6 @@ $(document).ready(function () {
     // FindEvents takes user artist input passes that and apikey to songkick api and obtains a response
     async function findEvents(userInput, dateFrom, dateTo) {
         let dataArr = [];
-        let locations = [];
         let pages = 1;
 
         try {
@@ -179,8 +178,11 @@ $(document).ready(function () {
     // Fires when user clicks a table row
     $('#table').bootstrapTable({
         onClickRow: function (row, $element) {
-            console.log(`row info is ${JSON.stringify(row)} date is ${JSON.stringify(row.Date)}`)
-            console.log(`element is ${JSON.stringify($element.index())}`)
+            console.log(`element is ${JSON.stringify($element.index())}`) // Find the index position of the clicked row
+            let pos = $element.index();
+            let zoomLocation = {lat: locations[pos].lat, lng: locations[pos].lng};
+            map.panTo(zoomLocation);
+            map.setZoom(18);
         }
     });
 

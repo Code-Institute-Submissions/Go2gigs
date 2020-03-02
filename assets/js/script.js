@@ -87,6 +87,7 @@ $(document).ready(function () {
 
     async function findLocEvents(userInput, dateFrom, dateTo) {
         locations = [];
+        // setMapOnAll(null);
         let dataArr = [];
         let pages = 1;
 
@@ -140,6 +141,7 @@ $(document).ready(function () {
     // FindEvents takes user artist input passes that and apikey to songkick api and obtains a response
     async function findEvents(userInput, dateFrom, dateTo) {
         locations = [];
+        // setMapOnAll(null);
         let dataArr = [];
         let pages = 1;
 
@@ -178,7 +180,6 @@ $(document).ready(function () {
             console.log('fetch failed', err);
         }
         // tabulate the data
-        // $('#table').bootstrapTable('removeAll')
         $('#table').bootstrapTable({ data: dataArr });
         $('#table').bootstrapTable('load', dataArr); // reload table data when another selection is made
         // add locations to the google map
@@ -188,7 +189,7 @@ $(document).ready(function () {
     // Fires when user clicks a table row
     $('#table').bootstrapTable({
         onClickRow: function (row, $element) {
-            console.log(`element is ${JSON.stringify($element.index())}`) // Find the index position of the clicked row
+            // Find the index position of the clicked row
             let pos = $element.index();
             let zoomLocation = { lat: locations[pos].lat, lng: locations[pos].lng };
             map.panTo(zoomLocation);

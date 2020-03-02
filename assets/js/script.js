@@ -62,7 +62,7 @@ $(document).ready(function () {
             var userInput = String($("#user-input").val());
             var dateFrom = $("#date-from").val();
             var dateTo = $("#date-to").val();
-            findLocation(userInput, dateFrom, dateTo, findEventLoc); // call findLocation with user input query to find Songkick location ID and assign to variable
+            findLocEvents(userInput, dateFrom, dateTo); // Function call with user input data
             event.preventDefault();
             $("#search-form")[0].reset();
         } else if ($('#search-by').val() == '1') { // search by artist
@@ -76,60 +76,20 @@ $(document).ready(function () {
         }
     });
 
-    // FindLocation takes user location input passes that and apikey to songkick api and obtains a location id response
-    // This id is then used to find events by location with function findEventLoc
-    // cb is a callback function to be called once metro_area_id found
-    function findLocation(userInput, dateFrom, dateTo, cb) {
-        fetch(`https://api.songkick.com/api/3.0/search/locations.json?query=${userInput}&apikey=P21PoIr1LmuJzJI7`)
-            .then(function (res) {
-                return res.json();
-            })
-            .then(function (data) {
-                let location = data.resultsPage.results.location[0].metroArea.id;
-                cb(location, dateFrom, dateTo);
-            })
-            .catch((err) => console.log(err))
-    }
-
-    function findEventLoc(locId, dateFrom, dateTo) {
-        fetch(`https://api.songkick.com/api/3.0/metro_areas/${locId}/calendar.json?apikey=P21PoIr1LmuJzJI7&min_date=${dateFrom}&max_date=${dateTo}`)
-            .then((res) => res.json())
-            .then((data) => {
-                console.log(data);
-                let event = data.resultsPage.results.event;
-                let dataArr = [];
-                let locations = [];
-
-                event.forEach(function (entry) {
-                    dataArr.push({
-                        'Artist': entry.performance[0].displayName,
-                        'Date': entry.start.date,
-                        'City': entry.location.city,
-                        'Venue': entry.venue.displayName,
-                    })
-
-                    locations.push({
-                        'lat': entry.location.lat,
-                        'lng': entry.location.lng
-                    })
-                })
-
-                $('#table').bootstrapTable({ data: dataArr })
-
-                addMarker(locations, map)
-            })
-            .catch((err) => console.log(err))
-    }
-
-    // FindEvents takes user artist input passes that and apikey to songkick api and obtains a response
-    async function findEvents(userInput, dateFrom, dateTo) {
+    async function findLocEvents(userInput, dateFrom, dateTo) {
         let dataArr = [];
         let locations = [];
         let pages = 1;
 
         try {
+            // Find the locations metro area id
+            const idResponse = await fetch(`https://api.songkick.com/api/3.0/search/locations.json?query=${userInput}&apikey=P21PoIr1LmuJzJI7`)
+            let idData = await idResponse.json();
+            console.log(idData);
+            let metroId = idData.resultsPage.results.location[0].metroArea.id;
+
             // Find the total number of pages in the paginated response
-            const response = await fetch(`https://api.songkick.com/api/3.0/events.json?apikey=P21PoIr1LmuJzJI7&artist_name=${userInput}&min_date=${dateFrom}&max_date=${dateTo}`)
+            const response = await fetch(`https://api.songkick.com/api/3.0/metro_areas/${metroId}/calendar.json?apikey=P21PoIr1LmuJzJI7&min_date=${dateFrom}&max_date=${dateTo}`)
             let data = await response.json();
             console.log(data);
             let total = data.resultsPage.totalEntries;
@@ -139,10 +99,10 @@ $(document).ready(function () {
 
             // Loop thru the pages in the paginated response and push the required data into arrays
             for (i = 1; i <= pages; i++) {
-                let responsePage = await fetch(`https://api.songkick.com/api/3.0/events.json?apikey=P21PoIr1LmuJzJI7&artist_name=${userInput}&min_date=${dateFrom}&max_date=${dateTo}&page=${i}`)
+                let responsePage = await fetch(`https://api.songkick.com/api/3.0/metro_areas/${metroId}/calendar.json?apikey=P21PoIr1LmuJzJI7&min_date=${dateFrom}&max_date=${dateTo}&page=${i}`)
                 let responsePageJson = await responsePage.json();
                 let event = responsePageJson.resultsPage.results.event;
-            
+
                 event.forEach(function (entry) {
                     dataArr.push({
                         'Artist': entry.performance[0].displayName,
@@ -167,31 +127,50 @@ $(document).ready(function () {
         addMarker(locations, map)
     }
 
-    // getData takes the response, loops thru the response and pushes the required response data into array containers
-    function getData(response) {
-        var total = parseInt(response.data.resultsPage.totalEntries);
-        var locations = [];
-        var data = [];
+    // FindEvents takes user artist input passes that and apikey to songkick api and obtains a response
+    async function findEvents(userInput, dateFrom, dateTo) {
+        let dataArr = [];
+        let locations = [];
+        let pages = 1;
 
-        for (var i = 0; i < total; i++) {
-            data.push({
-                'Artist': response.data && response.data.resultsPage && response.data.resultsPage.results && response.data.resultsPage.results.event[i] && response.data.resultsPage.results.event[i].performance[0] && response.data.resultsPage.results.event[i].performance[0].displayName,
-                'Date': response.data && response.data.resultsPage && response.data.resultsPage.results && response.data.resultsPage.results.event[i] && response.data.resultsPage.results.event[i].start && response.data.resultsPage.results.event[i].start.date,
-                'City': response.data && response.data.resultsPage && response.data.resultsPage.results && response.data.resultsPage.results.event[i] && response.data.resultsPage.results.event[i].location && response.data.resultsPage.results.event[i].location.city,
-                'Venue': response.data && response.data.resultsPage && response.data.resultsPage.results && response.data.resultsPage.results.event[i] && response.data.resultsPage.results && response.data.resultsPage.results.event[i] && response.data.resultsPage.results.event[i].venue && response.data.resultsPage.results.event[i].venue.displayName,
-            });
+        try {
+            // Find the total number of pages in the paginated response
+            const response = await fetch(`https://api.songkick.com/api/3.0/events.json?apikey=P21PoIr1LmuJzJI7&artist_name=${userInput}&min_date=${dateFrom}&max_date=${dateTo}`)
+            let data = await response.json();
+            console.log(data);
+            let total = data.resultsPage.totalEntries;
+            if (total > 50) {
+                pages = Math.ceil(total / 50);
+            }
 
-            locations.push({
-                'lat': response.data && response.data.resultsPage && response.data.resultsPage.results && response.data.resultsPage.results.event[i] && response.data.resultsPage.results.event[i].location && response.data.resultsPage.results.event[i].location.lat,
-                'lng': response.data && response.data.resultsPage && response.data.resultsPage.results && response.data.resultsPage.results.event[i] && response.data.resultsPage.results.event[i].location && response.data.resultsPage.results.event[i].location.lng
-            })
+            // Loop thru the pages in the paginated response and push the required data into arrays
+            for (i = 1; i <= pages; i++) {
+                let responsePage = await fetch(`https://api.songkick.com/api/3.0/events.json?apikey=P21PoIr1LmuJzJI7&artist_name=${userInput}&min_date=${dateFrom}&max_date=${dateTo}&page=${i}`)
+                let responsePageJson = await responsePage.json();
+                let event = responsePageJson.resultsPage.results.event;
+
+                event.forEach(function (entry) {
+                    dataArr.push({
+                        'Artist': entry.performance[0].displayName,
+                        'Date': entry.start.date,
+                        'City': entry.location.city,
+                        'Venue': entry.venue.displayName,
+                    })
+
+                    locations.push({
+                        'lat': entry.location.lat,
+                        'lng': entry.location.lng
+                    })
+                })
+            }
         }
-
-        // The function returns an object of all array containers
-        return {
-            tableData: data,
-            locationData: locations
-        };
+        catch (err) {
+            console.log('fetch failed', err);
+        }
+        // tabulate the data
+        $('#table').bootstrapTable({ data: dataArr })
+        // add locations to the google map
+        addMarker(locations, map)
     }
 
     // Youtube video

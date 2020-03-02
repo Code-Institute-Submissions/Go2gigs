@@ -56,7 +56,7 @@ $(document).ready(function () {
         }
     });
 
-    // User Input Form - When a user submits input save that input to variables and call the findEvents function
+    // User Input Form - When a user submits input save that input to variables and call the relevant function
     $("#search-btn").on("click", function () {
         if ($('#search-by').val() == '0') { // search by city
             var userInput = String($("#user-input").val());
@@ -69,7 +69,7 @@ $(document).ready(function () {
             var userInput = String($("#user-input").val());
             var dateFrom = $("#date-from").val();
             var dateTo = $("#date-to").val();
-            findEvents(userInput, dateFrom, dateTo);
+            findEvents(userInput, dateFrom, dateTo); // Function call with user input data
             // ytSearch(userInput);
             event.preventDefault();
             $("#search-form")[0].reset();
@@ -175,6 +175,14 @@ $(document).ready(function () {
         // add locations to the google map
         addMarker(locations, map);
     }
+
+    // Fires when user clicks a table row
+    $('#table').bootstrapTable({
+        onClickRow: function (row, $element) {
+            console.log(`row info is ${JSON.stringify(row)} date is ${JSON.stringify(row.Date)}`)
+            console.log(`element is ${JSON.stringify($element.index())}`)
+        }
+    });
 
     // Youtube video
     // This code loads the IFrame Player API code asynchronously.

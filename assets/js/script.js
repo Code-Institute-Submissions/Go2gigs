@@ -58,7 +58,6 @@ $(document).ready(function () {
 
     // User Input Form - When a user submits input save that input to variables and call the findEvents function
     $("#search-btn").on("click", function () {
-        $('#table').bootstrapTable('removeAll')
         if ($('#search-by').val() == '0') { // search by city
             var userInput = String($("#user-input").val());
             var dateFrom = $("#date-from").val();

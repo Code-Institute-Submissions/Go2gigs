@@ -78,6 +78,7 @@ $(document).ready(function () {
     });
 
     async function findLocEvents(userInput, dateFrom, dateTo) {
+        locations = [];
         let dataArr = [];
         let pages = 1;
 
@@ -130,6 +131,7 @@ $(document).ready(function () {
 
     // FindEvents takes user artist input passes that and apikey to songkick api and obtains a response
     async function findEvents(userInput, dateFrom, dateTo) {
+        locations = [];
         let dataArr = [];
         let pages = 1;
 

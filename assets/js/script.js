@@ -20,10 +20,11 @@ function addMarker(locations, map) {
             map: map
         });
 
-        google.maps.event.addListener(marker, 'click', function () {
-            map.panTo(this.getPosition());
-            map.setZoom(18);
-        });
+        // Event listener fires when user clicks on marker and zooms map
+        // google.maps.event.addListener(marker, 'click', function () {
+        //     map.panTo(this.getPosition());
+        //     map.setZoom(18);
+        // });
 
         // Extend the bounds of the google map to include all markers in view
         loc = new google.maps.LatLng(locations[i].lat, locations[i].lng);

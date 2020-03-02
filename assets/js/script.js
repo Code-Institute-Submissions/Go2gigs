@@ -58,6 +58,7 @@ $(document).ready(function () {
 
     // User Input Form - When a user submits input save that input to variables and call the findEvents function
     $("#search-btn").on("click", function () {
+        $('#table').bootstrapTable('removeAll')
         if ($('#search-by').val() == '0') { // search by city
             var userInput = String($("#user-input").val());
             var dateFrom = $("#date-from").val();
@@ -122,9 +123,10 @@ $(document).ready(function () {
             console.log('fetch failed', err);
         }
         // tabulate the data
-        $('#table').bootstrapTable({ data: dataArr })
+        $('#table').bootstrapTable({ data: dataArr });
+        $('#table').bootstrapTable('load', dataArr); // reload table data when another selection is made
         // add locations to the google map
-        addMarker(locations, map)
+        addMarker(locations, map);
     }
 
     // FindEvents takes user artist input passes that and apikey to songkick api and obtains a response
@@ -151,7 +153,7 @@ $(document).ready(function () {
 
                 event.forEach(function (entry) {
                     dataArr.push({
-                        'Artist': entry.performance[0].displayName,
+                        'Artist': userInput,
                         'Date': entry.start.date,
                         'City': entry.location.city,
                         'Venue': entry.venue.displayName,
@@ -168,9 +170,11 @@ $(document).ready(function () {
             console.log('fetch failed', err);
         }
         // tabulate the data
-        $('#table').bootstrapTable({ data: dataArr })
+        // $('#table').bootstrapTable('removeAll')
+        $('#table').bootstrapTable({ data: dataArr });
+        $('#table').bootstrapTable('load', dataArr); // reload table data when another selection is made
         // add locations to the google map
-        addMarker(locations, map)
+        addMarker(locations, map);
     }
 
     // Youtube video

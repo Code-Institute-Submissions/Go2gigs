@@ -9,16 +9,23 @@ function initMap() {
         document.getElementById('map'), { zoom: 8, center: { lat: 50.3785, lng: 14.9706 } });
 }
 
-// Adds markers to the map then sets to map zoom to fit the bounds of all markers
+// Adds markers to the map then sets map zoom to fit the bounds of all markers
 function addMarker(locations, map) {
     bounds = new google.maps.LatLngBounds();
 
+    // Loop thru all locations and set a marker on the map for each
     for (var i = 0; i < locations.length; i++) {
         var marker = new google.maps.Marker({
             position: locations[i],
             map: map
         });
 
+        google.maps.event.addListener(marker, 'click', function () {
+            map.panTo(this.getPosition());
+            map.setZoom(18);
+        });
+
+        // Extend the bounds of the google map to include all markers in view
         loc = new google.maps.LatLng(locations[i].lat, locations[i].lng);
         bounds.extend(loc);
     }
@@ -182,7 +189,7 @@ $(document).ready(function () {
         onClickRow: function (row, $element) {
             console.log(`element is ${JSON.stringify($element.index())}`) // Find the index position of the clicked row
             let pos = $element.index();
-            let zoomLocation = {lat: locations[pos].lat, lng: locations[pos].lng};
+            let zoomLocation = { lat: locations[pos].lat, lng: locations[pos].lng };
             map.panTo(zoomLocation);
             map.setZoom(18);
         }

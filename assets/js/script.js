@@ -1,9 +1,10 @@
+// A variable to store locations
+let locations = [];
+let map
 // Initialize and add the map
-function initMap(locations) {
-    // Create a bounds variable
-    let bounds = new google.maps.LatLngBounds();
+function initMap() {
     // The map, centered at central europe lat and long
-    let map = new google.maps.Map(
+    map = new google.maps.Map(
         document.getElementById('map'), { zoom: 8, center: { lat: 50.3785, lng: 14.9706 } });
     // Create markers array and map locations array to it while calling the callback function on each element
     let markers = locations.map(function (location) {
@@ -12,7 +13,8 @@ function initMap(locations) {
             map: map
         });
     });
-
+    // Create a bounds variable
+    let bounds = new google.maps.LatLngBounds();
     // Extend the bounds of the google map to include all markers in view
     for (var i = 0; i < locations.length; i++) {
         let loc = new google.maps.LatLng(locations[i].lat, locations[i].lng);
@@ -22,37 +24,11 @@ function initMap(locations) {
     // Fit all markers inside map zoom level and pan to center all markers
     map.fitBounds(bounds);
     map.panToBounds(bounds);
-    
+
     // Add marker clusters by passing in the map, markers array and local image path
     let markerClusterer = new MarkerClusterer(map, markers,
-        {imagePath:'../assets/images/markImages/m'});
+        { imagePath: '../assets/images/markImages/m' });
 }
-
-// Adds markers to the map then sets map zoom to fit the bounds of all markers
-// function addMarker(locations, map) {
-//     bounds = new google.maps.LatLngBounds();
-
-//     // Loop thru all locations and set a marker on the map for each
-//     for (var i = 0; i < locations.length; i++) {
-//         var marker = new google.maps.Marker({
-//             position: locations[i],
-//             map: map
-//         });
-
-//         // Event listener fires when user clicks on marker and zooms map
-//         // google.maps.event.addListener(marker, 'click', function () {
-//         //     map.panTo(this.getPosition());
-//         //     map.setZoom(18);
-//         // });
-
-//         // Extend the bounds of the google map to include all markers in view
-//         loc = new google.maps.LatLng(locations[i].lat, locations[i].lng);
-//         bounds.extend(loc);
-//     }
-//     // Fit all markers inside map zoom level and pan to center all markers
-//     map.fitBounds(bounds);
-//     map.panToBounds(bounds);
-// }
 
 // This function creates an <iframe> (and YouTube player)
 // after the API code downloads.
@@ -105,7 +81,7 @@ $(document).ready(function () {
     });
 
     async function findLocEvents(userInput, dateFrom, dateTo) {
-        let locations = [];
+        // let locations = [];
         let dataArr = [];
         let pages = 1;
 
@@ -153,14 +129,12 @@ $(document).ready(function () {
         $('#table').bootstrapTable({ data: dataArr });
         $('#table').bootstrapTable('load', dataArr); // reload table data when another selection is made
         // Initialise the google map
-        initMap(locations);
-        // add locations to the google map
-        // addMarker(locations, map);
+        initMap();
     }
 
     // FindEvents takes user artist input passes that and apikey to songkick api and obtains a response
     async function findEvents(userInput, dateFrom, dateTo) {
-        let locations = [];
+        // let locations = [];
         let dataArr = [];
         let pages = 1;
 
@@ -202,9 +176,7 @@ $(document).ready(function () {
         $('#table').bootstrapTable({ data: dataArr });
         $('#table').bootstrapTable('load', dataArr); // reload table data when another selection is made
         // Initialise the google map
-        initMap(locations);
-        // add locations to the google map
-        // addMarker(locations, map);
+        initMap();
     }
 
     // Fires when user clicks a table row

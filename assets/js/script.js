@@ -67,6 +67,7 @@ $(document).ready(function () {
             var dateFrom = $("#date-from").val();
             var dateTo = $("#date-to").val();
             findLocEvents(userInput, dateFrom, dateTo); // Function call with user input data
+            // $("#results-section").removeClass('hidden'); // Unhide the results section
             event.preventDefault();
             $("#search-form")[0].reset();
         } else if ($('#search-by').val() == '1') { // search by artist
@@ -74,6 +75,7 @@ $(document).ready(function () {
             var dateFrom = $("#date-from").val();
             var dateTo = $("#date-to").val();
             findEvents(userInput, dateFrom, dateTo); // Function call with user input data
+            // $("#results-section").removeClass('hidden'); // Unhide the results section
             // ytSearch(userInput);
             event.preventDefault();
             $("#search-form")[0].reset();

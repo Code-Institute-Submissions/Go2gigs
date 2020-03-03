@@ -42,7 +42,11 @@
 }
 
 
-/* Table Section */
+/* Results Section */
+.hidden{
+    display: none;
+}
+
 #results-section{
     padding: 0px;
 }
@@ -56,7 +60,6 @@
     padding: 0px;
 }
 
-/* Map */
 #map{
     height: 100%;
     width: 100%;

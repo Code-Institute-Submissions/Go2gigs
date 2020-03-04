@@ -54,7 +54,7 @@ $(document).ready(function () {
     // User Input Form - When the user changes the select option change the user input placeholder
     $('#search-by').change(function () {
         if ($(this).val() == '0') { // search by city
-            $('#user-input').attr('placeholder', 'Enter City');
+            $('#user-input').attr('placeholder', 'Enter City Country');
         } else if ($(this).val() == '1') { // search by artist
             $('#user-input').attr('placeholder', 'Enter Artist');
         }
@@ -91,7 +91,6 @@ $(document).ready(function () {
             // Find the locations metro area id
             const idResponse = await fetch(`https://api.songkick.com/api/3.0/search/locations.json?query=${userInput}&apikey=P21PoIr1LmuJzJI7`)
             let idData = await idResponse.json();
-            console.log(idData);
             let metroId = idData.resultsPage.results.location[0].metroArea.id;
 
             // Find the total number of pages in the paginated response
@@ -131,6 +130,7 @@ $(document).ready(function () {
         $('#table').bootstrapTable({ data: dataArr });
         $('#table').bootstrapTable('load', dataArr); // reload table data when another selection is made
         // Initialise the google map
+        console.log(`Locations are ${JSON.stringify(locations)}`);
         initMap(locations);
     }
 

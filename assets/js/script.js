@@ -1,10 +1,10 @@
 // A variable to store locations
-let locations = [];
-let map
+// let locations = [];
+// let map
 // Initialize and add the map
-function initMap() {
+function initMap(locations) {
     // The map, centered at central europe lat and long
-    map = new google.maps.Map(
+    let map = new google.maps.Map(
         document.getElementById('map'), { zoom: 8, center: { lat: 50.3785, lng: 14.9706 } });
     // Create markers array and map locations array to it while calling the callback function on each element
     let markers = locations.map(function (location) {
@@ -67,7 +67,7 @@ $(document).ready(function () {
             var dateFrom = $("#date-from").val();
             var dateTo = $("#date-to").val();
             findLocEvents(userInput, dateFrom, dateTo); // Function call with user input data
-            // $("#results-section").removeClass('hidden'); // Unhide the results section
+            $("#results-section").removeClass('hidden'); // Unhide the results section
             event.preventDefault();
             $("#search-form")[0].reset();
         } else if ($('#search-by').val() == '1') { // search by artist
@@ -75,7 +75,7 @@ $(document).ready(function () {
             var dateFrom = $("#date-from").val();
             var dateTo = $("#date-to").val();
             findEvents(userInput, dateFrom, dateTo); // Function call with user input data
-            // $("#results-section").removeClass('hidden'); // Unhide the results section
+            $("#results-section").removeClass('hidden'); // Unhide the results section
             // ytSearch(userInput);
             event.preventDefault();
             $("#search-form")[0].reset();
@@ -83,7 +83,7 @@ $(document).ready(function () {
     });
 
     async function findLocEvents(userInput, dateFrom, dateTo) {
-        // let locations = [];
+        let locations = [];
         let dataArr = [];
         let pages = 1;
 
@@ -131,12 +131,12 @@ $(document).ready(function () {
         $('#table').bootstrapTable({ data: dataArr });
         $('#table').bootstrapTable('load', dataArr); // reload table data when another selection is made
         // Initialise the google map
-        initMap();
+        initMap(locations);
     }
 
     // FindEvents takes user artist input passes that and apikey to songkick api and obtains a response
     async function findEvents(userInput, dateFrom, dateTo) {
-        // let locations = [];
+        let locations = [];
         let dataArr = [];
         let pages = 1;
 
@@ -178,19 +178,19 @@ $(document).ready(function () {
         $('#table').bootstrapTable({ data: dataArr });
         $('#table').bootstrapTable('load', dataArr); // reload table data when another selection is made
         // Initialise the google map
-        initMap();
+        initMap(locations);
     }
 
     // Fires when user clicks a table row
-    $('#table').bootstrapTable({
-        onClickRow: function (row, $element) {
-            // Find the index position of the clicked row
-            let pos = $element.index();
-            let zoomLocation = { lat: locations[pos].lat, lng: locations[pos].lng };
-            map.panTo(zoomLocation);
-            map.setZoom(18);
-        }
-    });
+    // $('#table').bootstrapTable({
+    //     onClickRow: function (row, $element) {
+    //         // Find the index position of the clicked row
+    //         let pos = $element.index();
+    //         let zoomLocation = { lat: locations[pos].lat, lng: locations[pos].lng };
+    //         map.panTo(zoomLocation);
+    //         map.setZoom(18);
+    //     }
+    // });
 
     // Youtube video
     // This code loads the IFrame Player API code asynchronously.

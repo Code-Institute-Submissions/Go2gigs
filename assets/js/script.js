@@ -188,6 +188,14 @@ $(document).ready(function () {
     //     }
     // });
 
+    // Youtube video
+    // This code loads the IFrame Player API code asynchronously.
+    let tag = document.createElement('script');
+
+    tag.src = "https://www.youtube.com/iframe_api";
+    let firstScriptTag = document.getElementsByTagName('script')[0];
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
     // This function creates an <iframe> (and YouTube player)
     // after the API code downloads.
     let player;
@@ -196,14 +204,6 @@ $(document).ready(function () {
             videoId: 'Wq4tyDRhU_4',
         });
     }
-
-    // Youtube video
-    // This code loads the IFrame Player API code asynchronously.
-    let tag = document.createElement('script');
-
-    tag.src = "https://www.youtube.com/iframe_api";
-    let firstScriptTag = document.getElementsByTagName('script')[0];
-    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
     async function ytSearch(searchTerm) {
         try {
@@ -218,25 +218,5 @@ $(document).ready(function () {
             console.log('fetch failed', err);
         }
     }
-
-    // Function finds a Youtube channel ID with searchTerm and API Key params
-    // function ytSearch(searchTerm) {
-    //     axios.get('https://www.googleapis.com/youtube/v3/search?part=snippet', {
-    //         params: {
-    //             q: `mix ${searchTerm}`, // string mix with search term returns better playlist results
-    //             type: 'playlist',
-    //             key: youtubeKey
-    //         }
-    //     })
-    //         .then(function (response) {
-    //             $(function () {
-    //                 let plist = response.data && response.data.items[0] && response.data.items[0].id && response.data.items[0].id.playlistId
-    //                 console.log(plist);
-    //             })
-    //         })
-    //         .catch(function (error) {
-    //             console.log(error);
-    //         })
-    // }
 
 });

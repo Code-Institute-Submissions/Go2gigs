@@ -35,15 +35,6 @@ function initMap(locations) {
         { imagePath: '../assets/images/markImages/m' });
 }
 
-// This function creates an <iframe> (and YouTube player)
-// after the API code downloads.
-var player;
-function onYouTubeIframeAPIReady() {
-    player = new YT.Player('player', {
-        videoId: 'Wq4tyDRhU_4',
-    });
-}
-
 $(document).ready(function () {
 
     // Calendar datepicker
@@ -81,7 +72,7 @@ $(document).ready(function () {
             var dateTo = $("#date-to").val();
             findEvents(userInput, dateFrom, dateTo); // Function call with user input data
             $("#results-section").removeClass('hidden'); // Unhide the results section
-            // ytSearch(userInput);
+            ytSearch(userInput);
             event.preventDefault();
             $("#search-form")[0].reset();
         }
@@ -197,32 +188,55 @@ $(document).ready(function () {
     //     }
     // });
 
+    // This function creates an <iframe> (and YouTube player)
+    // after the API code downloads.
+    let player;
+    function onYouTubeIframeAPIReady() {
+        player = new YT.Player('player', {
+            videoId: 'Wq4tyDRhU_4',
+        });
+    }
+
     // Youtube video
     // This code loads the IFrame Player API code asynchronously.
-    var tag = document.createElement('script');
+    let tag = document.createElement('script');
 
     tag.src = "https://www.youtube.com/iframe_api";
-    var firstScriptTag = document.getElementsByTagName('script')[0];
+    let firstScriptTag = document.getElementsByTagName('script')[0];
     firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
-    // Function finds a Youtube channel ID with searchTerm and API Key params
-    function ytSearch(searchTerm) {
-        axios.get('https://www.googleapis.com/youtube/v3/search?part=snippet', {
-            params: {
-                q: `mix ${searchTerm}`, // string mix with search term returns better playlist results
-                type: 'playlist',
-                key: youtubeKey
-            }
-        })
-            .then(function (response) {
-                $(function () {
-                    var plist = response.data && response.data.items[0] && response.data.items[0].id && response.data.items[0].id.playlistId
-                    console.log(plist);
-                })
-            })
-            .catch(function (error) {
-                console.log(error);
-            })
+    async function ytSearch(searchTerm) {
+        try {
+            // Find the total number of pages in the paginated response
+            const response = await fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&q=mix+${searchTerm}&type=playlist&key=${youtubeKey}`)
+            let data = await response.json();
+            console.log(data);
+            let plist = data.items[0].id.playlistId;
+            console.log(plist);
+        }
+        catch (err) {
+            console.log('fetch failed', err);
+        }
     }
+
+    // Function finds a Youtube channel ID with searchTerm and API Key params
+    // function ytSearch(searchTerm) {
+    //     axios.get('https://www.googleapis.com/youtube/v3/search?part=snippet', {
+    //         params: {
+    //             q: `mix ${searchTerm}`, // string mix with search term returns better playlist results
+    //             type: 'playlist',
+    //             key: youtubeKey
+    //         }
+    //     })
+    //         .then(function (response) {
+    //             $(function () {
+    //                 let plist = response.data && response.data.items[0] && response.data.items[0].id && response.data.items[0].id.playlistId
+    //                 console.log(plist);
+    //             })
+    //         })
+    //         .catch(function (error) {
+    //             console.log(error);
+    //         })
+    // }
 
 });

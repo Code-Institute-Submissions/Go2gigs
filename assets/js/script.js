@@ -1,6 +1,11 @@
 // A variable to store locations
 // let locations = [];
 // let map
+
+// variables to store API keys
+let songkickKey = config.songkickKey;
+let youtubeKey = config.youtubeKey;
+
 // Initialize and add the map
 function initMap(locations) {
     // The map, centered at central europe lat and long
@@ -89,12 +94,12 @@ $(document).ready(function () {
 
         try {
             // Find the locations metro area id
-            const idResponse = await fetch(`https://api.songkick.com/api/3.0/search/locations.json?query=${userInput}&apikey=P21PoIr1LmuJzJI7`)
+            const idResponse = await fetch(`https://api.songkick.com/api/3.0/search/locations.json?query=${userInput}&apikey=${songkickKey}`)
             let idData = await idResponse.json();
             let metroId = idData.resultsPage.results.location[0].metroArea.id;
 
             // Find the total number of pages in the paginated response
-            const response = await fetch(`https://api.songkick.com/api/3.0/metro_areas/${metroId}/calendar.json?apikey=P21PoIr1LmuJzJI7&min_date=${dateFrom}&max_date=${dateTo}`)
+            const response = await fetch(`https://api.songkick.com/api/3.0/metro_areas/${metroId}/calendar.json?apikey=${songkickKey}&min_date=${dateFrom}&max_date=${dateTo}`)
             let data = await response.json();
             console.log(data);
             let total = data.resultsPage.totalEntries;
@@ -104,7 +109,7 @@ $(document).ready(function () {
 
             // Loop thru the pages in the paginated response and push the required data into arrays
             for (i = 1; i <= pages; i++) {
-                let responsePage = await fetch(`https://api.songkick.com/api/3.0/metro_areas/${metroId}/calendar.json?apikey=P21PoIr1LmuJzJI7&min_date=${dateFrom}&max_date=${dateTo}&page=${i}`)
+                let responsePage = await fetch(`https://api.songkick.com/api/3.0/metro_areas/${metroId}/calendar.json?apikey=${songkickKey}&min_date=${dateFrom}&max_date=${dateTo}&page=${i}`)
                 let responsePageJson = await responsePage.json();
                 let event = responsePageJson.resultsPage.results.event;
 
@@ -142,7 +147,7 @@ $(document).ready(function () {
 
         try {
             // Find the total number of pages in the paginated response
-            const response = await fetch(`https://api.songkick.com/api/3.0/events.json?apikey=P21PoIr1LmuJzJI7&artist_name=${userInput}&min_date=${dateFrom}&max_date=${dateTo}`)
+            const response = await fetch(`https://api.songkick.com/api/3.0/events.json?apikey=${songkickKey}&artist_name=${userInput}&min_date=${dateFrom}&max_date=${dateTo}`)
             let data = await response.json();
             console.log(data);
             let total = data.resultsPage.totalEntries;
@@ -152,7 +157,7 @@ $(document).ready(function () {
 
             // Loop thru the pages in the paginated response and push the required data into arrays
             for (i = 1; i <= pages; i++) {
-                let responsePage = await fetch(`https://api.songkick.com/api/3.0/events.json?apikey=P21PoIr1LmuJzJI7&artist_name=${userInput}&min_date=${dateFrom}&max_date=${dateTo}&page=${i}`)
+                let responsePage = await fetch(`https://api.songkick.com/api/3.0/events.json?apikey=${songkickKey}&artist_name=${userInput}&min_date=${dateFrom}&max_date=${dateTo}&page=${i}`)
                 let responsePageJson = await responsePage.json();
                 let event = responsePageJson.resultsPage.results.event;
 
@@ -206,7 +211,7 @@ $(document).ready(function () {
             params: {
                 q: `mix ${searchTerm}`, // string mix with search term returns better playlist results
                 type: 'playlist',
-                key: 'AIzaSyBM28Mpnwfy8kj3KF8QJF24LsnTMvgqR68'
+                key: youtubeKey
             }
         })
             .then(function (response) {

@@ -35,12 +35,12 @@ function initMap(locations) {
         { imagePath: '../assets/images/markImages/m' });
 }
 
-function findFormatter(value) {
-    return '<i class="fas fa-search-location"></i>';
+function findFormatter() {
+    return '<button class="btn"><i class="fas fa-search-location"></i></button>';
 }
 
-function playFormatter(value) {
-    return '<i class="fas fa-play"></i>';
+function playFormatter() {
+    return '<button class="btn"><i class="fas fa-play"></i></button>';
 }
 
 $(document).ready(function () {

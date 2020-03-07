@@ -35,6 +35,14 @@ function initMap(locations) {
         { imagePath: '../assets/images/markImages/m' });
 }
 
+function findFormatter(value) {
+    return '<i class="fas fa-search-location"></i>';
+}
+
+function playFormatter(value) {
+    return '<i class="fas fa-play"></i>';
+}
+
 $(document).ready(function () {
 
     // Calendar datepicker
@@ -72,12 +80,13 @@ $(document).ready(function () {
             var dateTo = $("#date-to").val();
             findEvents(userInput, dateFrom, dateTo); // Function call with user input data
             $("#results-section").removeClass('hidden'); // Unhide the results section
-            ytSearch(userInput);
+            // ytSearch(userInput);
             event.preventDefault();
             $("#search-form")[0].reset();
         }
     });
 
+    // findLocEvents fetch response from Songkick API based on a location search
     async function findLocEvents(userInput, dateFrom, dateTo) {
         let locations = [];
         let dataArr = [];
@@ -110,6 +119,8 @@ $(document).ready(function () {
                         'Date': entry.start.date,
                         'City': entry.location.city,
                         'Venue': entry.venue.displayName,
+                        'Find': 'Find',
+                        'Play': 'Play'
                     })
 
                     locations.push({
@@ -158,6 +169,8 @@ $(document).ready(function () {
                         'Date': entry.start.date,
                         'City': entry.location.city,
                         'Venue': entry.venue.displayName,
+                        'Find': 'Find',
+                        'Play': 'Play'
                     })
 
                     locations.push({

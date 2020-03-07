@@ -190,16 +190,21 @@ $(document).ready(function () {
         initMap(locations);
     }
 
-    // Fires when user clicks a table row
-    // $('#table').bootstrapTable({
-    //     onClickRow: function (row, $element) {
-    //         // Find the index position of the clicked row
-    //         let pos = $element.index();
-    //         let zoomLocation = { lat: locations[pos].lat, lng: locations[pos].lng };
-    //         map.panTo(zoomLocation);
-    //         map.setZoom(18);
-    //     }
-    // });
+    // Fires when user clicks a table cell
+    $('#table').bootstrapTable({
+        onClickCell: function (field, value, row, $element) {
+            // Find the index position of the row of clicked cell
+            if (field === "Find") {
+                let pos = $element.index();
+                let zoomLocation = { lat: locations[pos].lat, lng: locations[pos].lng };
+                map.panTo(zoomLocation);
+                map.setZoom(18);
+            }
+            else if(field === "Play") {
+                let pos = $element.index();
+            }
+        }
+    });
 
     // Youtube video
     // This code loads the IFrame Player API code asynchronously.

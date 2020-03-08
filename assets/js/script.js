@@ -201,45 +201,48 @@ $(document).ready(function () {
             }
             else if (field === "Play") {
                 console.log(row.Artist);
-                let plist = ytSearch(row.Artist);
-                startVideo(plist);
+                // let plist = ytSearch(row.Artist);
+                console.log(`plist at yt video is; ${ytSearch(row.Artist)}`)
+                $("#player")
+                    .html(`<iframe width="560" height="315" src="https://www.youtube.com/embed/videoseries?list=PL2B940ABFB08FC274" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>`);
+                // startVideo(plist);
             }
         }
     });
 
     // Youtube video
     // This code loads the IFrame Player API code asynchronously.
-    let tag = document.createElement('script');
+    // let tag = document.createElement('script');
 
-    tag.src = "https://www.youtube.com/iframe_api";
-    let firstScriptTag = document.getElementsByTagName('script')[0];
-    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+    // tag.src = "https://www.youtube.com/iframe_api";
+    // let firstScriptTag = document.getElementsByTagName('script')[0];
+    // firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
     // This function creates an <iframe> (and YouTube player)
     // after the API code downloads.
-    let player;
-    function startVideo(plist) {
-        player = new YT.Player('player', {
-            height: "390",
-            width: "640",
-            playerVars:
-            {
-                listType: "playlist",
-                list: plist
-            },
-        });
-    }
+    // let player;
+    // function startVideo(plist) {
+    //     player = new YT.Player('player', {
+    //         height: "390",
+    //         width: "640",
+    //         playerVars:
+    //         {
+    //             listType: "playlist",
+    //             list: plist
+    //         },
+    //     });
+    // }
 
     async function ytSearch(searchTerm) {
         try {
             // Find the total number of pages in the paginated response
             const response = await fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&q=mix+${searchTerm}&type=playlist&key=${youtubeKey}&maxResults=${1}`)
             let data = await response.json();
-            let plist = data.items[0].id.playlistId;
+            console.log(`data is: ${data}`)
+            let plist = JSON.stringify(data.items[0].id.playlistId);
             console.log(plist);
-            let strPlist = JSON.stringify(plist);
-            console.log(typeof(strPlist));
-            return strPlist;
+            console.log(typeof (plist));
+            return plist;
         }
         catch (err) {
             console.log('fetch failed', err);

@@ -6,6 +6,25 @@ let map
 let songkickKey = config.songkickKey;
 let youtubeKey = config.youtubeKey;
 
+// Youtube video
+// This code loads the IFrame Player API code asynchronously.
+let tag = document.createElement('script');
+
+tag.src = "https://www.youtube.com/iframe_api";
+let firstScriptTag = document.getElementsByTagName('script')[0];
+firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+// This function creates an <iframe> (and YouTube player)
+// after the API code downloads.
+let player;
+function onYouTubeIframeAPIReady() {
+    player = new YT.Player('player', {
+        height: "390",
+        width: "640",
+        videoId: "PL2B940ABFB08FC274"
+    });
+}
+
 // Initialize and add the map
 function initMap() {
     // The map, centered at central europe lat and long
@@ -209,38 +228,16 @@ $(document).ready(function () {
         }
     });
 
-    // Youtube video
-    // This code loads the IFrame Player API code asynchronously.
-    // let tag = document.createElement('script');
-
-    // tag.src = "https://www.youtube.com/iframe_api";
-    // let firstScriptTag = document.getElementsByTagName('script')[0];
-    // firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
-    // This function creates an <iframe> (and YouTube player)
-    // after the API code downloads.
-    // let player;
-    // function onYouTubeIframeAPIReady(plist) {
-    //     player = new YT.Player('player', {
-    //         height: "390",
-    //         width: "640",
-    //         playerVars:
-    //         {
-    //             listType: "playlist",
-    //             list: 'PL2B940ABFB08FC274'
-    //         },
-    //     });
-    // }
-
     async function ytSearch(searchTerm) {
         try {
             // Find the total number of pages in the paginated response
             const response = await fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&q=mix+${searchTerm}&type=playlist&key=${youtubeKey}&maxResults=${1}`)
             let data = await response.json();
-            let plist = new String(data.items[0].id.playlistId);
+            let plist = data.items[0].id.playlistId;
             console.log(`plist is: ${plist} and its type is: ${typeof (plist)}`);
-            $("#player")
-                .html(`<iframe width="300" height="300" src="https://www.youtube.com/embed/${plist}"></iframe>`);
+            player.loadVideoById(plist);
+            // $("#player")
+            //     .html(`<iframe width="300" height="300" src="https://www.youtube.com/embed/${plist}"></iframe>`);
         }
         catch (err) {
             console.log('fetch failed', err);

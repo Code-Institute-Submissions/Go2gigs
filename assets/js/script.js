@@ -40,7 +40,7 @@ function findFormatter() {
 }
 
 function playFormatter() {
-    return '<button class="btn"><i class="fas fa-play"></i></button>';
+    return '<button class="btn" data-toggle="modal" data-target="videoModal"><i class="fas fa-play"></i></button>';
 }
 
 $(document).ready(function () {
@@ -80,7 +80,6 @@ $(document).ready(function () {
             var dateTo = $("#date-to").val();
             findEvents(userInput, dateFrom, dateTo); // Function call with user input data
             $("#results-section").removeClass('hidden'); // Unhide the results section
-            // ytSearch(userInput);
             event.preventDefault();
             $("#search-form")[0].reset();
         }
@@ -202,6 +201,8 @@ $(document).ready(function () {
             }
             else if (field === "Play") {
                 console.log(row.Artist);
+                let plist = ytSearch(row.Artist);
+                startVideo(plist);
             }
         }
     });
@@ -217,20 +218,28 @@ $(document).ready(function () {
     // This function creates an <iframe> (and YouTube player)
     // after the API code downloads.
     let player;
-    function onYouTubeIframeAPIReady() {
+    function startVideo(plist) {
         player = new YT.Player('player', {
-            videoId: 'Wq4tyDRhU_4',
+            height: "390",
+            width: "640",
+            playerVars:
+            {
+                listType: "playlist",
+                list: plist
+            },
         });
     }
 
     async function ytSearch(searchTerm) {
         try {
             // Find the total number of pages in the paginated response
-            const response = await fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&q=mix+${searchTerm}&type=playlist&key=${youtubeKey}`)
+            const response = await fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&q=mix+${searchTerm}&type=playlist&key=${youtubeKey}&maxResults=${1}`)
             let data = await response.json();
-            console.log(data);
             let plist = data.items[0].id.playlistId;
             console.log(plist);
+            let strPlist = JSON.stringify(plist);
+            console.log(typeof(strPlist));
+            return strPlist;
         }
         catch (err) {
             console.log('fetch failed', err);

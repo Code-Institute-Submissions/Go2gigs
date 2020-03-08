@@ -201,10 +201,9 @@ $(document).ready(function () {
             }
             else if (field === "Play") {
                 console.log(row.Artist);
-                // let plist = ytSearch(row.Artist);
-                console.log(`plist at yt video is; ${ytSearch(row.Artist)}`)
-                $("#player")
-                    .html(`<iframe width="560" height="315" src="https://www.youtube.com/embed/videoseries?list=PL2B940ABFB08FC274" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>`);
+                ytSearch(row.Artist);
+                // $("#player")
+                //     .html(`<iframe width="560" height="315" src="https://www.youtube.com/embed/videoseries?list=PL2B940ABFB08FC274" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>`);
                 // startVideo(plist);
             }
         }
@@ -221,14 +220,14 @@ $(document).ready(function () {
     // This function creates an <iframe> (and YouTube player)
     // after the API code downloads.
     // let player;
-    // function startVideo(plist) {
+    // function onYouTubeIframeAPIReady(plist) {
     //     player = new YT.Player('player', {
     //         height: "390",
     //         width: "640",
     //         playerVars:
     //         {
     //             listType: "playlist",
-    //             list: plist
+    //             list: 'PL2B940ABFB08FC274'
     //         },
     //     });
     // }
@@ -238,11 +237,10 @@ $(document).ready(function () {
             // Find the total number of pages in the paginated response
             const response = await fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&q=mix+${searchTerm}&type=playlist&key=${youtubeKey}&maxResults=${1}`)
             let data = await response.json();
-            console.log(`data is: ${data}`)
-            let plist = JSON.stringify(data.items[0].id.playlistId);
-            console.log(plist);
-            console.log(typeof (plist));
-            return plist;
+            let plist = new String(data.items[0].id.playlistId);
+            console.log(`plist is: ${plist} and its type is: ${typeof (plist)}`);
+            $("#player")
+                .html(`<iframe width="300" height="300" src="https://www.youtube.com/embed/${plist}"></iframe>`);
         }
         catch (err) {
             console.log('fetch failed', err);

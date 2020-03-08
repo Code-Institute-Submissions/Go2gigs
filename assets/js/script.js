@@ -1,15 +1,15 @@
 // A variable to store locations
-// let locations = [];
-// let map
+let locations = [];
+let map
 
 // variables to store API keys
 let songkickKey = config.songkickKey;
 let youtubeKey = config.youtubeKey;
 
 // Initialize and add the map
-function initMap(locations) {
+function initMap() {
     // The map, centered at central europe lat and long
-    let map = new google.maps.Map(
+    map = new google.maps.Map(
         document.getElementById('map'), { zoom: 8, center: { lat: 50.3785, lng: 14.9706 } });
     // Create markers array and map locations array to it while calling the callback function on each element
     let markers = locations.map(function (location) {
@@ -88,7 +88,7 @@ $(document).ready(function () {
 
     // findLocEvents fetch response from Songkick API based on a location search
     async function findLocEvents(userInput, dateFrom, dateTo) {
-        let locations = [];
+        // let locations = [];
         let dataArr = [];
         let pages = 1;
 
@@ -138,12 +138,12 @@ $(document).ready(function () {
         $('#table').bootstrapTable('load', dataArr); // reload table data when another selection is made
         // Initialise the google map
         console.log(`Locations are ${JSON.stringify(locations)}`);
-        initMap(locations);
+        initMap();
     }
 
     // FindEvents takes user artist input passes that and apikey to songkick api and obtains a response
     async function findEvents(userInput, dateFrom, dateTo) {
-        let locations = [];
+        // let locations = [];
         let dataArr = [];
         let pages = 1;
 
@@ -187,7 +187,7 @@ $(document).ready(function () {
         $('#table').bootstrapTable({ data: dataArr });
         $('#table').bootstrapTable('load', dataArr); // reload table data when another selection is made
         // Initialise the google map
-        initMap(locations);
+        initMap();
     }
 
     // Fires when user clicks a table cell
@@ -195,13 +195,13 @@ $(document).ready(function () {
         onClickCell: function (field, value, row, $element) {
             // Find the index position of the row of clicked cell
             if (field === "Find") {
-                let pos = $element.index();
+                let pos = $element.parent().data("index");
                 let zoomLocation = { lat: locations[pos].lat, lng: locations[pos].lng };
                 map.panTo(zoomLocation);
                 map.setZoom(18);
             }
-            else if(field === "Play") {
-                let pos = $element.index();
+            else if (field === "Play") {
+                console.log(row.Artist);
             }
         }
     });

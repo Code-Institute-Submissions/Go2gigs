@@ -21,7 +21,7 @@ function onYouTubeIframeAPIReady() {
     player = new YT.Player('player', {
         height: "390",
         width: "640",
-        videoId: "Wq4tyDRhU_4"
+        videoId: ""
     });
 }
 
@@ -219,26 +219,20 @@ $(document).ready(function () {
                 map.setZoom(18);
             }
             else if (field === "Play") {
-                console.log(row.Artist);
+                // call ytSearch with the artist in the selected row
                 ytSearch(row.Artist);
-                // $("#player")
-                //     .html(`<iframe width="560" height="315" src="https://www.youtube.com/embed/videoseries?list=PL2B940ABFB08FC274" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>`);
-                // startVideo(plist);
             }
         }
     });
 
     async function ytSearch(searchTerm) {
         try {
-            // Find the total number of pages in the paginated response
             const response = await fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&q=mix+${searchTerm}&type=playlist&key=${youtubeKey}&maxResults=${1}`)
             let data = await response.json();
             let plist = data.items[0].id.playlistId;
-            console.log(`plist is: ${plist} and its type is: ${typeof (plist)}`);
+            // load the youtube player with the playlist ID found
             player.loadPlaylist({
                 list: plist});
-            // $("#player")
-            //     .html(`<iframe width="300" height="300" src="https://www.youtube.com/embed/${plist}"></iframe>`);
         }
         catch (err) {
             console.log('fetch failed', err);

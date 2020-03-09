@@ -21,7 +21,7 @@ function onYouTubeIframeAPIReady() {
     player = new YT.Player('player', {
         height: "390",
         width: "640",
-        videoId: "PL2B940ABFB08FC274"
+        videoId: "Wq4tyDRhU_4"
     });
 }
 
@@ -235,7 +235,8 @@ $(document).ready(function () {
             let data = await response.json();
             let plist = data.items[0].id.playlistId;
             console.log(`plist is: ${plist} and its type is: ${typeof (plist)}`);
-            player.loadVideoById(plist);
+            player.loadPlaylist({
+                list: plist});
             // $("#player")
             //     .html(`<iframe width="300" height="300" src="https://www.youtube.com/embed/${plist}"></iframe>`);
         }

@@ -233,6 +233,7 @@ $(document).ready(function () {
             // load the youtube player with the playlist ID found
             player.loadPlaylist({
                 list: plist});
+            $('#videoModal').modal('show');
         }
         catch (err) {
             console.log('fetch failed', err);

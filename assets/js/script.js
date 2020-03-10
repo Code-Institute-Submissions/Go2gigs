@@ -40,7 +40,7 @@ function initMap() {
     // Create a bounds variable
     let bounds = new google.maps.LatLngBounds();
     // Extend the bounds of the google map to include all markers in view
-    for (var i = 0; i < locations.length; i++) {
+    for (let i = 0; i < locations.length; i++) {
         let loc = new google.maps.LatLng(locations[i].lat, locations[i].lng);
         bounds.extend(loc);
     }
@@ -86,17 +86,17 @@ $(document).ready(function () {
     // User Input Form - When a user submits input save that input to variables and call the relevant function
     $("#search-btn").on("click", function () {
         if ($('#search-by').val() == '0') { // search by city
-            var userInput = String($("#user-input").val());
-            var dateFrom = $("#date-from").val();
-            var dateTo = $("#date-to").val();
+            let userInput = String($("#user-input").val());
+            let dateFrom = $("#date-from").val();
+            let dateTo = $("#date-to").val();
             findLocEvents(userInput, dateFrom, dateTo); // Function call with user input data
             $("#results-section").removeClass('hidden'); // Unhide the results section
             event.preventDefault();
             $("#search-form")[0].reset();
         } else if ($('#search-by').val() == '1') { // search by artist
-            var userInput = String($("#user-input").val());
-            var dateFrom = $("#date-from").val();
-            var dateTo = $("#date-to").val();
+            let userInput = String($("#user-input").val());
+            let dateFrom = $("#date-from").val();
+            let dateTo = $("#date-to").val();
             findEvents(userInput, dateFrom, dateTo); // Function call with user input data
             $("#results-section").removeClass('hidden'); // Unhide the results section
             event.preventDefault();

@@ -224,6 +224,10 @@ $(document).ready(function () {
             }
         }
     });
+    // Fires when the modal hides to stop YouTube video
+    $("#videoModal").on('hide.bs.modal', function(){
+        player.stopVideo()
+    })
 
     async function ytSearch(searchTerm) {
         try {

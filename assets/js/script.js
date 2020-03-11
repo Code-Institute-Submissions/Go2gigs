@@ -25,6 +25,9 @@ function onYouTubeIframeAPIReady() {
     });
 }
 
+let autoSearch
+// function AutocompleteOn, AutocompleteOff
+
 function autocomplete() {
     // restict selection to cities only
     let options = {
@@ -32,7 +35,7 @@ function autocomplete() {
     };
     // Create the search box and link it to the UI element
     let input = document.getElementById('user-input');
-    new google.maps.places.Autocomplete(input, options);
+    autoSearch = new google.maps.places.Autocomplete(input, options);
 }
 
 // Initialize and add the map

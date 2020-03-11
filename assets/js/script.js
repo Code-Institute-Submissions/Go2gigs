@@ -90,12 +90,11 @@ $(document).ready(function () {
             // User Input Form - When the user changes the select option change the user input placeholder
             $('#search-by').change(function () {
                 if ($(this).val() == '0') { // search by city
-                    $("#search-form")[0].reset();
                     $('#user-input').attr('placeholder', 'Enter City');
                     autocomplete();
                 } else if ($(this).val() == '1') { // search by artist
-                    $("#search-form")[0].reset();
                     $('#user-input').attr('placeholder', 'Enter Artist');
+                    autoSearch = null;
                 }
             });
 

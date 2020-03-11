@@ -34,8 +34,8 @@ function autocomplete() {
         types: ['(cities)']
     };
     // Create the search box and link it to the UI element
-    let input = document.getElementById('user-input');
-    autoSearch = new google.maps.places.Autocomplete(input, options);
+    autoSearch = document.getElementById('user-input');
+    new google.maps.places.Autocomplete(autoSearch, options);
 }
 
 // Initialize and add the map
@@ -91,10 +91,12 @@ $(document).ready(function () {
             $('#search-by').change(function () {
                 if ($(this).val() == '0') { // search by city
                     $('#user-input').attr('placeholder', 'Enter City');
+                    // Run autocomplete function to autocomplete cities
                     autocomplete();
                 } else if ($(this).val() == '1') { // search by artist
                     $('#user-input').attr('placeholder', 'Enter Artist');
-                    autoSearch = null;
+                    // Remove the autocomplete
+                    google.maps.event.clearInstanceListeners(autoSearch);
                 }
             });
 

@@ -63,8 +63,7 @@ function initMap() {
             map.panToBounds(bounds);
 
             // Add marker clusters by passing in the map, markers array and local image path
-            let markerClusterer = new MarkerClusterer(map, markers,
-                { imagePath: '../assets/images/markImages/m' });
+            new MarkerClusterer(map, markers,{ imagePath: '../assets/images/markImages/m' });
         }
 
 function findFormatter() {
@@ -227,7 +226,7 @@ $(document).ready(function () {
 
             // Fires when user clicks a table cell
             $('#table').bootstrapTable({
-                onClickCell: function (field, value, row, $element) {
+                onClickCell: function (field, row, $element) {
                     // Find the index position of the row of clicked cell
                     if (field === "Find") {
                         let pos = $element.parent().data("index");

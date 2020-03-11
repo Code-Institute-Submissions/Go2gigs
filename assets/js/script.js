@@ -25,19 +25,14 @@ function onYouTubeIframeAPIReady() {
     });
 }
 
-function initAutocomplete() {
+function autocomplete() {
+    // restict selection to cities only
+    let options = {
+        types: ['(cities)']
+    };
     // Create the search box and link it to the UI element
     let input = document.getElementById('user-input');
-    let searchBox = new google.maps.places.SearchBox(input);
-    map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
-
-    searchBox.addListener('places_changed', function () {
-        var places = searchBox.getPlaces();
-
-        if (places.length == 0) {
-            return;
-        }
-    })
+    new google.maps.places.Autocomplete(input, options);
 }
 
 // Initialize and add the map
@@ -77,10 +72,6 @@ function playFormatter() {
             return '<button class="btn" data-toggle="modal" data-target="videoModal"><i class="fas fa-play"></i></button>';
         }
 
-function buyFormatter() {
-            return '<button class="btn"><i class="fas fa-ticket-alt"></i></button>';
-        }
-
 $(document).ready(function () {
 
             // Calendar datepicker
@@ -96,8 +87,11 @@ $(document).ready(function () {
             // User Input Form - When the user changes the select option change the user input placeholder
             $('#search-by').change(function () {
                 if ($(this).val() == '0') { // search by city
-                    $('#user-input').attr('placeholder', 'Enter City Country');
+                    $("#search-form")[0].reset();
+                    $('#user-input').attr('placeholder', 'Enter City');
+                    autocomplete();
                 } else if ($(this).val() == '1') { // search by artist
+                    $("#search-form")[0].reset();
                     $('#user-input').attr('placeholder', 'Enter Artist');
                 }
             });

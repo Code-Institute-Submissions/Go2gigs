@@ -77,10 +77,11 @@ function initMap() {
     new MarkerClusterer(map, markers, { imagePath: '../assets/images/markImages/m' });
 }
 
+// A function to format the data table find column
 function findFormatter() {
     return '<button class="btn"><i class="fas fa-search-location"></i></button>';
 }
-
+// A function to format the data table play column
 function playFormatter() {
     return '<button class="btn" data-toggle="modal" data-target="videoModal"><i class="fas fa-play"></i></button>';
 }
@@ -113,20 +114,24 @@ $(document).ready(function () {
     // User Input Form - When a user submits input save that input to variables and call the relevant function
     $("#search-btn").on("click", function () {
         if ($('#search-by').val() == '0') { // search by city
+            // Store user input data in variables
             let userInput = String($("#user-input").val());
             let dateFrom = $("#date-from").val();
             let dateTo = $("#date-to").val();
             findLocEvents(userInput, dateFrom, dateTo); // Function call with user input data
             $("#results-section").removeClass('hidden'); // Unhide the results section
             event.preventDefault();
+            // After form submit remove the user input data
             $("#search-form")[0].reset();
         } else if ($('#search-by').val() == '1') { // search by artist
+            // Store user input data in variables
             let userInput = String($("#user-input").val());
             let dateFrom = $("#date-from").val();
             let dateTo = $("#date-to").val();
             findEvents(userInput, dateFrom, dateTo); // Function call with user input data
             $("#results-section").removeClass('hidden'); // Unhide the results section
             event.preventDefault();
+            // After form submit remove the user input data
             $("#search-form")[0].reset();
         }
     });
@@ -146,6 +151,7 @@ $(document).ready(function () {
             const response = await fetch(`https://api.songkick.com/api/3.0/metro_areas/${metroId}/calendar.json?apikey=${songkickKey}&min_date=${dateFrom}&max_date=${dateTo}`)
             let data = await response.json();
             let total = data.resultsPage.totalEntries;
+            // If the total results are > 50 calculate the total number of pages
             if (total > 50) {
                 pages = Math.ceil(total / 50);
             }
@@ -196,6 +202,7 @@ $(document).ready(function () {
             let data = await response.json();
             console.log(data);
             let total = data.resultsPage.totalEntries;
+            // If the total results are > 50 calculate the total number of pages
             if (total > 50) {
                 pages = Math.ceil(total / 50);
             }
@@ -241,8 +248,11 @@ $(document).ready(function () {
         onClickCell: function (field, value, row, $element) {
             // Find the index position of the row of clicked cell
             if (field === "Find") {
+                // Find the index position of the clicked element in data array
                 let pos = $element.parent().data("index");
+                // Find the location to zoom by looking up the corresponding lat and lng in locations array
                 let zoomLocation = { lat: locations[pos].lat, lng: locations[pos].lng };
+                // Pan and zoom to the location
                 map.panTo(zoomLocation);
                 map.setZoom(18);
             }
@@ -268,6 +278,7 @@ $(document).ready(function () {
             player.loadPlaylist({
                 list: plist
             });
+            // Open the video modal
             $('#videoModal').modal('show');
         }
         catch (err) {

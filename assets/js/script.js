@@ -145,7 +145,6 @@ $(document).ready(function () {
             // Find the total number of pages in the paginated response
             const response = await fetch(`https://api.songkick.com/api/3.0/metro_areas/${metroId}/calendar.json?apikey=${songkickKey}&min_date=${dateFrom}&max_date=${dateTo}`)
             let data = await response.json();
-            console.log(data);
             let total = data.resultsPage.totalEntries;
             if (total > 50) {
                 pages = Math.ceil(total / 50);
@@ -183,8 +182,6 @@ $(document).ready(function () {
         $('#table').bootstrapTable({ data: dataArr });
         $('#table').bootstrapTable('load', dataArr); // reload table data when another selection is made
         // Initialise the google map
-        console.log(`Num of locations is: ${locations.length}`)
-        console.log(`Locations are ${JSON.stringify(locations)}`);
         initMap();
     }
 
@@ -250,7 +247,6 @@ $(document).ready(function () {
                 map.setZoom(18);
             }
             else if (field === "Play") {
-                console.log(`row artist is ${row.Artist}`)
                 // call ytSearch with the artist in the selected row
                 ytSearch(row.Artist);
             }
@@ -268,7 +264,6 @@ $(document).ready(function () {
             const response = await fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&q=mix+${searchTerm}&type=playlist&key=${youtubeKey}&maxResults=${1}`)
             let data = await response.json();
             let plist = data.items[0].id.playlistId;
-            console.log(`playlist is ${plist}`)
             // load the youtube player with the playlist ID found
             player.loadPlaylist({
                 list: plist

@@ -88,14 +88,23 @@ function playFormatter() {
 
 $(document).ready(function () {
 
-    // Calendar datepicker
-    $('.datepicker').datepicker({
+    // Calendar date from datepicker
+    let date1 = $('#date-from').datepicker({
         weekStart: 1,
         startDate: "today",
         format: 'yyyy-mm-dd',
         clearBtn: true,
         autoclose: true,
         todayHighlight: true
+    });
+
+    // Calendar date from datepicker
+    let date2 = $('#date-to').datepicker({
+        weekStart: 1,
+        format: 'yyyy-mm-dd',
+        clearBtn: true,
+        autoclose: true,
+        todayHighlight: true,
     });
 
     // User Input Form - When the user changes the select option change the user input placeholder

@@ -26,7 +26,7 @@ function onYouTubeIframeAPIReady() {
 
 // A variable to store the user input element
 let autoSearch
-
+// A function to autocomplete cities
 function autocomplete() {
     // restict selection to cities only
     let options = {
@@ -241,7 +241,7 @@ $(document).ready(function () {
 
     // Fires when user clicks a table cell
     $('#table').bootstrapTable({
-        onClickCell: function (field, row, $element) {
+        onClickCell: function (field, value, row, $element) {
             // Find the index position of the row of clicked cell
             if (field === "Find") {
                 let pos = $element.parent().data("index");
@@ -250,6 +250,7 @@ $(document).ready(function () {
                 map.setZoom(18);
             }
             else if (field === "Play") {
+                console.log(`row artist is ${row.Artist}`)
                 // call ytSearch with the artist in the selected row
                 ytSearch(row.Artist);
             }
@@ -267,6 +268,7 @@ $(document).ready(function () {
             const response = await fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&q=mix+${searchTerm}&type=playlist&key=${youtubeKey}&maxResults=${1}`)
             let data = await response.json();
             let plist = data.items[0].id.playlistId;
+            console.log(`playlist is ${plist}`)
             // load the youtube player with the playlist ID found
             player.loadPlaylist({
                 list: plist

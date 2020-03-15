@@ -88,23 +88,66 @@ function playFormatter() {
 
 $(document).ready(function () {
 
-    // Calendar date from datepicker
-    let date1 = $('#date-from').datepicker({
+    // Calendar variables
+    let checkin_div, checkout_date, checkin_date, checkout_div, checkin_dp, checkout_dp
+
+    // Create checkin datepicker
+    checkin_div = $('#date-from').datepicker({
         weekStart: 1,
         startDate: "today",
         format: 'yyyy-mm-dd',
         clearBtn: true,
         autoclose: true,
-        todayHighlight: true
+        todayHighlight: true,
+        beforeShowDay: function (date) {
+            if (checkout_date !== undefined) {
+
+                if (date > checkout_date) {
+                    return false;
+                }
+            }
+            return true;
+        }
+    });
+    // save checkin datepicker for later
+    checkin_dp = checkin_div.data('datepicker');
+
+    checkin_div.on('changeDate', (event) => {
+        // Save checkin date
+        checkin_date = event.date;
+        // update checkout datepicker so range dates are displayed
+        checkout_dp.update();
+        checkin_dp.update();
+        update();
     });
 
-    // Calendar date from datepicker
-    let date2 = $('#date-to').datepicker({
+    // Create checkout datepicker
+    checkout_div = $('#date-to').datepicker({
         weekStart: 1,
         format: 'yyyy-mm-dd',
         clearBtn: true,
         autoclose: true,
         todayHighlight: true,
+        beforeShowDay: function (date) {
+            if (checkin_date !== undefined) {
+
+                if (date < checkin_date) {
+                    return false;
+                }
+            }
+            return true;
+        }
+    });
+    // save checkout datepicker for later
+    checkout_dp = checkout_div.data('datepicker');
+
+    checkout_div.on('changeDate', (event) => {
+        // Save checkin date
+        checkout_date = event.date;
+        // update checkin datepicker so range dates are displayed
+        checkin_dp.update();
+        checkout_dp.update();
+        update();
     });
 
     // User Input Form - When the user changes the select option change the user input placeholder

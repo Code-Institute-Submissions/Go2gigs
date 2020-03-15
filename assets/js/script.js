@@ -118,7 +118,6 @@ $(document).ready(function () {
         // update checkout datepicker so range dates are displayed
         checkout_dp.update();
         checkin_dp.update();
-        update();
     });
 
     // Create checkout datepicker
@@ -147,7 +146,6 @@ $(document).ready(function () {
         // update checkin datepicker so range dates are displayed
         checkin_dp.update();
         checkout_dp.update();
-        update();
     });
 
     // User Input Form - When the user changes the select option change the user input placeholder

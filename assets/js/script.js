@@ -173,6 +173,7 @@ $(document).ready(function () {
             event.preventDefault();
             // After form submit remove the user input data
             $("#search-form")[0].reset();
+            $("#results-section").scrollIntoView();
         } else if ($('#search-by').val() == '1') { // search by artist
             // Store user input data in variables
             let userInput = String($("#user-input").val());
@@ -183,6 +184,7 @@ $(document).ready(function () {
             event.preventDefault();
             // After form submit remove the user input data
             $("#search-form")[0].reset();
+            $("#results-section").scrollIntoView();
         }
     });
 

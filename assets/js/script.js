@@ -169,24 +169,32 @@ $(document).ready(function () {
             let dateFrom = $("#date-from").val();
             let dateTo = $("#date-to").val();
             findLocEvents(userInput, dateFrom, dateTo); // Function call with user input data
-            $("#results-section").removeClass('hidden'); // Unhide the results section
+            // $("#results-section").removeClass('hidden'); // Unhide the results section
             event.preventDefault();
             // After form submit remove the user input data
             $("#search-form")[0].reset();
-            $("#results-section").scrollIntoView();
+            // document.getElementById("#footer-container").scrollIntoView();
         } else if ($('#search-by').val() == '1') { // search by artist
             // Store user input data in variables
             let userInput = String($("#user-input").val());
             let dateFrom = $("#date-from").val();
             let dateTo = $("#date-to").val();
             findEvents(userInput, dateFrom, dateTo); // Function call with user input data
-            $("#results-section").removeClass('hidden'); // Unhide the results section
+            // $("#results-section").removeClass('hidden'); // Unhide the results section
             event.preventDefault();
             // After form submit remove the user input data
             $("#search-form")[0].reset();
-            $("#results-section").scrollIntoView();
+            // document.getElementById("#footer-container").scrollIntoView();
         }
     });
+
+    // A function to unhide the results section and to slowly scroll to results
+    function unhideScroll() {
+        $("#results-section").removeClass('hidden');
+        $('html, body').animate({
+            scrollTop: $("#results-section").offset().top
+        }, 500);
+    }
 
     // findLocEvents fetch response from Songkick API based on a location search
     async function findLocEvents(userInput, dateFrom, dateTo) {
@@ -241,6 +249,7 @@ $(document).ready(function () {
         $('#table').bootstrapTable('load', dataArr); // reload table data when another selection is made
         // Initialise the google map
         initMap();
+        unhideScroll();
     }
 
     // FindEvents takes user artist input passes that and apikey to songkick api and obtains a response
@@ -293,6 +302,7 @@ $(document).ready(function () {
         $('#table').bootstrapTable('load', dataArr); // reload table data when another selection is made
         // Initialise the google map
         initMap();
+        unhideScroll();
     }
 
     // Fires when user clicks a table cell

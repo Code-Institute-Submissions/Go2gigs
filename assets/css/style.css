@@ -103,7 +103,11 @@
 /*Footer*/
 #footer-container{
     height: 56px;
-    background-color: #ffffff;
+    background-color: #000000;
+}
+
+#sk-image > img{
+    font-size: 30px;
 }
 
 #social-links{

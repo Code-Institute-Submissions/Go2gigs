@@ -1,5 +1,3 @@
-// A variable to store locations
-let locations = [];
 
 // variables to store API keys
 let songkickKey = config.songkickKey;
@@ -24,59 +22,6 @@ function onYouTubeIframeAPIReady() {
     });
 }
 
-// A variable to store the user input element
-let autoSearch
-// A function to autocomplete cities
-function autocomplete() {
-    // restict selection to cities only
-    let options = {
-        types: ['(cities)']
-    };
-    // Create the search box and link it to the UI element
-    autoSearch = document.getElementById('user-input');
-    new google.maps.places.Autocomplete(autoSearch, options);
-}
-// map variable
-let map
-
-// marker array to store map markers
-let markers = [];
-
-// Initialize and add the map
-function initMap() {
-    // Clear all previous markers
-    markers.forEach(function (marker) {
-        marker.setMap(null);
-    });
-    markers = [];
-
-    // The map, centered at central europe lat and long
-    map = new google.maps.Map(
-        document.getElementById('map'), { zoom: 8, center: { lat: 50.3785, lng: 14.9706 } });
-
-    // Map locations array to markers array while calling the callback function on each element
-    markers = locations.map(function (location) {
-        return new google.maps.Marker({
-            position: location,
-            map: map
-        });
-    });
-    // Create a bounds variable
-    let bounds = new google.maps.LatLngBounds();
-    // Extend the bounds of the google map to include all markers in view
-    for (let i = 0; i < locations.length; i++) {
-        let loc = new google.maps.LatLng(locations[i].lat, locations[i].lng);
-        bounds.extend(loc);
-    }
-
-    // Fit all markers inside map zoom level and pan to center all markers
-    map.fitBounds(bounds);
-    map.panToBounds(bounds);
-
-    // Add marker clusters by passing in the map, markers array and local image path
-    new MarkerClusterer(map, markers, { imagePath: '../assets/images/markImages/m' });
-}
-
 // A function to format the data table find column
 function findFormatter() {
     return '<button class="btn"><i class="fas fa-search-location"></i></button>';
@@ -87,6 +32,61 @@ function playFormatter() {
 }
 
 $(document).ready(function () {
+    // A variable to store the user input element
+    let autoSearch
+    // A function to autocomplete cities
+    function autocomplete() {
+        // restict selection to cities only
+        let options = {
+            types: ['(cities)']
+        };
+        // Create the search box and link it to the UI element
+        autoSearch = document.getElementById('user-input');
+        new google.maps.places.Autocomplete(autoSearch, options);
+    }
+    // A variable to store locations
+    let locations = [];
+    
+    // map variable
+    let map
+
+    // marker array to store map markers
+    let markers = [];
+
+    // Initialize and add the map
+    function initMap() {
+        // Clear all previous markers
+        markers.forEach(function (marker) {
+            marker.setMap(null);
+        });
+        markers = [];
+
+        // The map, centered at central europe lat and long
+        map = new google.maps.Map(
+            document.getElementById('map'), { zoom: 8, center: { lat: 50.3785, lng: 14.9706 } });
+
+        // Map locations array to markers array while calling the callback function on each element
+        markers = locations.map(function (location) {
+            return new google.maps.Marker({
+                position: location,
+                map: map
+            });
+        });
+        // Create a bounds variable
+        let bounds = new google.maps.LatLngBounds();
+        // Extend the bounds of the google map to include all markers in view
+        for (let i = 0; i < locations.length; i++) {
+            let loc = new google.maps.LatLng(locations[i].lat, locations[i].lng);
+            bounds.extend(loc);
+        }
+
+        // Fit all markers inside map zoom level and pan to center all markers
+        map.fitBounds(bounds);
+        map.panToBounds(bounds);
+
+        // Add marker clusters by passing in the map, markers array and local image path
+        new MarkerClusterer(map, markers, { imagePath: '../assets/images/markImages/m' });
+    }
 
     // Calendar variables
     let checkin_div, checkout_date, checkin_date, checkout_div, checkin_dp, checkout_dp
@@ -169,22 +169,18 @@ $(document).ready(function () {
             let dateFrom = $("#date-from").val();
             let dateTo = $("#date-to").val();
             findLocEvents(userInput, dateFrom, dateTo); // Function call with user input data
-            // $("#results-section").removeClass('hidden'); // Unhide the results section
             event.preventDefault();
             // After form submit remove the user input data
             $("#search-form")[0].reset();
-            // document.getElementById("#footer-container").scrollIntoView();
         } else if ($('#search-by').val() == '1') { // search by artist
             // Store user input data in variables
             let userInput = String($("#user-input").val());
             let dateFrom = $("#date-from").val();
             let dateTo = $("#date-to").val();
             findEvents(userInput, dateFrom, dateTo); // Function call with user input data
-            // $("#results-section").removeClass('hidden'); // Unhide the results section
             event.preventDefault();
             // After form submit remove the user input data
             $("#search-form")[0].reset();
-            // document.getElementById("#footer-container").scrollIntoView();
         }
     });
 
@@ -336,6 +332,7 @@ $(document).ready(function () {
             const response = await fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&q=mix+${searchTerm}&type=playlist&key=${youtubeKey}&maxResults=${1}`)
             let data = await response.json();
             let plist = data.items[0].id.playlistId;
+            console.log(`playlist is: ${plist}`)
             // load the youtube player with the playlist ID found
             player.loadPlaylist({
                 list: plist

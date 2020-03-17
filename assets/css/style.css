@@ -1,3 +1,7 @@
+/* Fonts */
+
+/* Colors */
+
 /*Hero Section*/
 .highlight{
     background-color: yellow;
@@ -106,12 +110,16 @@
     background-color: #000000;
 }
 
-#sk-image > img{
-    font-size: 30px;
+#sk-image{
+    max-width: 26px;
+    height: auto;
+    padding-bottom: 10px;
+
 }
 
 #social-links{
     text-align: center;
+    margin: 0px;
 }
 
 #social-links li {

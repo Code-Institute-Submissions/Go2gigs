@@ -1,17 +1,18 @@
 /* Fonts */
+@import url('https://fonts.googleapis.com/css?family=Lato|Roboto:500&display=swap');
 
 /* Colors */
-
-/*Hero Section*/
 .highlight{
-    background-color: yellow;
+    background-color:#0066cc;
 }
 
+/*Hero Section*/
 #hero-heading{
     color: #fff;
     z-index: 3;
     text-align: center;
     padding-top: 170px;
+    font-family: 'Roboto', 'sans-serif';
 }
 
 .hero{
@@ -48,6 +49,7 @@
 #search-btn{
     width: 145px;
 }
+
 /* Calendar */
 .is-selected {
   background-color: #286090;
@@ -86,12 +88,16 @@
 }
 
 #results-section{
-    padding: 0px;
+    padding: 5px 0px 5px 0px;
 }
 
 #data-table{
     padding: 10px 10px 0px 10px;
-    /* background-color: #343a40; */
+}
+
+#thead-custom{
+    background-color: #0066cc;
+    color: #ffffff; 
 }
 
 #data-col{
@@ -107,14 +113,13 @@
 /*Footer*/
 #footer-container{
     height: 56px;
-    background-color: #000000;
+    background-color: #0066cc;
 }
 
 #sk-image{
     max-width: 26px;
     height: auto;
     padding-bottom: 10px;
-
 }
 
 #social-links{
@@ -131,17 +136,5 @@
 #social-links i {
     font-size: 26px;
     margin-top: 13px;
-    -webkit-transition-property: color;
-    -o-transition-property: color;
-    transition-property: color;
-    -webkit-transition-duration: 0.5s;
-    -o-transition-duration: 0.5s;
-    transition-duration: 0.5s;
-}
-
-#social-links i:hover {
-    color: #d32f2f;
-    -webkit-transition-timing-function: ease-in-out;
-    -o-transition-timing-function: ease-in-out;
-    transition-timing-function: ease-in-out;
+    color: #fff;
 }

@@ -26,33 +26,37 @@
 				</div>
 			</div>
 			<div class="container" id="search-box-outer">
-				<form id="search-form" autocomplete="off">
-					<div class="form-row align-items-center" id="search-row">
-						<div class="col-md-3 col-md-3 col-sm-12 p-0">
-							<select required class="form-control" id="search-by">
+				<div class="row">
+					<div class="col">
+						<form id="search-form" autocomplete="off">
+							<div class="form-row align-items-center" id="search-row">
+								<div class="col-md-3 col-md-3 col-sm-12 p-0">
+									<select required class="form-control" id="search-by">
                                 <option value = '' disabled selected hidden>Choose...</option>
                                 <option value = '0'>Search by City</option>
                                 <option value = '1'>Search by Artist</option>
 							</select>
-						</div>
-						<div class="col-md-3 col-sm-12 p-0">
-							<input type="text" class="form-control" id="user-input" required>
-                        </div>
-							<div class="col-md-2 col-sm-12 p-0">
-								<div class="input-group date">
-									<input type="text" class="form-control datepicker" id="date-from" placeholder="Date from" required>
-                        </div>
 								</div>
-								<div class="col-md-2 col-sm-12 p-0">
-									<div class="input-group date">
-										<input type="text" class="form-control datepicker" id="date-to" placeholder="Date to" required>
+								<div class="col-md-3 col-sm-12 p-0">
+									<input type="text" class="form-control" id="user-input" required>
                         </div>
-									</div>
 									<div class="col-md-2 col-sm-12 p-0">
-										<input type="submit" class="btn btn-primary highlight" id="search-btn" value="Search">
+										<div class="input-group date">
+											<input type="text" class="form-control datepicker" id="date-from" placeholder="Date from" required>
+                        </div>
+										</div>
+										<div class="col-md-2 col-sm-12 p-0">
+											<div class="input-group date">
+												<input type="text" class="form-control datepicker" id="date-to" placeholder="Date to" required>
+                        </div>
+											</div>
+											<div class="col-md-2 col-sm-12 p-0">
+												<input type="submit" class="btn btn-primary highlight" id="search-btn" value="Search">
 									</div>
-									</div>
-				</form>
+											</div>
+						</form>
+					</div>
+				</div>
 			</div>
 		</div>
 	</section>
@@ -62,7 +66,7 @@
 		<div class="row no-gutters" id="results-row">
 			<div class="col-12 col-md-5" id="data-col">
 				<div class="table-responsive" id="data-table">
-					<table id="table" data-height="400"
+					<table id="table" data-height="400" data-virtual-scroll="true"
 						class="table table-borderless table-fixed table-sm">
 						<thead id="thead-custom">
 							<tr>
@@ -106,7 +110,7 @@
 							<span class="sr-only">Instagram link</span>
 						</a>
 					</li>
-                    <li class="list-inline-item">
+					<li class="list-inline-item">
 						<a href="https://www.songkick.com"
 							target="_blank"><img src="assets/images/sk-badge-white.png" id="sk-image" aria-hidden="true" rel="noopener"></img>
 							<span class="sr-only">Songkick link</span>
@@ -122,7 +126,7 @@
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
-                <h5 class="modal-title">Artist Playlist</h5>
+					<h5 class="modal-title">Artist Playlist</h5>
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -131,7 +135,7 @@
 					<div id="player"></div>
 				</div>
 				<div class="modal-footer">
-                <div class="div" id="modal-footnote">Skip forwards to hear more tunes!!!</div>
+					<div class="div" id="modal-footnote">Skip forwards to hear more tunes!!!</div>
 					<button type="button" class="btn btn-secondary highlight" id="modal-closeBtn" data-dismiss="modal">Close</button>
 				</div>
 			</div>

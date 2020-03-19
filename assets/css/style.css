@@ -92,7 +92,7 @@
 }
 
 #data-table{
-    padding: 10px 10px 0px 10px;
+    padding: 0 10px 0 10px;
 }
 
 #thead-custom{
@@ -106,6 +106,10 @@
 
 #data-col{
     padding: 0px;
+}
+
+#map-col{
+    padding-right: 10px;
 }
 
 #map{
@@ -153,7 +157,8 @@
 }
 
 .modal-footer{
-    justify-content: left;
+    align-items: flex-start;
+    justify-content: space-between;
 }
 
 #modal-footnote{
@@ -161,11 +166,11 @@
 }
 
 #modal-closeBtn{
-    justify-self: right;
+    flex: right;
 }
 
 #modal-closeBtn:hover{
-    background-color: #0066cc;
+    background-color: #000;
 }
 
 .close{

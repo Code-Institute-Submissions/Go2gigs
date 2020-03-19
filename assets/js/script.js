@@ -338,7 +338,9 @@ $(document).ready(function () {
                 list: plist
             });
             // Open the video modal
+            $('.modal-title').text(`${searchTerm} Playlist`);
             $('#videoModal').modal('show');
+            
         }
         catch (err) {
             console.log('fetch failed', err);

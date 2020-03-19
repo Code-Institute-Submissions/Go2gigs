@@ -142,3 +142,38 @@
     margin-top: 13px;
     color: #fff;
 }
+/* Modal */
+.modal-title{
+    font-family: 'Lato', 'sans-serif';
+    color: #fff;
+}
+
+.modal-header{
+    background-color: #0066cc;
+}
+
+.modal-footer{
+    justify-content: left;
+}
+
+#modal-footnote{
+    font-family: 'Lato', 'sans-serif';
+}
+
+#modal-closeBtn{
+    justify-self: right;
+}
+
+#modal-closeBtn:hover{
+    background-color: #0066cc;
+}
+
+.close{
+    color:#fff;
+    text-shadow: none;
+    opacity: 1;
+}
+
+.close:hover{
+    color: #fff;
+}

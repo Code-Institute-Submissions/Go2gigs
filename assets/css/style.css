@@ -6,12 +6,17 @@
     background-color:#0066cc;
 }
 
+/* Html */
+html{
+    font-size: 62.5%;
+}
+
 /*Hero Section*/
 #hero-heading{
     color: #fff;
     z-index: 3;
     text-align: center;
-    padding-top: 170px;
+    padding-top: 17rem;
     font-family: 'Roboto', 'sans-serif';
 }
 
@@ -121,7 +126,7 @@
 
 /*Footer*/
 #footer-container{
-    height: 56px;
+    height: 5.6rem;
     background-color: #0066cc;
 }
 

@@ -38,6 +38,7 @@
     padding: 15px;
     background: rgba(25, 70,105, 0.5);
     position: absolute;
+    justify-content: center;
     top: 50vh;
     left: 10vw;
 }

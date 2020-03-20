@@ -16,8 +16,9 @@ html{
     color: #fff;
     z-index: 3;
     text-align: center;
-    padding-top: 17rem;
+    padding-top: 30vh;
     font-family: 'Roboto', 'sans-serif';
+    font-size: 5rem;
 }
 
 .hero{
@@ -39,21 +40,20 @@ html{
 }
 
 #search-box-outer{
-    width: 75vw;
+    width: 60vw;
     padding: 15px;
     background: rgba(25, 70,105, 0.5);
-    position: absolute;
-    justify-content: center;
-    top: 50vh;
-    left: 10vw;
+    top: 40vh;
+    left: 20vw;
 }
 
 #search-row{
     margin: 0;
 }
 
-#search-btn{
-    width: 145px;
+#search-by, #user-input, #date-from, #date-to, #search-btn{
+    width: 10vw;
+    /* height: 3rem; */
 }
 
 /* Calendar */

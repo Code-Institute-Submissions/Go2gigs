@@ -12,15 +12,6 @@ html{
 }
 
 /*Hero Section*/
-#hero-heading{
-    color: #fff;
-    z-index: 3;
-    text-align: center;
-    padding-top: 30vh;
-    font-family: 'Roboto', 'sans-serif';
-    font-size: 5rem;
-}
-
 .hero{
     height: 100vh;
     background: url("../images/gig2.jpg") no-repeat center center fixed; 
@@ -39,12 +30,21 @@ html{
     background-color: rgba(0,0,0,0.5);
 }
 
+#hero-text{
+    margin-top: 30vh;
+}
+
+#hero-heading{
+    color: #fff;
+    text-align: center;
+    font-family: 'Roboto', 'sans-serif';
+    font-size: 5rem;
+    padding-bottom: 2rem;
+}
+
 #search-box-outer{
-    width: 60vw;
     padding: 15px;
     background: rgba(25, 70,105, 0.5);
-    top: 40vh;
-    left: 20vw;
 }
 
 #search-row{
@@ -52,8 +52,13 @@ html{
 }
 
 #search-by, #user-input, #date-from, #date-to, #search-btn{
-    width: 10vw;
+    /* width: 10vw; */
+    /* border: 0; */
     /* height: 3rem; */
+}
+
+#search-btn{
+    width: 100%;
 }
 
 /* Calendar */
@@ -64,28 +69,6 @@ html{
 
 .is-selected:hover {
   background-color: #204d74 !important;
-}
-
-.is-between {
-  border-radius: 0 !important;
-  background-color: #5599d4;
-  color: white;
-}
-
-.is-between:hover {
-  background-color: #204d74 !important;
-}
-
-.checkin-picker .active,
-.checkout-picker .is-selected {
-  border-top-right-radius: 0;
-  border-bottom-right-radius: 0;
-}
-
-.checkout-picker .active,
-.checkin-picker .is-selected {
-  border-top-left-radius: 0;
-  border-bottom-left-radius: 0;
 }
 
 /* Results Section */

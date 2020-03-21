@@ -32,6 +32,8 @@ html{
 
 #hero-text{
     margin-top: 10vh;
+    padding-left: 15vw;
+    padding-right: 15vw;
 }
 
 #hero-heading{
@@ -182,6 +184,8 @@ html{
 @media screen and (min-width: 768px) {
     #hero-text{
     margin-top: 25vh;
+    padding-left: 10vw;
+    padding-right: 10vw;
 }
     #hero-heading{
     font-size: 5rem;

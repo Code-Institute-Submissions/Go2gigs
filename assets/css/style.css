@@ -31,14 +31,14 @@ html{
 }
 
 #hero-text{
-    margin-top: 20vh;
+    margin-top: 10vh;
 }
 
 #hero-heading{
     color: #fff;
     text-align: center;
     font-family: 'Roboto', 'sans-serif';
-    font-size: 5rem;
+    font-size: 3rem;
     padding-bottom: 2rem;
 }
 
@@ -53,7 +53,7 @@ html{
 
 #search-by, #user-input, #date-from, #date-to, #search-btn{
     font-family: 'Lato', 'sans-serif';
-    font-size: 1.5rem;
+    font-size: 1rem;
 }
 
 #search-btn{
@@ -174,4 +174,26 @@ html{
 
 .close:hover{
     color: #fff;
+}
+
+/* Media Queries */
+
+/*iPad Potrait View and above*/
+@media screen and (min-width: 768px) {
+    #hero-text{
+    margin-top: 25vh;
+}
+    #hero-heading{
+    font-size: 5rem;
+}
+    #search-by, #user-input, #date-from, #date-to, #search-btn{
+    font-size: 1.5rem;
+}
+}
+
+/*Desktop and above*/
+@media screen and (min-width: 1200px) {
+    #hero-text{
+    margin-top: 20vh;
+}
 }

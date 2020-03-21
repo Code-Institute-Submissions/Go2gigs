@@ -24,11 +24,11 @@ function onYouTubeIframeAPIReady() {
 
 // A function to format the data table find column
 function findFormatter() {
-    return '<button class="btn"><i class="fas fa-search-location"></i></button>';
+    return '<button class="btn"><i class="fas fa-search-location data-fas"></i></button>';
 }
 // A function to format the data table play column
 function playFormatter() {
-    return '<button class="btn" data-toggle="modal" data-target="videoModal"><i class="fas fa-play"></i></button>';
+    return '<button class="btn" data-toggle="modal" data-target="videoModal"><i class="fas fa-play data-fas"></i></button>';
 }
 
 $(document).ready(function () {

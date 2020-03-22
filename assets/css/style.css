@@ -82,7 +82,7 @@ html{
 }
 
 #data-col{
-    padding-right: 1rem;
+    padding-right: 0;
 }
 
 .table{
@@ -109,7 +109,7 @@ html{
 }
 
 #map{
-    height: 100%;
+    height: 400px;
     width: 100%;
     overflow: hidden;
 }
@@ -142,6 +142,7 @@ html{
     margin-top: 1.3rem;
     color: #fff;
 }
+
 /* Modal */
 .modal-title{
     font-family: 'Lato', 'sans-serif';
@@ -196,6 +197,9 @@ html{
 }
     .table{
     font-size: 1.5rem;
+}
+    #data-col{
+    padding-right: 1rem;
 }
 }
 

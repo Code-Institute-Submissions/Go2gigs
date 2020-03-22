@@ -89,15 +89,15 @@ html{
     font-family: 'Lato', 'sans-serif';
     font-size: 1rem;
 }
-
-/* .fixed-table-container{
-    padding-bottom: 30px;
-} */
-
-/* .fixed-table-border{
+/* overload bootstrap table property to overcome display overflow when table first loaded */
+.fixed-table-container{
+    padding-bottom: 30px !important;
+}
+/* overload bootstrap table property to overcome display overflow when table first loaded */
+.fixed-table-border{
     height: 0px !important;
     display: none;
-} */
+}
 
 #thead-custom{
     background-color: #0066cc;

@@ -241,7 +241,7 @@ $(document).ready(function () {
             console.log('fetch failed', err);
         }
         // tabulate the data
-        $('#table').bootstrapTable({ data: dataArr });
+        // $('#table').bootstrapTable({ data: dataArr });
         $('#table').bootstrapTable('load', dataArr); // reload table data when another selection is made
         // Initialise the google map
         initMap();
@@ -257,7 +257,6 @@ $(document).ready(function () {
             // Find the total number of pages in the paginated response
             const response = await fetch(`https://api.songkick.com/api/3.0/events.json?apikey=${songkickKey}&artist_name=${userInput}&min_date=${dateFrom}&max_date=${dateTo}`)
             let data = await response.json();
-            console.log(data);
             let total = data.resultsPage.totalEntries;
             // If the total results are > 50 calculate the total number of pages
             if (total > 50) {
@@ -294,7 +293,7 @@ $(document).ready(function () {
             console.log('fetch failed', err);
         }
         // tabulate the data
-        $('#table').bootstrapTable({ data: dataArr });
+        // $('#table').bootstrapTable({ data: dataArr });
         $('#table').bootstrapTable('load', dataArr); // reload table data when another selection is made
         // Initialise the google map
         initMap();
@@ -332,7 +331,6 @@ $(document).ready(function () {
             const response = await fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&q=mix+${searchTerm}&type=playlist&key=${youtubeKey}&maxResults=${1}`)
             let data = await response.json();
             let plist = data.items[0].id.playlistId;
-            console.log(`playlist is: ${plist}`)
             // load the youtube player with the playlist ID found
             player.loadPlaylist({
                 list: plist

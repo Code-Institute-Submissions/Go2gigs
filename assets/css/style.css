@@ -81,9 +81,10 @@ html{
     padding: 5px 0 5px 0;
 }
 
-#data-table{
+/* #data-table{
     padding: 0 1rem 0 1rem;
-}
+    overflow: hidden;
+}*/
 
 #thead-custom{
     background-color: #0066cc;
@@ -92,7 +93,14 @@ html{
 
 .table{
     font-family: 'Lato', 'sans-serif';
-    font-size: 1.5rem;
+    font-size: 1rem;
+    padding: 0 1rem 0 1rem;
+    /* overflow: hidden; */
+}
+
+.fixed-table-border{
+    /* height: 0px; */
+    display: none;
 }
 
 .data-fas{
@@ -100,7 +108,7 @@ html{
 }
 
 #data-col{
-    padding: 0;
+    padding: 0 1rem 0 1rem;
 }
 
 #map-col{
@@ -191,6 +199,9 @@ html{
     font-size: 5rem;
 }
     #search-by, #user-input, #date-from, #date-to, #search-btn{
+    font-size: 1.5rem;
+}
+    .table{
     font-size: 1.5rem;
 }
 }

@@ -109,7 +109,7 @@ html{
 }
 
 #map{
-    height: 400px;
+    height: 40rem;
     width: 100%;
     overflow: hidden;
 }

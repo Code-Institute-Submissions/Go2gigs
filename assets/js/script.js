@@ -1,18 +1,28 @@
 
-// variables to store API keys
+/**
+ * Songkick api key
+ * @type {string}
+ */
 let songkickKey = config.songkickKey;
+/**
+ * Youtube api key
+ * @type {string}
+ */
 let youtubeKey = config.youtubeKey;
 
-// Youtube video
-// This code loads the IFrame Player API code asynchronously.
+/**
+ * Load the Youtube Iframe Player API code asynchronously
+ * @type {HTMLElement} tag
+ */
 let tag = document.createElement('script');
-
 tag.src = "https://www.youtube.com/iframe_api";
 let firstScriptTag = document.getElementsByTagName('script')[0];
 firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
-// This function creates an <iframe> (and YouTube player)
-// after the API code downloads.
+/**
+ * A function which creates a Youtube iframe and player
+ * @function onYouTubeIframeAPIReady
+ */
 let player;
 function onYouTubeIframeAPIReady() {
     player = new YT.Player('player', {
@@ -22,38 +32,60 @@ function onYouTubeIframeAPIReady() {
     });
 }
 
-// A function to format the data table find column
+/**
+ * A function to format the data table find column
+ * @function findFormatter
+ */
 function findFormatter() {
     return '<button class="btn"><i class="fas fa-search-location data-fas"></i></button>';
 }
-// A function to format the data table play column
+/**
+ * A function to format the data table play column
+ * @function playFormatter
+ */
 function playFormatter() {
     return '<button class="btn" data-toggle="modal" data-target="videoModal"><i class="fas fa-play data-fas"></i></button>';
 }
 
 $(document).ready(function () {
-    // A variable to store the user input element
-    let autoSearch
-    // A function to autocomplete cities
+    
+    /**
+     * A function to autocomplete city user input
+     * @function autocomplete
+     */
     function autocomplete() {
-        // restict selection to cities only
-        let options = {
+        const options = {
             types: ['(cities)']
         };
-        // Create the search box and link it to the UI element
-        autoSearch = document.getElementById('user-input');
+        /**
+         * Create the search box and link it to the UI element
+         * @type {HTMLElement} autosearch
+         */
+        let autoSearch = document.getElementById('user-input');
         new google.maps.places.Autocomplete(autoSearch, options);
     }
-    // A variable to store locations
+    /**
+     * Array to store locations
+     * @type {Array<number>}
+     */
     let locations = [];
     
-    // map variable
+    /**
+     * A variable to store a google map
+     * @type {object}
+     */
     let map
 
-    // marker array to store map markers
+    /**
+     * Array to store map markers
+     * @type {Array<number>}
+     */
     let markers = [];
 
-    // Initialize and add the map
+    /**
+     * A function to initialize a google map
+     * @function initMap
+     */
     function initMap() {
         // Clear all previous markers
         markers.forEach(function (marker) {
@@ -72,9 +104,11 @@ $(document).ready(function () {
                 map: map
             });
         });
-        // Create a bounds variable
+        /**
+         * A bounds variable to extend the bounds of the google map to include all markers
+         * @type {object}
+         */
         let bounds = new google.maps.LatLngBounds();
-        // Extend the bounds of the google map to include all markers in view
         for (let i = 0; i < locations.length; i++) {
             let loc = new google.maps.LatLng(locations[i].lat, locations[i].lng);
             bounds.extend(loc);
@@ -148,43 +182,51 @@ $(document).ready(function () {
         checkout_dp.update();
     });
 
-    // User Input Form - When the user changes the select option change the user input placeholder
+    /**
+     * When search-by drop down menu is changed change the user input placeholder,
+     * if this.val() == '0' the user has selected search by city
+     * if this.val() == '1' the user has selected search by artist
+     * based on the selection either run or remove the autocomplete function
+     */
     $('#search-by').change(function () {
-        if ($(this).val() == '0') { // search by city
+        if ($(this).val() == '0') {
             $('#user-input').attr('placeholder', 'Enter City');
-            // Run autocomplete function to autocomplete cities
             autocomplete();
-        } else if ($(this).val() == '1') { // search by artist
+        } else if ($(this).val() == '1') {
             $('#user-input').attr('placeholder', 'Enter Artist');
-            // Remove the autocomplete
             google.maps.event.clearInstanceListeners(autoSearch);
         }
     });
 
-    // User Input Form - When a user submits input save that input to variables and call the relevant function
+    /**
+     * When search button is clicked store user input data in variables, 
+     * call the relevant function and reset the form
+     * @type {string} userInput - either a city or an artist string
+     * @type {string} dateFrom - a date string in the form YYYY-MM-DD
+     * @type {string} dateTo - a date string in the form YYYY-MM-DD
+     */
     $("#search-btn").on("click", function () {
-        if ($('#search-by').val() == '0') { // search by city
-            // Store user input data in variables
+        if ($('#search-by').val() == '0') {
             let userInput = String($("#user-input").val());
             let dateFrom = $("#date-from").val();
             let dateTo = $("#date-to").val();
-            findLocEvents(userInput, dateFrom, dateTo); // Function call with user input data
+            findLocEvents(userInput, dateFrom, dateTo);
             event.preventDefault();
-            // After form submit remove the user input data
             $("#search-form")[0].reset();
-        } else if ($('#search-by').val() == '1') { // search by artist
-            // Store user input data in variables
+        } else if ($('#search-by').val() == '1') {
             let userInput = String($("#user-input").val());
             let dateFrom = $("#date-from").val();
             let dateTo = $("#date-to").val();
-            findEvents(userInput, dateFrom, dateTo); // Function call with user input data
+            findEvents(userInput, dateFrom, dateTo);
             event.preventDefault();
-            // After form submit remove the user input data
             $("#search-form")[0].reset();
         }
     });
 
-    // A function to unhide the results section and to slowly scroll to results
+    /**
+     * A function to unhide the results section and to scroll to the results section
+     * @function unhideScroll
+     */
     function unhideScroll() {
         $("#results-section").removeClass('hidden');
         $('html, body').animate({

@@ -117,12 +117,31 @@ $(document).ready(function () {
         map.panToBounds(bounds);
         new MarkerClusterer(map, markers, { imagePath: '../assets/images/markImages/m' });
     }
+    
+    /**
+     * @type {string} checkin_date - store date-from date
+     */
+    let checkin_date
 
-    // Calendar variables
-    let checkin_div, checkout_date, checkin_date, checkout_div, checkin_dp, checkout_dp
+    /**
+     * @type {string} checkout_date - store date-to date
+     */
+    let checkout_date
 
-    // Create checkin datepicker
-    checkin_div = $('#date-from').datepicker({
+    /**
+     * @type {object} checkin_dp - store the check in datepicker data
+     */
+    let checkin_dp
+
+    /**
+     * @type {object} checkout_dp - store the check out datepicker data
+     */
+    let checkout_dp
+
+    /**
+     * Create check in datepicker at html element date-from
+     */
+    let checkin_div = $('#date-from').datepicker({
         weekStart: 1,
         startDate: "today",
         format: 'yyyy-mm-dd',
@@ -131,7 +150,6 @@ $(document).ready(function () {
         todayHighlight: true,
         beforeShowDay: function (date) {
             if (checkout_date !== undefined) {
-
                 if (date > checkout_date) {
                     return false;
                 }
@@ -139,19 +157,17 @@ $(document).ready(function () {
             return true;
         }
     });
-    // save checkin datepicker for later
     checkin_dp = checkin_div.data('datepicker');
-
     checkin_div.on('changeDate', (event) => {
-        // Save checkin date
         checkin_date = event.date;
-        // update checkout datepicker so range dates are displayed
         checkout_dp.update();
         checkin_dp.update();
     });
 
-    // Create checkout datepicker
-    checkout_div = $('#date-to').datepicker({
+    /**
+     * Create check out datepicker at html element date-to
+     */
+    let checkout_div = $('#date-to').datepicker({
         weekStart: 1,
         format: 'yyyy-mm-dd',
         clearBtn: true,
@@ -159,7 +175,6 @@ $(document).ready(function () {
         todayHighlight: true,
         beforeShowDay: function (date) {
             if (checkin_date !== undefined) {
-
                 if (date < checkin_date) {
                     return false;
                 }
@@ -167,13 +182,9 @@ $(document).ready(function () {
             return true;
         }
     });
-    // save checkout datepicker for later
     checkout_dp = checkout_div.data('datepicker');
-
     checkout_div.on('changeDate', (event) => {
-        // Save checkin date
         checkout_date = event.date;
-        // update checkin datepicker so range dates are displayed
         checkin_dp.update();
         checkout_dp.update();
     });

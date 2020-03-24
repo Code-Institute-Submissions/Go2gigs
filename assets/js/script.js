@@ -1,9 +1,9 @@
-
 /**
  * Songkick api key
  * @type {string}
  */
 let songkickKey = config.songkickKey;
+
 /**
  * Youtube api key
  * @type {string}
@@ -39,6 +39,7 @@ function onYouTubeIframeAPIReady() {
 function findFormatter() {
     return '<button class="btn"><i class="fas fa-search-location data-fas"></i></button>';
 }
+
 /**
  * A function to format the data table play column
  * @function playFormatter
@@ -48,7 +49,6 @@ function playFormatter() {
 }
 
 $(document).ready(function () {
-    
     /**
      * A function to autocomplete city user input
      * @function autocomplete
@@ -64,6 +64,7 @@ $(document).ready(function () {
         let autoSearch = document.getElementById('user-input');
         new google.maps.places.Autocomplete(autoSearch, options);
     }
+
     /**
      * Array to store locations
      * @type {Array<number>}
@@ -83,21 +84,20 @@ $(document).ready(function () {
     let markers = [];
 
     /**
-     * A function to initialize a google map
+     * Clear all previous markers from the map array, create the map object
+     * Map all locations in locations array to markers array, extend the bounds of the map, fit map to bounds
+     * And pan to bounds, create map clusters
      * @function initMap
      */
     function initMap() {
-        // Clear all previous markers
         markers.forEach(function (marker) {
             marker.setMap(null);
         });
         markers = [];
 
-        // The map, centered at central europe lat and long
         map = new google.maps.Map(
             document.getElementById('map'), { zoom: 8, center: { lat: 50.3785, lng: 14.9706 } });
 
-        // Map locations array to markers array while calling the callback function on each element
         markers = locations.map(function (location) {
             return new google.maps.Marker({
                 position: location,
@@ -113,12 +113,8 @@ $(document).ready(function () {
             let loc = new google.maps.LatLng(locations[i].lat, locations[i].lng);
             bounds.extend(loc);
         }
-
-        // Fit all markers inside map zoom level and pan to center all markers
         map.fitBounds(bounds);
         map.panToBounds(bounds);
-
-        // Add marker clusters by passing in the map, markers array and local image path
         new MarkerClusterer(map, markers, { imagePath: '../assets/images/markImages/m' });
     }
 
@@ -187,6 +183,7 @@ $(document).ready(function () {
      * if this.val() == '0' the user has selected search by city
      * if this.val() == '1' the user has selected search by artist
      * based on the selection either run or remove the autocomplete function
+     * @event change
      */
     $('#search-by').change(function () {
         if ($(this).val() == '0') {
@@ -201,7 +198,7 @@ $(document).ready(function () {
     /**
      * When search button is clicked store user input data in variables, 
      * call the relevant function and reset the form
-     * @type {string} userInput - either a city or an artist string
+     * @type {string} userInput - either a city (val == 0) or an artist (val == 1) string
      * @type {string} dateFrom - a date string in the form YYYY-MM-DD
      * @type {string} dateTo - a date string in the form YYYY-MM-DD
      */
@@ -224,7 +221,7 @@ $(document).ready(function () {
     });
 
     /**
-     * A function to unhide the results section and to scroll to the results section
+     * A function to unhide and to scroll to the results section
      * @function unhideScroll
      */
     function unhideScroll() {
@@ -234,29 +231,38 @@ $(document).ready(function () {
         }, 500);
     }
 
-    // findLocEvents fetch response from Songkick API based on a location search
+    /**
+     * A function which first fetches from songkick api the relevant metro area id for a location
+     * then uses this metro id to fetch events in that area for the date range specified
+     * calculates how many pages are in the response, loops thru the pages and
+     * pushes the event data and locations into data array and location array
+     * load the data into the bootstrap table, initialises the google map and calls unhideScroll
+     * @function findLocEvents
+     * @param {string} userInput - a user input city
+     * @param {string} dateFrom - a user input date from
+     * @param {string} dateTo - a user input date to
+     * @type {array} dataArr - array to store event data
+     * @type {number} pages - variable to store the number of pages in a paginated response, initialised to 1
+     */
     async function findLocEvents(userInput, dateFrom, dateTo) {
         let dataArr = [];
         let pages = 1;
 
         try {
-            // Find the locations metro area id
             const idResponse = await fetch(`https://api.songkick.com/api/3.0/search/locations.json?query=${userInput}&apikey=${songkickKey}`)
             let idData = await idResponse.json();
             let metroId = idData.resultsPage.results.location[0].metroArea.id;
 
-            // Find the total number of pages in the paginated response
             const response = await fetch(`https://api.songkick.com/api/3.0/metro_areas/${metroId}/calendar.json?apikey=${songkickKey}&min_date=${dateFrom}&max_date=${dateTo}`)
             let data = await response.json();
             let total = data.resultsPage.totalEntries;
-            // If the total results are > 50 calculate the total number of pages
+
             if (total > 50) {
                 pages = Math.ceil(total / 50);
             }
-            // Clear out locations array
+
             locations.length = 0;
 
-            // Loop thru the pages in the paginated response and push the required data into arrays
             for (i = 1; i <= pages; i++) {
                 let responsePage = await fetch(`https://api.songkick.com/api/3.0/metro_areas/${metroId}/calendar.json?apikey=${songkickKey}&min_date=${dateFrom}&max_date=${dateTo}&page=${i}`)
                 let responsePageJson = await responsePage.json();
@@ -282,33 +288,39 @@ $(document).ready(function () {
         catch (err) {
             console.log('fetch failed', err);
         }
-        // tabulate the data
         // $('#table').bootstrapTable({ data: dataArr });
-        $('#table').bootstrapTable('load', dataArr); // reload table data when another selection is made
-        // Initialise the google map
+        $('#table').bootstrapTable('load', dataArr);
         initMap();
         unhideScroll();
     }
 
-    // FindEvents takes user artist input passes that and apikey to songkick api and obtains a response
+    /**
+     * A function which fetches artist events from songkick api for a specified date range
+     * calculates how many pages are in the response, loops thru the pages and
+     * pushes the event data and locations into data array and location array
+     * load the data into the bootstrap table, initialises the google map and calls unhideScroll
+     * @function findEvents
+     * @param {string} userInput - a user input artist name
+     * @param {string} dateFrom - a user input date from
+     * @param {string} dateTo - a user input date to
+     * @type {array} dataArr - array to store event data
+     * @type {number} pages - variable to store the number of pages in a paginated response, initialised to 1
+     */
     async function findEvents(userInput, dateFrom, dateTo) {
         let dataArr = [];
         let pages = 1;
 
         try {
-            // Find the total number of pages in the paginated response
             const response = await fetch(`https://api.songkick.com/api/3.0/events.json?apikey=${songkickKey}&artist_name=${userInput}&min_date=${dateFrom}&max_date=${dateTo}`)
             let data = await response.json();
             let total = data.resultsPage.totalEntries;
-            // If the total results are > 50 calculate the total number of pages
+            
             if (total > 50) {
                 pages = Math.ceil(total / 50);
             }
 
-            // Clear out locations array
             locations.length = 0;
 
-            // Loop thru the pages in the paginated response and push the required data into arrays
             for (i = 1; i <= pages; i++) {
                 let responsePage = await fetch(`https://api.songkick.com/api/3.0/events.json?apikey=${songkickKey}&artist_name=${userInput}&min_date=${dateFrom}&max_date=${dateTo}&page=${i}`)
                 let responsePageJson = await responsePage.json();
@@ -334,50 +346,54 @@ $(document).ready(function () {
         catch (err) {
             console.log('fetch failed', err);
         }
-        // tabulate the data
         // $('#table').bootstrapTable({ data: dataArr });
-        $('#table').bootstrapTable('load', dataArr); // reload table data when another selection is made
-        // Initialise the google map
+        $('#table').bootstrapTable('load', dataArr);
         initMap();
         unhideScroll();
     }
 
-    // Fires when user clicks a table cell
+    /**
+     * A bootstrap table event which fires on cell click
+     * If clicked cell == Find, use the index position of the clicked cell to look up the
+     * corresponding lat and lng in locations array, then pan and zoom to those coordinates on the google map
+     * if clicked cell == Play, call function ytSearch with the artist name passed as parameter
+     * @event onClickCell
+     */
     $('#table').bootstrapTable({
         onClickCell: function (field, value, row, $element) {
-            // Find the index position of the row of clicked cell
             if (field === "Find") {
-                // Find the index position of the clicked element in data array
                 let pos = $element.parent().data("index");
-                // Find the location to zoom by looking up the corresponding lat and lng in locations array
                 let zoomLocation = { lat: locations[pos].lat, lng: locations[pos].lng };
-                // Pan and zoom to the location
                 map.panTo(zoomLocation);
                 map.setZoom(18);
             }
             else if (field === "Play") {
-                // call ytSearch with the artist in the selected row
                 ytSearch(row.Artist);
             }
         }
     });
 
-    // Fires when the modal hides to stop YouTube video
+    /**
+     * An event which fires to stop the YouTube player when the modal is closed
+     */
     $("#videoModal").on('hide.bs.modal', function () {
         player.stopVideo()
     })
 
-    // Function to search for the top hit YouTube video, find the playlist Id and load the player with the playlist
+    /**
+     * A function to search for the top hit YouTube playlist when passed an artist name as a parameter
+     * Find the playlist ID and load the YouTube player with the playlist
+     * Then set the modal title text and open the modal
+     * @param {string} searchTerm - an artist name
+     */
     async function ytSearch(searchTerm) {
         try {
             const response = await fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&q=mix+${searchTerm}&type=playlist&key=${youtubeKey}&maxResults=${1}`)
             let data = await response.json();
             let plist = data.items[0].id.playlistId;
-            // load the youtube player with the playlist ID found
             player.loadPlaylist({
                 list: plist
             });
-            // Open the video modal
             $('.modal-title').text(`${searchTerm} Playlist`);
             $('#videoModal').modal('show');
             

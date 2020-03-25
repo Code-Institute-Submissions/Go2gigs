@@ -49,6 +49,7 @@ function playFormatter() {
 }
 
 $(document).ready(function () {
+    let autoSearch;
     /**
      * A function to autocomplete city user input
      * @function autocomplete
@@ -61,7 +62,7 @@ $(document).ready(function () {
          * Create the search box and link it to the UI element
          * @type {HTMLElement} autosearch
          */
-        let autoSearch = document.getElementById('user-input');
+        autoSearch = document.getElementById('user-input');
         new google.maps.places.Autocomplete(autoSearch, options);
     }
 
@@ -202,7 +203,7 @@ $(document).ready(function () {
             autocomplete();
         } else if ($(this).val() == '1') {
             $('#user-input').attr('placeholder', 'Enter Artist');
-            // google.maps.event.clearInstanceListeners(autoSearch);
+            google.maps.event.clearInstanceListeners(autoSearch);
         }
     });
 
@@ -301,7 +302,7 @@ $(document).ready(function () {
         catch (err) {
             console.log('fetch failed', err);
         }
-        // $('#table').bootstrapTable({ data: dataArr });
+        $('#table').bootstrapTable({ data: dataArr });
         $('#table').bootstrapTable('load', dataArr);
         initMap();
         unhideScroll();
@@ -359,7 +360,7 @@ $(document).ready(function () {
         catch (err) {
             console.log('fetch failed', err);
         }
-        // $('#table').bootstrapTable({ data: dataArr });
+        $('#table').bootstrapTable({ data: dataArr });
         $('#table').bootstrapTable('load', dataArr);
         initMap();
         unhideScroll();

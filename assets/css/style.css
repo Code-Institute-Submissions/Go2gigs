@@ -96,7 +96,7 @@ html{
 /* overload bootstrap table property to overcome display overflow when table first loaded */
 .fixed-table-border{
     height: 0px !important;
-    display: none;
+    /* display: none; */
 }
 
 #thead-custom{

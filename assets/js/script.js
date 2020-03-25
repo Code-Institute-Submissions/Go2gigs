@@ -202,7 +202,7 @@ $(document).ready(function () {
             autocomplete();
         } else if ($(this).val() == '1') {
             $('#user-input').attr('placeholder', 'Enter Artist');
-            google.maps.event.clearInstanceListeners(autoSearch);
+            // google.maps.event.clearInstanceListeners(autoSearch);
         }
     });
 
@@ -220,14 +220,16 @@ $(document).ready(function () {
             let dateTo = $("#date-to").val();
             findLocEvents(userInput, dateFrom, dateTo);
             event.preventDefault();
-            $("#search-form")[0].reset();
+            document.getElementById('search-form').reset();
+            // $("#search-form")[0].reset();
         } else if ($('#search-by').val() == '1') {
             let userInput = String($("#user-input").val());
             let dateFrom = $("#date-from").val();
             let dateTo = $("#date-to").val();
             findEvents(userInput, dateFrom, dateTo);
             event.preventDefault();
-            $("#search-form")[0].reset();
+            document.getElementById('search-form').reset();
+            // $("#search-form")[0].reset();
         }
     });
 

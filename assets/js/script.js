@@ -289,7 +289,7 @@ $(document).ready(function () {
                         'City': entry.location.city,
                         'Venue': entry.venue.displayName,
                         'Find': 'Find',
-                        'Play': 'Play',
+                        'Play': 'Play'
                     })
 
                     locations.push({

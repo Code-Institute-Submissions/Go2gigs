@@ -96,7 +96,6 @@ html{
 /* overload bootstrap table property to overcome display overflow when table first loaded */
 .fixed-table-border{
     height: 0px !important;
-    /* display: none; */
 }
 
 #thead-custom{
@@ -201,6 +200,15 @@ html{
     #data-col{
     padding-right: 1rem;
 }
+    #modal-title{
+    font-size: 1.5rem;
+}
+    #modal-footnote{
+    font-size: 1.5rem;
+}
+    #modal-closeBtn{
+    font-size: 1.5rem;
+    }
 }
 
 /*Desktop and above*/

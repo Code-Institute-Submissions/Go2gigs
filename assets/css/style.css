@@ -143,11 +143,6 @@ html{
 }
 
 /* Modal */
-.modal-title{
-    font-family: 'Lato', 'sans-serif';
-    color: #fff;
-}
-
 .modal-header{
     background-color: #0066cc;
 }
@@ -199,9 +194,6 @@ html{
 }
     #data-col{
     padding-right: 1rem;
-}
-    #modal-title{
-    font-size: 1.5rem;
 }
     #modal-footnote{
     font-size: 1.5rem;

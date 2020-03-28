@@ -425,9 +425,9 @@ $(document).ready(function () {
                 form.addEventListener('submit', function (event) {
                     if (form.checkValidity() === false) {
                         event.preventDefault();
-                        event.stopPropagation();
+                        // event.stopPropagation();
                     }
-                    else if (form.checkValidity() === true) {
+                   else if (form.checkValidity() === true) {
                         search();
                     }
                     form.classList.add('was-validated');

@@ -31,7 +31,7 @@
 							<form class="needs-validation" id="search-form" autocomplete="off" novalidate>
 								<div class="form-row align-items-center" id="search-row">
 									<div class="col-md-3 col-sm-12 p-0 form-col">
-										<select required class="form-control" id="search-by">
+										<select class="form-control" id="search-by" name="search-by" required>
                                             <option value = '' disabled selected hidden>Choose...</option>
                                             <option value = '0'>Search by City</option>
                                             <option value = '1'>Search by Artist</option>
@@ -39,23 +39,23 @@
                                         <div class="invalid-tooltip">Please choose</div>
 									</div>
 									<div class="col-md-3 col-sm-12 p-0">
-										<input type="text" class="form-control" id="user-input" required>
+										<input type="text" class="form-control" id="user-input" name="user-input" required>
                                         <div class="invalid-tooltip">This field is required</div>
 									</div>
 									<div class="col-md-2 col-sm-12 p-0">
 										<div class="input-group date">
-											<input type="text" class="form-control datepicker" id="date-from" placeholder="Date from" required>
+											<input type="text" class="form-control datepicker" id="date-from" name="date-from" placeholder="Date from" required>
                                             <div class="invalid-tooltip">This field is required</div>
 										</div>
 									</div>
 									<div class="col-md-2 col-sm-12 p-0">
 										<div class="input-group date">
-											<input type="text" class="form-control datepicker" id="date-to" placeholder="Date to" required>
+											<input type="text" class="form-control datepicker" id="date-to" name="date-to" placeholder="Date to" required>
                                             <div class="invalid-tooltip">This field is required</div>
 										</div>
 									</div>
 									<div class="col-md-2 col-sm-12 p-0">
-										<button type="submit" class="btn btn-primary highlight" id="search-btn" value="Search">Search</button>
+										<button type="submit" class="btn btn-primary highlight" id="search-btn">Search</button>
 									</div>
 									</div>
 							</form>

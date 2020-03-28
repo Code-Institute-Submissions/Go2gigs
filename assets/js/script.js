@@ -208,30 +208,12 @@ $(document).ready(function () {
     });
 
     /**
-     * When search button is clicked store user input data in variables, 
+     * When search function is called store user input data in variables, 
      * call the relevant function and reset the form
      * @type {string} userInput - either a city (val == 0) or an artist (val == 1) string
      * @type {string} dateFrom - a date string in the form YYYY-MM-DD
      * @type {string} dateTo - a date string in the form YYYY-MM-DD
      */
-    // $("#search-btn").on("click", function () {
-    //     if ($('#search-by').val() == '0') {
-    //         let userInput = String($("#user-input").val());
-    //         let dateFrom = $("#date-from").val();
-    //         let dateTo = $("#date-to").val();
-    //         findLocEvents(userInput, dateFrom, dateTo);
-    //         event.preventDefault();
-    //         // document.getElementById('search-form').reset();
-    //     } else if ($('#search-by').val() == '1') {
-    //         let userInput = String($("#user-input").val());
-    //         let dateFrom = $("#date-from").val();
-    //         let dateTo = $("#date-to").val();
-    //         findEvents(userInput, dateFrom, dateTo);
-    //         event.preventDefault();
-    //         // document.getElementById('search-form').reset();
-    //     }
-    // });
-
     function search() {
         if ($('#search-by').val() == '0') {
             let userInput = String($("#user-input").val());
@@ -445,8 +427,10 @@ $(document).ready(function () {
                         event.preventDefault();
                         event.stopPropagation();
                     }
+                    else if (form.checkValidity() === true) {
+                        search();
+                    }
                     form.classList.add('was-validated');
-                    search();
                 }, false);
             });
         }, false);

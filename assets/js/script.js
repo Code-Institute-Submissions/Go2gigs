@@ -71,7 +71,7 @@ $(document).ready(function () {
      * @type {Array<number>}
      */
     let locations = [];
-    
+
     /**
      * A variable to store a google map
      * @type {object}
@@ -118,7 +118,7 @@ $(document).ready(function () {
         map.panToBounds(bounds);
         new MarkerClusterer(map, markers, { imagePath: '../assets/images/markImages/m' });
     }
-    
+
     /**
      * @type {string} checkin_date - store date-from date
      */
@@ -328,7 +328,7 @@ $(document).ready(function () {
             const response = await fetch(`https://api.songkick.com/api/3.0/events.json?apikey=${songkickKey}&artist_name=${userInput}&min_date=${dateFrom}&max_date=${dateTo}`)
             let data = await response.json();
             let total = data.resultsPage.totalEntries;
-            
+
             if (total > 50) {
                 pages = Math.ceil(total / 50);
             }
@@ -410,10 +410,28 @@ $(document).ready(function () {
             });
             $('.modal-title').text(`${searchTerm} Playlist`);
             $('#videoModal').modal('show');
-            
+
         }
         catch (err) {
             console.log('fetch failed', err);
         }
     }
+
+    (function () {
+        'use strict';
+        window.addEventListener('load', function () {
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            let forms = document.getElementsByClassName('needs-validation');
+            // Loop over them and prevent submission
+            let validation = Array.prototype.filter.call(forms, function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (form.checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        }, false);
+    })();
 });

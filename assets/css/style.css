@@ -53,6 +53,10 @@ html{
     margin: 0;
 }
 
+.form-col{
+    position: relative;
+}
+
 #search-by, #user-input, #date-from, #date-to, #search-btn{
     font-family: 'Lato', 'sans-serif';
     font-size: 1rem;

@@ -214,25 +214,41 @@ $(document).ready(function () {
      * @type {string} dateFrom - a date string in the form YYYY-MM-DD
      * @type {string} dateTo - a date string in the form YYYY-MM-DD
      */
-    $("#search-btn").on("click", function () {
+    // $("#search-btn").on("click", function () {
+    //     if ($('#search-by').val() == '0') {
+    //         let userInput = String($("#user-input").val());
+    //         let dateFrom = $("#date-from").val();
+    //         let dateTo = $("#date-to").val();
+    //         findLocEvents(userInput, dateFrom, dateTo);
+    //         event.preventDefault();
+    //         // document.getElementById('search-form').reset();
+    //     } else if ($('#search-by').val() == '1') {
+    //         let userInput = String($("#user-input").val());
+    //         let dateFrom = $("#date-from").val();
+    //         let dateTo = $("#date-to").val();
+    //         findEvents(userInput, dateFrom, dateTo);
+    //         event.preventDefault();
+    //         // document.getElementById('search-form').reset();
+    //     }
+    // });
+
+    function search() {
         if ($('#search-by').val() == '0') {
             let userInput = String($("#user-input").val());
             let dateFrom = $("#date-from").val();
             let dateTo = $("#date-to").val();
             findLocEvents(userInput, dateFrom, dateTo);
             event.preventDefault();
-            document.getElementById('search-form').reset();
-            // $("#search-form")[0].reset();
+            // document.getElementById('search-form').reset();
         } else if ($('#search-by').val() == '1') {
             let userInput = String($("#user-input").val());
             let dateFrom = $("#date-from").val();
             let dateTo = $("#date-to").val();
             findEvents(userInput, dateFrom, dateTo);
             event.preventDefault();
-            document.getElementById('search-form').reset();
-            // $("#search-form")[0].reset();
+            // document.getElementById('search-form').reset();
         }
-    });
+    };
 
     /**
      * A function to unhide and to scroll to the results section
@@ -430,6 +446,7 @@ $(document).ready(function () {
                         event.stopPropagation();
                     }
                     form.classList.add('was-validated');
+                    search();
                 }, false);
             });
         }, false);

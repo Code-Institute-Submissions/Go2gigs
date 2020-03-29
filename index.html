@@ -28,30 +28,30 @@
 				<div class="row">
 					<div class="col p-0">
 						<div class="container" id="search-box-outer">
-							<form class="needs-validation" id="search-form" autocomplete="off" novalidate>
+							<form id="search-form" autocomplete="off">
 								<div class="form-row align-items-center" id="search-row">
 									<div class="col-md-3 col-sm-12 p-0 form-col">
-										<select class="form-control" id="search-by" name="search-by" required>
+										<select class="form-control" id="search-by" name="search-by">
                                             <option value = '' disabled selected hidden>Choose...</option>
                                             <option value = '0'>Search by City</option>
                                             <option value = '1'>Search by Artist</option>
 							            </select>
-                                        <div class="invalid-tooltip">Please choose</div>
+                                        <div id="search-by-error"></div>
 									</div>
 									<div class="col-md-3 col-sm-12 p-0">
-										<input type="text" class="form-control" id="user-input" name="user-input" required>
-                                        <div class="invalid-tooltip">This field is required</div>
+										<input type="text" class="form-control" id="user-input" name="user-input">
+                                        <div id="user-input-error"></div>
 									</div>
 									<div class="col-md-2 col-sm-12 p-0">
 										<div class="input-group date">
-											<input type="text" class="form-control datepicker" id="date-from" name="date-from" placeholder="Date from" required>
-                                            <div class="invalid-tooltip">This field is required</div>
+											<input type="text" class="form-control datepicker" id="date-from" name="date-from" placeholder="Date from">
+                                            <div id="date-from-error"></div>
 										</div>
 									</div>
 									<div class="col-md-2 col-sm-12 p-0">
 										<div class="input-group date">
-											<input type="text" class="form-control datepicker" id="date-to" name="date-to" placeholder="Date to" required>
-                                            <div class="invalid-tooltip">This field is required</div>
+											<input type="text" class="form-control datepicker" id="date-to" name="date-to" placeholder="Date to">
+                                            <div id="date-to-error"></div>
 										</div>
 									</div>
 									<div class="col-md-2 col-sm-12 p-0">
@@ -146,8 +146,6 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.min.js"></script>
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/es6-shim/0.35.5/es6-shim.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-validator/0.5.3/js/bootstrapValidator.min.js"></script> -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js">
 	</script>
 	<script src="https://unpkg.com/bootstrap-table@1.16.0/dist/bootstrap-table.min.js"></script>

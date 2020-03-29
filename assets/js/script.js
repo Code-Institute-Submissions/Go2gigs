@@ -221,14 +221,14 @@ $(document).ready(function () {
             let dateTo = $("#date-to").val();
             findLocEvents(userInput, dateFrom, dateTo);
             event.preventDefault();
-            // document.getElementById('search-form').reset();
+            document.getElementById('search-form').reset();
         } else if ($('#search-by').val() == '1') {
             let userInput = String($("#user-input").val());
             let dateFrom = $("#date-from").val();
             let dateTo = $("#date-to").val();
             findEvents(userInput, dateFrom, dateTo);
             event.preventDefault();
-            // document.getElementById('search-form').reset();
+            document.getElementById('search-form').reset();
         }
     };
 
@@ -414,72 +414,33 @@ $(document).ready(function () {
             console.log('fetch failed', err);
         }
     }
-    // (function () {
-    //     'use strict';
-    // window.addEventListener('load', function () {
-        // Fetch all the forms we want to apply custom Bootstrap validation styles to
-        let forms = document.getElementsByClassName('needs-validation');
-        // Loop over them and prevent submission
-        let validation = Array.prototype.filter.call(forms, function (form) {
-            form.addEventListener('submit', function (event) {
-                if (form.checkValidity() === false) {
-                    event.preventDefault();
-                    event.stopPropagation();
-                }
-                else if (form.checkValidity() === true) {
-                    search();
-                    form.classList.remove('was-validated');
-                }
-                form.classList.add('was-validated');
-            }, false);
-        });
-    // }, false);
-})
-// });
 
+    const searchBy = document.getElementById('search-by');
+    const userText = document.getElementById('user-input');
+    const date1 = document.getElementById('date-from');
+    const date2 = document.getElementById('date-to');
+    const searchForm = document.getElementById('search-form');
+    const searchByError = document.getElementById('search-by-error');
+    const userTextError = document.getElementById('user-input-error');
+    const date1Error = document.getElementById('date-from-error');
+    const date2Error = document.getElementById('date-to-error');
 
-
-// document.addEventListener('DOMContentLoaded', function (e) {
-//     const searchButton = document.getElementById('search-btn');
-//     const form = document.getElementById('search-form');
-//     const fv = FormValidation.formValidation(form, {
-//         fields: {
-//             'search-by': {
-//                 validators: {
-//                     notEmpty: {
-//                         message: 'Please choose'
-//                     }
-//                 }
-//             },
-//             'user-input': {
-//                 validators: {
-//                     notEmpty: {
-//                         message: 'This field is required'
-//                     }
-//                 }
-//             },
-//             'date-from': {
-//                 validators: {
-//                     notEmpty: {
-//                         message: 'This field is required'
-//                     }
-//                 }
-//             },
-//             'date-to': {
-//                 validators: {
-//                     notEmpty: {
-//                         message: 'This field is required'
-//                     }
-//                 }
-//             },
-//         },
-//         plugins: {
-//             trigger: new FormValidation.plugins.Trigger(),
-//             message: new FormValidation.plugins.Message(),
-//             submitButton: new FormValidation.plugins.SubmitButton(),
-//             defaultSubmit: new FormValidation.plugins.DefaultSubmit(),
-//             bootstrap: new FormValidation.plugins.Bootstrap()
-//         },
-//     }
-//     );
-// });
+    searchForm.addEventListener('submit', (e) => {
+        if(searchBy.value === '' || searchBy.value == null){
+            searchByError.innerText = 'This field is required';
+            e.preventDefault()
+        }else if(userText.value === '' || userText.value == null){
+            userTextError.innerText = 'This field is required';
+            e.preventDefault()
+        }else if(date1.value === '' || date1.value == null){
+            date1Error.innerText = 'This field is required';
+            e.preventDefault()
+        }else if(date2.value === '' || date2.value == null){
+            date2Error.innerText = 'This field is required';
+            e.preventDefault()
+        }else{
+            search();
+        }
+        
+    })
+});

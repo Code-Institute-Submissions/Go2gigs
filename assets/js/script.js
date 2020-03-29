@@ -414,70 +414,72 @@ $(document).ready(function () {
             console.log('fetch failed', err);
         }
     }
-
-    // (function () {
-    //     'use strict';
-    //     window.addEventListener('load', function () {
-    //         // Fetch all the forms we want to apply custom Bootstrap validation styles to
-    //         let forms = document.getElementsByClassName('needs-validation');
-    //         // Loop over them and prevent submission
-    //         let validation = Array.prototype.filter.call(forms, function (form) {
-    //             form.addEventListener('submit', function (event) {
-    //                 if (form.checkValidity() === false) {
-    //                     event.preventDefault();
-    //                     // event.stopPropagation();
-    //                 }
-    //                else if (form.checkValidity() === true) {
-    //                     search();
-    //                 }
-    //                 form.classList.add('was-validated');
-    //             }, false);
-    //         });
-    //     }, false);
-    // })();
+    (function () {
+        'use strict';
+        window.addEventListener('load', function () {
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            let forms = document.getElementsByClassName('needs-validation');
+            // Loop over them and prevent submission
+            let validation = Array.prototype.filter.call(forms, function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (form.checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    else if (form.checkValidity() === true) {
+                        search();
+                        form.classList.remove('was-validated');
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        }, false);
+    })();
 });
 
-document.addEventListener('DOMContentLoaded', function (e) {
-    const searchButton = document.getElementById('search-btn');
-    const form = document.getElementById('search-form');
-    const fv = FormValidation.formValidation(form, {
-        fields: {
-            'search-by': {
-                validators: {
-                    notEmpty: {
-                        message: 'Please choose'
-                    }
-                }
-            },
-            'user-input': {
-                validators: {
-                    notEmpty: {
-                        message: 'This field is required'
-                    }
-                }
-            },
-            'date-from': {
-                validators: {
-                    notEmpty: {
-                        message: 'This field is required'
-                    }
-                }
-            },
-            'date-to': {
-                validators: {
-                    notEmpty: {
-                        message: 'This field is required'
-                    }
-                }
-            },
-        },
-        plugins: {
-            trigger: new FormValidation.plugins.Trigger(),
-            message: new FormValidation.plugins.Message(),
-            submitButton: new FormValidation.plugins.SubmitButton(),
-            defaultSubmit: new FormValidation.plugins.DefaultSubmit(),
-            bootstrap: new FormValidation.plugins.Bootstrap()
-        },
-    }
-    );
-});
+
+
+// document.addEventListener('DOMContentLoaded', function (e) {
+//     const searchButton = document.getElementById('search-btn');
+//     const form = document.getElementById('search-form');
+//     const fv = FormValidation.formValidation(form, {
+//         fields: {
+//             'search-by': {
+//                 validators: {
+//                     notEmpty: {
+//                         message: 'Please choose'
+//                     }
+//                 }
+//             },
+//             'user-input': {
+//                 validators: {
+//                     notEmpty: {
+//                         message: 'This field is required'
+//                     }
+//                 }
+//             },
+//             'date-from': {
+//                 validators: {
+//                     notEmpty: {
+//                         message: 'This field is required'
+//                     }
+//                 }
+//             },
+//             'date-to': {
+//                 validators: {
+//                     notEmpty: {
+//                         message: 'This field is required'
+//                     }
+//                 }
+//             },
+//         },
+//         plugins: {
+//             trigger: new FormValidation.plugins.Trigger(),
+//             message: new FormValidation.plugins.Message(),
+//             submitButton: new FormValidation.plugins.SubmitButton(),
+//             defaultSubmit: new FormValidation.plugins.DefaultSubmit(),
+//             bootstrap: new FormValidation.plugins.Bootstrap()
+//         },
+//     }
+//     );
+// });

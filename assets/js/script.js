@@ -426,21 +426,49 @@ $(document).ready(function () {
     const date2Error = document.getElementById('date-to-error');
 
     searchForm.addEventListener('submit', (e) => {
-        if(searchBy.value === '' || searchBy.value == null){
-            searchByError.innerText = 'This field is required';
-            e.preventDefault()
-        }else if(userText.value === '' || userText.value == null){
-            userTextError.innerText = 'This field is required';
-            e.preventDefault()
-        }else if(date1.value === '' || date1.value == null){
-            date1Error.innerText = 'This field is required';
-            e.preventDefault()
-        }else if(date2.value === '' || date2.value == null){
-            date2Error.innerText = 'This field is required';
-            e.preventDefault()
-        }else{
+        e.preventDefault()
+        checkInputs();
+    });
+
+    function checkInputs(){
+        if(searchBy.value === ''){
+            setErrorFor(searchBy, 'Required');
+        }else {
+            removeErrorFor(searchBy, '');
+        }
+        if(userText.value === ''){
+            setErrorFor(userText, 'Required');
+        }else {
+            removeErrorFor(userText, '');
+        }
+        if(date1.value === ''){
+            setErrorFor(date1, 'Required');
+        }else {
+            removeErrorFor(date1, '');
+        }
+        if(date2.value === ''){
+            setErrorFor(date2, 'Required');
+        }else {
+            removeErrorFor(date2, '');
+        }
+        if(searchBy.value != '' && userText.value != '' && date1.value != '' && date2.value != ''){
             search();
         }
+    }
         
-    })
+    function setErrorFor(input, message){
+        const parentDiv = input.parentElement;
+        const small = parentDiv.querySelector('small');
+
+        $(parentDiv).addClass('error'); // add error class
+        small.innerText = message; // add error message inside small 
+    }
+
+    function removeErrorFor(input, message){
+        const parentDiv = input.parentElement;
+        const small = parentDiv.querySelector('small');
+
+        $(parentDiv).removeClass('error'); // remove error class
+
+    }
 });

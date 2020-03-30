@@ -45,16 +45,12 @@ html{
 }
 
 #search-box-outer{
-    padding: 1.5rem;
+    padding: 2.5rem;
     background: rgba(25, 70,105, 0.5);
 }
 
 #search-row{
     margin: 0;
-}
-
-.form-col{
-    position: relative;
 }
 
 #search-by, #user-input, #date-from, #date-to, #search-btn{
@@ -64,6 +60,33 @@ html{
 
 #search-btn{
     width: 100%;
+}
+
+/* Form validation */
+.form-col{
+    position: relative;
+}
+
+.form-col small{
+    visibility: hidden;
+    position: absolute;
+    bottom: -1.5rem;
+    left: 0;
+    font-family: 'Lato', 'sans-serif';
+    font-size: 1rem;
+}
+
+.form-col.error input{
+    border-bottom-color: #dc3545;
+}
+
+.form-col.error select{
+    border-bottom-color: #dc3545;
+}
+
+.form-col.error small{
+    visibility: visible;
+    color: #dc3545;
 }
 
 /* Calendar */

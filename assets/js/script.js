@@ -414,59 +414,69 @@ $(document).ready(function () {
             console.log('fetch failed', err);
         }
     }
-
-    const searchBy = document.getElementById('search-by');
-    const userText = document.getElementById('user-input');
-    const date1 = document.getElementById('date-from');
-    const date2 = document.getElementById('date-to');
+    
     const searchForm = document.getElementById('search-form');
-    const searchByError = document.getElementById('search-by-error');
-    const userTextError = document.getElementById('user-input-error');
-    const date1Error = document.getElementById('date-from-error');
-    const date2Error = document.getElementById('date-to-error');
-
+    /**
+     * Event listener added to submit button to check form validation
+     */
     searchForm.addEventListener('submit', (e) => {
         e.preventDefault()
         checkInputs();
     });
 
-    function checkInputs(){
-        if(searchBy.value === ''){
+    const searchBy = document.getElementById('search-by');
+    const userText = document.getElementById('user-input');
+    const date1 = document.getElementById('date-from');
+    const date2 = document.getElementById('date-to');
+
+    /**
+     * @function checkInputs
+     * A function to validate the values of search form inputs
+     */
+    function checkInputs() {
+        if (searchBy.value === '') {
             setErrorFor(searchBy, 'Please choose');
-        }else {
-            removeErrorFor(searchBy, '');
+        } else {
+            removeErrorFor(searchBy);
         }
-        if(userText.value === ''){
+        if (userText.value === '') {
             setErrorFor(userText, 'Required');
-        }else {
-            removeErrorFor(userText, '');
+        } else {
+            removeErrorFor(userText);
         }
-        if(date1.value === ''){
+        if (date1.value === '') {
             setErrorFor(date1, 'Required');
-        }else {
-            removeErrorFor(date1, '');
+        } else {
+            removeErrorFor(date1);
         }
-        if(date2.value === ''){
+        if (date2.value === '') {
             setErrorFor(date2, 'Required');
-        }else {
-            removeErrorFor(date2, '');
+        } else {
+            removeErrorFor(date2);
         }
-        if(searchBy.value != '' && userText.value != '' && date1.value != '' && date2.value != ''){
+        if (searchBy.value != '' && userText.value != '' && date1.value != '' && date2.value != '') {
             search();
         }
     }
-        
-    function setErrorFor(input, message){
+
+    /**
+     * A function to set error class to input html and to assign error message
+     * @param {HtmlElement} input - Html element to apply validation error
+     * @param {string} message - an error message
+     */
+    function setErrorFor(input, message) {
         const parentDiv = input.parentElement;
         const small = parentDiv.querySelector('small');
 
         $(parentDiv).addClass('error'); // add error class
         small.innerText = message; // add error message inside small 
     }
-
-    function removeErrorFor(input, message){
+    /**
+     * A function to remove error class
+     * @param {HtmlElement} input - Html element to remove validation error
+     */
+    function removeErrorFor(input) {
         const parentDiv = input.parentElement;
-        const small = parentDiv.querySelector('small');
 
         $(parentDiv).removeClass('error'); // remove error class
 

@@ -432,7 +432,7 @@ $(document).ready(function () {
 
     function checkInputs(){
         if(searchBy.value === ''){
-            setErrorFor(searchBy, 'Required');
+            setErrorFor(searchBy, 'Please choose');
         }else {
             removeErrorFor(searchBy, '');
         }

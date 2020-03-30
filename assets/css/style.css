@@ -46,7 +46,7 @@ html{
 
 #search-box-outer{
     padding: 2.5rem;
-    background: rgba(25, 70,105, 0.5);
+    background: rgba(25, 70,105, 0.8);
 }
 
 #search-row{
@@ -70,18 +70,20 @@ html{
 .form-col small{
     visibility: hidden;
     position: absolute;
-    bottom: -1.5rem;
+    bottom: -2rem;
     left: 0;
     font-family: 'Lato', 'sans-serif';
-    font-size: 1rem;
+    font-size: 1.2rem;
 }
 
 .form-col.error input{
     border-bottom-color: #dc3545;
+    border-bottom-width: 2px;
 }
 
 .form-col.error select{
     border-bottom-color: #dc3545;
+    border-bottom-width: 2px;
 }
 
 .form-col.error small{

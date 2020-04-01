@@ -70,10 +70,10 @@ html{
 .form-col small{
     visibility: hidden;
     position: absolute;
-    bottom: -2rem;
-    left: 0;
+    bottom: 0;
+    right: 0.5rem;
     font-family: 'Lato', 'sans-serif';
-    font-size: 1.2rem;
+    font-size: 1rem;
 }
 
 .form-col.error input{
@@ -208,7 +208,7 @@ html{
 /*iPad Potrait View and above*/
 @media screen and (min-width: 768px) {
     #hero-text{
-    margin-top: 25vh;
+    margin-top: 15vh;
     padding-left: 10vw;
     padding-right: 10vw;
 }
@@ -230,6 +230,11 @@ html{
     #modal-closeBtn{
     font-size: 1.5rem;
     }
+    .form-col small{
+    bottom: -2rem;
+    left: 0;
+    font-size: 1.2rem;
+}
 }
 
 /*Desktop and above*/

@@ -400,8 +400,9 @@ $(document).ready(function () {
      */
     async function ytSearch(searchTerm) {
         try {
-            const response = await fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&q=mix+${searchTerm}&type=playlist&key=${youtubeKey}&maxResults=${1}`)
+            const response = await fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&q=${searchTerm}&type=playlist&key=${youtubeKey}&maxResults=${1}`)
             let data = await response.json();
+            console.log(data);
             let plist = data.items[0].id.playlistId;
             player.loadPlaylist({
                 list: plist

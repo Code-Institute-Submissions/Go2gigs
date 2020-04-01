@@ -2,13 +2,13 @@
  * Songkick api key
  * @type {string}
  */
-let songkickKey = config.songkickKey;
+const songkickKey = 'P21PoIr1LmuJzJI7';
 
 /**
  * Youtube api key
  * @type {string}
  */
-let youtubeKey = config.youtubeKey;
+const youtubeKey = 'AIzaSyBAFzHI4_cQraakFPRxi4haCOOnxiJaLXI';
 
 /**
  * Load the Youtube Iframe Player API code asynchronously

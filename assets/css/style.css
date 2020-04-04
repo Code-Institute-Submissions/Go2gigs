@@ -64,7 +64,7 @@ html{
     position: relative;
 }
 
-.form-col small{
+.err-text{
     visibility: hidden;
     position: absolute;
     bottom: 0;
@@ -83,7 +83,7 @@ html{
     border-bottom-width: 2px;
 }
 
-.form-col.error small{
+.form-col.error .err-text{
     visibility: visible;
     color: #dc3545;
 }
@@ -233,7 +233,7 @@ html{
     #modal-closeBtn{
     font-size: 1.5rem;
     }
-    .form-col small{
+    .form-col .err-text{
     bottom: -2rem;
     left: 0;
     font-size: 1.2rem;

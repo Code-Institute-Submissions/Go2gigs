@@ -489,10 +489,10 @@ $(document).ready(function () {
      */
     function setErrorFor(input, message) {
         const parentDiv = input.parentElement;
-        const small = parentDiv.querySelector('small');
+        const text = parentDiv.querySelector('.err-text');
 
         $(parentDiv).addClass('error'); // add error class
-        small.innerText = message; // add error message inside small 
+        text.innerText = message; // add error message inside small 
     }
     /**
      * A function to remove error class

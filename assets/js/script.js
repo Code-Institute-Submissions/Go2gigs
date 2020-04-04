@@ -111,19 +111,19 @@ $(document).ready(function () {
         });
 
         let content = [];
-        for (let i in dataArr){
-            content.push("<p>" + dataArr[i]['Artist'] + "<br>" + dataArr[i]['Venue']  + "<br>" + dataArr[i]['City'] + "</p>");
+        content.length = 0;
+        for (let i in dataArr) {
+            content.push("<p>" + dataArr[i]['Artist'] + "<br>" + dataArr[i]['Venue'] + "<br>" + dataArr[i]['City'] + "</p>");
             console.log(content[i]);
         }
 
         markers.forEach(function (item, index) {
-            item.addListener('click', function(){
+            item.addListener('click', function () {
                 infowindow.close();
                 infowindow.setContent(content[index]);
-                infowindow.open(map,item);
+                infowindow.open(map, item);
             })
         });
-        
 
         /**
          * A bounds variable to extend the bounds of the google map to include all markers
@@ -280,7 +280,6 @@ $(document).ready(function () {
      * @type {number} pages - variable to store the number of pages in a paginated response, initialised to 1
      */
     async function findLocEvents(userInput, dateFrom, dateTo) {
-        // let dataArr = [];
         let pages = 1;
 
         try {
@@ -295,7 +294,7 @@ $(document).ready(function () {
             if (total > 50) {
                 pages = Math.ceil(total / 50);
             }
-
+            dataArr.length = 0;
             locations.length = 0;
 
             for (i = 1; i <= pages; i++) {
@@ -342,7 +341,6 @@ $(document).ready(function () {
      * @type {number} pages - variable to store the number of pages in a paginated response, initialised to 1
      */
     async function findEvents(userInput, dateFrom, dateTo) {
-        // let dataArr = [];
         let pages = 1;
 
         try {
@@ -353,7 +351,8 @@ $(document).ready(function () {
             if (total > 50) {
                 pages = Math.ceil(total / 50);
             }
-
+            
+            dataArr.length = 0;
             locations.length = 0;
 
             for (i = 1; i <= pages; i++) {
@@ -438,7 +437,7 @@ $(document).ready(function () {
             console.log('fetch failed', err);
         }
     }
-    
+
     const searchForm = document.getElementById('search-form');
     /**
      * Event listener added to submit button to check form validation

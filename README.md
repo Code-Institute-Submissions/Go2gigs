@@ -103,6 +103,12 @@ Once the band has scheduled a gig in that city the user could then receive an em
 7. [Auto Prefixer](https://autoprefixer.github.io/)
 8. [JQuery](https://jquery.com/)
 9. [Popper.js](https://popper.js.org/)
+10. [Google API](https://developers.google.com/)
+11. [YouTube API](https://developers.google.com/youtube/v3)
+12. [Songkick API](https://www.songkick.com/developer)
+13. [Bootstrap datepicker](https://github.com/uxsolutions/bootstrap-datepicker)
+14. [Bootstrap table](https://bootstrap-table.com/)
+
 
 ## Testing
 Testing involved viewing the website myself on a range of devices both in Chrome Dev tools and on physical Iphone, tablet and desktop devices.

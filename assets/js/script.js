@@ -158,7 +158,10 @@ $(document).ready(function () {
             return true;
         }
     });
+
     checkin_dp = checkin_div.data('datepicker');
+    checkin_dp.update(new Date());
+
     checkin_div.on('changeDate', (event) => {
         checkin_date = event.date;
         checkout_dp.update();
@@ -221,14 +224,12 @@ $(document).ready(function () {
             let dateTo = $("#date-to").val();
             findLocEvents(userInput, dateFrom, dateTo);
             event.preventDefault();
-            document.getElementById('search-form').reset();
         } else if ($('#search-by').val() == '1') {
             let userInput = String($("#user-input").val());
             let dateFrom = $("#date-from").val();
             let dateTo = $("#date-to").val();
             findEvents(userInput, dateFrom, dateTo);
             event.preventDefault();
-            document.getElementById('search-form').reset();
         }
     };
 
@@ -241,6 +242,8 @@ $(document).ready(function () {
         $('html, body').animate({
             scrollTop: $("#results-section").offset().top
         }, 500);
+        document.getElementById('search-form').reset();
+        checkin_dp.update(new Date());
     }
 
     /**

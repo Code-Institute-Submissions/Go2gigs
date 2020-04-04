@@ -142,27 +142,27 @@ $(document).ready(function () {
     /**
      * @type {string} checkin_date - store date-from date
      */
-    let checkin_date
+    let checkinDate
 
     /**
      * @type {string} checkout_date - store date-to date
      */
-    let checkout_date
+    let checkoutDate
 
     /**
      * @type {object} checkin_dp - store the check in datepicker data
      */
-    let checkin_dp
+    let checkinDp
 
     /**
      * @type {object} checkout_dp - store the check out datepicker data
      */
-    let checkout_dp
+    let checkoutDp
 
     /**
      * Create check in datepicker at html element date-from
      */
-    let checkin_div = $('#date-from').datepicker({
+    let checkinDiv = $('#date-from').datepicker({
         weekStart: 1,
         startDate: "today",
         format: 'yyyy-mm-dd',
@@ -170,8 +170,8 @@ $(document).ready(function () {
         autoclose: true,
         todayHighlight: true,
         beforeShowDay: function (date) {
-            if (checkout_date !== undefined) {
-                if (date > checkout_date) {
+            if (checkoutDate !== undefined) {
+                if (date > checkoutDate) {
                     return false;
                 }
             }
@@ -179,38 +179,38 @@ $(document).ready(function () {
         }
     });
 
-    checkin_dp = checkin_div.data('datepicker');
-    checkin_dp.update(new Date());
+    checkinDp = checkinDiv.data('datepicker');
+    // checkinDp.update(new Date());
 
-    checkin_div.on('changeDate', (event) => {
-        checkin_date = event.date;
-        checkout_dp.update();
-        checkin_dp.update();
+    checkinDiv.on('changeDate', (event) => {
+        checkinDate = event.date;
+        checkoutDp.update();
+        checkinDp.update();
     });
 
     /**
      * Create check out datepicker at html element date-to
      */
-    let checkout_div = $('#date-to').datepicker({
+    let checkoutDiv = $('#date-to').datepicker({
         weekStart: 1,
         format: 'yyyy-mm-dd',
         clearBtn: true,
         autoclose: true,
         todayHighlight: true,
         beforeShowDay: function (date) {
-            if (checkin_date !== undefined) {
-                if (date < checkin_date) {
+            if (checkinDate !== undefined) {
+                if (date < checkinDate) {
                     return false;
                 }
             }
             return true;
         }
     });
-    checkout_dp = checkout_div.data('datepicker');
-    checkout_div.on('changeDate', (event) => {
-        checkout_date = event.date;
-        checkin_dp.update();
-        checkout_dp.update();
+    checkoutDp = checkoutDiv.data('datepicker');
+    checkoutDiv.on('changeDate', (event) => {
+        checkoutDate = event.date;
+        checkinDp.update();
+        checkoutDp.update();
     });
 
     /**
@@ -263,7 +263,7 @@ $(document).ready(function () {
             scrollTop: $("#results-section").offset().top
         }, 500);
         document.getElementById('search-form').reset();
-        checkin_dp.update(new Date());
+        // checkinDp.update(new Date());
     }
 
     /**

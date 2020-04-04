@@ -72,6 +72,8 @@ $(document).ready(function () {
      */
     let locations = [];
 
+    let dataArr = [];
+
     /**
      * A variable to store a google map
      * @type {object}
@@ -108,13 +110,20 @@ $(document).ready(function () {
             });
         });
 
-        markers.forEach(function (item) {
+        let content = [];
+        for (let i in dataArr){
+            content.push("<p>" + dataArr[i]['Artist'] + "<br>" + dataArr[i]['Venue']  + "<br>" + dataArr[i]['City'] + "</p>");
+            console.log(content[i]);
+        }
+
+        markers.forEach(function (item, index) {
             item.addListener('click', function(){
                 infowindow.close();
-                infowindow.setContent("I'm an info window");
+                infowindow.setContent(content[index]);
                 infowindow.open(map,item);
             })
         });
+        
 
         /**
          * A bounds variable to extend the bounds of the google map to include all markers
@@ -271,7 +280,7 @@ $(document).ready(function () {
      * @type {number} pages - variable to store the number of pages in a paginated response, initialised to 1
      */
     async function findLocEvents(userInput, dateFrom, dateTo) {
-        let dataArr = [];
+        // let dataArr = [];
         let pages = 1;
 
         try {
@@ -333,7 +342,7 @@ $(document).ready(function () {
      * @type {number} pages - variable to store the number of pages in a paginated response, initialised to 1
      */
     async function findEvents(userInput, dateFrom, dateTo) {
-        let dataArr = [];
+        // let dataArr = [];
         let pages = 1;
 
         try {

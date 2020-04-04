@@ -180,7 +180,7 @@ $(document).ready(function () {
     });
 
     checkinDp = checkinDiv.data('datepicker');
-    // checkinDp.update(new Date());
+    checkinDp.update(new Date());
 
     checkinDiv.on('changeDate', (event) => {
         checkinDate = event.date;
@@ -193,6 +193,7 @@ $(document).ready(function () {
      */
     let checkoutDiv = $('#date-to').datepicker({
         weekStart: 1,
+        startDate: "today",
         format: 'yyyy-mm-dd',
         clearBtn: true,
         autoclose: true,
@@ -263,7 +264,7 @@ $(document).ready(function () {
             scrollTop: $("#results-section").offset().top
         }, 500);
         document.getElementById('search-form').reset();
-        // checkinDp.update(new Date());
+        checkinDp.update(new Date());
     }
 
     /**

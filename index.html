@@ -31,7 +31,7 @@
 							<form id="search-form" autocomplete="off">
 								<div class="form-row align-items-center" id="search-row">
 									<div class="col-md-3 col-sm-12 p-0 form-col">
-										<select class="form-control" id="search-by" name="search-by">
+										<select class="form-control search-font" id="search-by" name="search-by" aria-label="Search drop down">
                                             <option value = '' disabled selected hidden>Choose...</option>
                                             <option value = '0'>Search by City</option>
                                             <option value = '1'>Search by Artist</option>
@@ -39,23 +39,23 @@
                                         <small>Error message</small>
 									</div>
 									<div class="col-md-3 col-sm-12 p-0 form-col">
-										<input type="text" class="form-control" id="user-input" name="user-input">
+										<input type="text" class="form-control search-font" id="user-input" name="user-input" aria-label="User input">
                                         <small>Error message</small>
 									</div>
 									<div class="col-md-2 col-sm-12 p-0">
 										<div class="input-group date form-col">
-											<input type="text" class="form-control datepicker" id="date-from" name="date-from">
+											<input type="text" class="form-control datepicker search-font" id="date-from" name="date-from" aria-label="Date from">
                                             <small>Error message</small>
 										</div>
 									</div>
 									<div class="col-md-2 col-sm-12 p-0">
 										<div class="input-group date form-col">
-											<input type="text" class="form-control datepicker" id="date-to" name="date-to" placeholder="Date to">
+											<input type="text" class="form-control datepicker search-font" id="date-to" name="date-to" placeholder="Date to" aria-label="Date to">
                                             <small>Error message</small>
 										</div>
 									</div>
 									<div class="col-md-2 col-sm-12 p-0">
-										<button type="submit" class="btn btn-primary highlight" id="search-btn">Search</button>
+										<button type="submit" class="btn btn-primary highlight search-font" id="search-btn">Search</button>
 									</div>
 									</div>
 							</form>
@@ -114,7 +114,7 @@
 					</li>
 					<li class="list-inline-item">
 						<a href="https://www.songkick.com"
-							target="_blank"><img src="assets/images/sk-badge-white.png" id="sk-image" aria-hidden="true" rel="noopener">
+							target="_blank"><img src="assets/images/sk-badge-white.png" alt="Songkick logo" id="sk-image" aria-hidden="true" rel="noopener">
 							<span class="sr-only">Songkick link</span>
 						</a>
 					</li>

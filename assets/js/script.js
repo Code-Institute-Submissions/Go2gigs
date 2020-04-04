@@ -96,6 +96,8 @@ $(document).ready(function () {
         });
         markers = [];
 
+        const infowindow = new google.maps.InfoWindow();
+
         map = new google.maps.Map(
             document.getElementById('map'), { zoom: 8, center: { lat: 50.3785, lng: 14.9706 } });
 
@@ -105,6 +107,15 @@ $(document).ready(function () {
                 map: map
             });
         });
+
+        markers.forEach(function (item) {
+            item.addListener('click', function(){
+                infowindow.close();
+                infowindow.setContent("I'm an info window");
+                infowindow.open(map,item);
+            })
+        });
+
         /**
          * A bounds variable to extend the bounds of the google map to include all markers
          * @type {object}
@@ -116,7 +127,7 @@ $(document).ready(function () {
         }
         map.fitBounds(bounds);
         map.panToBounds(bounds);
-        new MarkerClusterer(map, markers, { imagePath: '../assets/images/markImages/m' });
+        new MarkerClusterer(map, markers, { imagePath: '/assets/images/markImages/m' });
     }
 
     /**

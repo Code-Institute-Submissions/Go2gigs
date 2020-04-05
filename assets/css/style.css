@@ -53,6 +53,7 @@ html{
 .search-font{
     font-family: 'Lato', sans-serif;
     font-size: 1rem;
+    padding: 4px;
 }
 
 #search-btn{
@@ -128,14 +129,6 @@ html{
     font-family: 'Lato', sans-serif;
     font-size: 1rem;
 }
-/* overload bootstrap table property to overcome display overflow when table first loaded
-.fixed-table-container{
-    padding-bottom: 3rem !important;
-}
-/* overload bootstrap table property to overcome display overflow when table first loaded */
-/* .fixed-table-border{
-    height: 0 !important;
-}  */
 
 #thead-custom{
     background-color: #0066cc;
@@ -256,6 +249,14 @@ html{
         left: 0;
         font-size: 1.5rem;
     }
+    /* overload bootstrap table property to overcome display overflow when table first loaded*/
+    .fixed-table-container{
+        padding-bottom: 3rem !important;
+    }
+    /* overload bootstrap table property to overcome display overflow when table first loaded */
+    .fixed-table-border{
+        height: 0 !important;
+    } 
 }
 
 /*Desktop and above*/

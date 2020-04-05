@@ -65,7 +65,6 @@ Fellow student feedback was also key to the testing procedure where other course
 * **Verdict:** This element of the website has passed this test.
 
 ## Bugs
-### During development
 Bug: The standard Boostrap form validation would not work on the date fields and would not clear on form reset. Validation plug ins would not clear after from reset either.
 Fix: I wrote my own form validation javascript to resolve this issue.
 Verdict: Form validation works properly and validation errors are cleared after form reset

@@ -92,7 +92,6 @@ $(document).ready(function () {
         content.length = 0;
         for (let i in dataArr) {
             content.push("<p>" + dataArr[i]['Artist'] + "<br>" + dataArr[i]['Venue'] + "<br>" + dataArr[i]['City'] + "</p>");
-            console.log(content[i]);
         }
 
         markers.forEach(function (item, index) {

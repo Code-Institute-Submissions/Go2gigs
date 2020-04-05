@@ -1,5 +1,4 @@
 <h1 align="center">Go2Gigs</h1>
-![Gig Image](assets/images/gig2.jpg)
 
 This website will allow users to search for their favorite gigs by searching by location or by artist.
 The website will provide a simple to use search facility where users can enter their city and receive a list of local gigs

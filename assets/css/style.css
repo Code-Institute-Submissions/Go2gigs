@@ -56,6 +56,14 @@ html{
     padding: 4px;
 }
 
+#search-by{
+    padding-left: 0;
+}
+
+#search-by option{
+    padding-left: 0;
+}
+
 #search-btn{
     width: 100%;
 }
@@ -133,7 +141,11 @@ html{
 /* overload bootstrap table property to overcome display overflow when table first loaded */
 .fixed-table-border{
     height: 0 !important;
-} 
+}
+/* overload bootstrap table property to overcome display overflow when table first loaded*/
+.fixed-table-container{
+    padding-bottom: 3rem !important;
+}
 
 #thead-custom{
     background-color: #0066cc;
@@ -257,11 +269,6 @@ html{
         left: 0;
         font-size: 1.5rem;
     }
-    /* overload bootstrap table property to overcome display overflow when table first loaded*/
-    .fixed-table-container{
-        padding-bottom: 3rem !important;
-    }
-    
 }
 
 /*Desktop and above*/

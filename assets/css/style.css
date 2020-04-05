@@ -128,14 +128,14 @@ html{
     font-family: 'Lato', sans-serif;
     font-size: 1rem;
 }
-/* overload bootstrap table property to overcome display overflow when table first loaded */
+/* overload bootstrap table property to overcome display overflow when table first loaded
 .fixed-table-container{
     padding-bottom: 3rem !important;
 }
 /* overload bootstrap table property to overcome display overflow when table first loaded */
-.fixed-table-border{
+/* .fixed-table-border{
     height: 0 !important;
-}
+}  */
 
 #thead-custom{
     background-color: #0066cc;

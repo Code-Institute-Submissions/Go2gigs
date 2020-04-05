@@ -29,7 +29,7 @@ let player;
 function onYouTubeIframeAPIReady() {
     player = new YT.Player('player', {
         height: "280",
-        width: "360",
+        width: "320",
         videoId: ""
     });
 }

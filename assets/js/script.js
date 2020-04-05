@@ -1,14 +1,16 @@
-/**
- * Songkick api key
- * @type {string}
- */
-const songkickKey = 'P21PoIr1LmuJzJI7';
 
-/**
- * Youtube api key
- * @type {string}
- */
-const youtubeKey = 'AIzaSyBAFzHI4_cQraakFPRxi4haCOOnxiJaLXI';
+const songkickAPIKEY = 'P21PoIr1LmuJzJI7';
+const youtubeAPIKEY = 'AIzaSyBAFzHI4_cQraakFPRxi4haCOOnxiJaLXI';
+
+let autoSearch;
+let locations = [];
+let dataArr = [];
+let map;
+let markers = [];
+let checkinDate;
+let checkoutDate;
+let checkinDp;
+let checkoutDp;
 
 /**
  * Load the Youtube Iframe Player API code asynchronously
@@ -49,7 +51,6 @@ function playFormatter() {
 }
 
 $(document).ready(function () {
-    let autoSearch;
     /**
      * A function to autocomplete city user input
      * @function autocomplete
@@ -58,34 +59,11 @@ $(document).ready(function () {
         const options = {
             types: ['(cities)']
         };
-        /**
-         * Create the search box and link it to the UI element
-         * @type {HTMLElement} autosearch
-         */
+
         autoSearch = document.getElementById('user-input');
         new google.maps.places.Autocomplete(autoSearch, options);
     }
-
-    /**
-     * Array to store locations
-     * @type {Array<number>}
-     */
-    let locations = [];
-
-    let dataArr = [];
-
-    /**
-     * A variable to store a google map
-     * @type {object}
-     */
-    let map
-
-    /**
-     * Array to store map markers
-     * @type {Array<number>}
-     */
-    let markers = [];
-
+  
     /**
      * Clear all previous markers from the map array, create the map object
      * Map all locations in locations array to markers array, extend the bounds of the map, fit map to bounds
@@ -125,10 +103,6 @@ $(document).ready(function () {
             })
         });
 
-        /**
-         * A bounds variable to extend the bounds of the google map to include all markers
-         * @type {object}
-         */
         let bounds = new google.maps.LatLngBounds();
         for (let i = 0; i < locations.length; i++) {
             let loc = new google.maps.LatLng(locations[i].lat, locations[i].lng);
@@ -138,26 +112,6 @@ $(document).ready(function () {
         map.panToBounds(bounds);
         new MarkerClusterer(map, markers, { imagePath: '/assets/images/markImages/m' });
     }
-
-    /**
-     * @type {string} checkin_date - store date-from date
-     */
-    let checkinDate
-
-    /**
-     * @type {string} checkout_date - store date-to date
-     */
-    let checkoutDate
-
-    /**
-     * @type {object} checkin_dp - store the check in datepicker data
-     */
-    let checkinDp
-
-    /**
-     * @type {object} checkout_dp - store the check out datepicker data
-     */
-    let checkoutDp
 
     /**
      * Create check in datepicker at html element date-from
@@ -216,8 +170,8 @@ $(document).ready(function () {
 
     /**
      * When search-by drop down menu is changed change the user input placeholder,
-     * if this.val() == '0' the user has selected search by city
-     * if this.val() == '1' the user has selected search by artist
+     * if 0 the user has selected search by city
+     * if 1 the user has selected search by artist
      * based on the selection either run or remove the autocomplete function
      * @event change
      */
@@ -234,7 +188,7 @@ $(document).ready(function () {
     /**
      * When search function is called store user input data in variables, 
      * call the relevant function and reset the form
-     * @type {string} userInput - either a city (val == 0) or an artist (val == 1) string
+     * @type {string} userInput - either a city 0 or an artist 1 string
      * @type {string} dateFrom - a date string in the form YYYY-MM-DD
      * @type {string} dateTo - a date string in the form YYYY-MM-DD
      */
@@ -270,7 +224,6 @@ $(document).ready(function () {
     /**
      * A function which first fetches from songkick api the relevant metro area id for a location
      * then uses this metro id to fetch events in that area for the date range specified
-     * calculates how many pages are in the response, loops thru the pages and
      * pushes the event data and locations into data array and location array
      * load the data into the bootstrap table, initialises the google map and calls unhideScroll
      * @function findLocEvents
@@ -284,11 +237,11 @@ $(document).ready(function () {
         let pages = 1;
 
         try {
-            const idResponse = await fetch(`https://api.songkick.com/api/3.0/search/locations.json?query=${userInput}&apikey=${songkickKey}`)
+            const idResponse = await fetch(`https://api.songkick.com/api/3.0/search/locations.json?query=${userInput}&apikey=${songkickAPIKEY}`)
             let idData = await idResponse.json();
             let metroId = idData.resultsPage.results.location[0].metroArea.id;
 
-            const response = await fetch(`https://api.songkick.com/api/3.0/metro_areas/${metroId}/calendar.json?apikey=${songkickKey}&min_date=${dateFrom}&max_date=${dateTo}`)
+            const response = await fetch(`https://api.songkick.com/api/3.0/metro_areas/${metroId}/calendar.json?apikey=${songkickAPIKEY}&min_date=${dateFrom}&max_date=${dateTo}`)
             let data = await response.json();
             let total = data.resultsPage.totalEntries;
 
@@ -299,7 +252,7 @@ $(document).ready(function () {
             locations.length = 0;
 
             for (i = 1; i <= pages; i++) {
-                let responsePage = await fetch(`https://api.songkick.com/api/3.0/metro_areas/${metroId}/calendar.json?apikey=${songkickKey}&min_date=${dateFrom}&max_date=${dateTo}&page=${i}`)
+                let responsePage = await fetch(`https://api.songkick.com/api/3.0/metro_areas/${metroId}/calendar.json?apikey=${songkickAPIKEY}&min_date=${dateFrom}&max_date=${dateTo}&page=${i}`)
                 let responsePageJson = await responsePage.json();
                 let event = responsePageJson.resultsPage.results.event;
 
@@ -345,7 +298,7 @@ $(document).ready(function () {
         let pages = 1;
 
         try {
-            const response = await fetch(`https://api.songkick.com/api/3.0/events.json?apikey=${songkickKey}&artist_name=${userInput}&min_date=${dateFrom}&max_date=${dateTo}`)
+            const response = await fetch(`https://api.songkick.com/api/3.0/events.json?apikey=${songkickAPIKEY}&artist_name=${userInput}&min_date=${dateFrom}&max_date=${dateTo}`)
             let data = await response.json();
             let total = data.resultsPage.totalEntries;
 
@@ -357,7 +310,7 @@ $(document).ready(function () {
             locations.length = 0;
 
             for (i = 1; i <= pages; i++) {
-                let responsePage = await fetch(`https://api.songkick.com/api/3.0/events.json?apikey=${songkickKey}&artist_name=${userInput}&min_date=${dateFrom}&max_date=${dateTo}&page=${i}`)
+                let responsePage = await fetch(`https://api.songkick.com/api/3.0/events.json?apikey=${songkickAPIKEY}&artist_name=${userInput}&min_date=${dateFrom}&max_date=${dateTo}&page=${i}`)
                 let responsePageJson = await responsePage.json();
                 let event = responsePageJson.resultsPage.results.event;
 
@@ -423,7 +376,7 @@ $(document).ready(function () {
      */
     async function ytSearch(searchTerm) {
         try {
-            const response = await fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&q=${searchTerm}&type=playlist&key=${youtubeKey}&maxResults=${1}`)
+            const response = await fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&q=${searchTerm}&type=playlist&key=${youtubeAPIKEY}&maxResults=${1}`)
             let data = await response.json();
             console.log(data);
             let plist = data.items[0].id.playlistId;
@@ -495,13 +448,13 @@ $(document).ready(function () {
         $(parentDiv).addClass('error'); // add error class
         text.innerText = message; // add error message inside small 
     }
+
     /**
      * A function to remove error class
      * @param {HtmlElement} input - Html element to remove validation error
      */
     function removeErrorFor(input) {
         const parentDiv = input.parentElement;
-
         $(parentDiv).removeClass('error'); // remove error class
 
     }

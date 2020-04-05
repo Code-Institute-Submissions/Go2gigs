@@ -67,10 +67,18 @@ html{
 .err-text{
     visibility: hidden;
     position: absolute;
-    bottom: 0;
-    right: 0.5rem;
+    bottom: 0.5rem;
+    right: 2.5rem;
     font-family: 'Lato', sans-serif;
     font-size: 1rem;
+}
+
+.err-fas{
+    visibility: hidden;
+    position: absolute;
+    bottom: 0.5rem;
+    right: 0.5rem;
+    font-size: 1.5rem;
 }
 
 .form-col.error input{
@@ -84,6 +92,11 @@ html{
 }
 
 .form-col.error .err-text{
+    visibility: visible;
+    color: #dc3545;
+}
+
+.form-col.error .err-fas{
     visibility: visible;
     color: #dc3545;
 }
@@ -211,38 +224,43 @@ html{
 /*iPad Potrait View and above*/
 @media screen and (min-width: 768px) {
     #hero-text{
-    margin-top: 15vh;
-    padding-left: 10vw;
-    padding-right: 10vw;
-}
+        margin-top: 15vh;
+        padding-left: 10vw;
+        padding-right: 10vw;
+    }
     #hero-heading{
-    font-size: 5rem;
-}
+        font-size: 5rem;
+    }
     .search-font{
-    font-size: 1.5rem;
-}
+        font-size: 1.5rem;
+    }
     .table{
-    font-size: 1.5rem;
-}
+        font-size: 1.5rem;
+    }
     #data-col{
-    padding-right: 1rem;
-}
+        padding-right: 1rem;
+    }
     #modal-footnote{
-    font-size: 1.5rem;
-}
+        font-size: 1.5rem;
+    }
     #modal-closeBtn{
-    font-size: 1.5rem;
+        font-size: 1.5rem;
     }
     .form-col .err-text{
-    bottom: -2rem;
-    left: 0;
-    font-size: 1.2rem;
-}
+        bottom: -2.2rem;
+        left: 2rem;
+        font-size: 1.2rem;
+    }
+    .err-fas{
+        bottom: -2rem;
+        left: 0;
+        font-size: 1.5rem;
+    }
 }
 
 /*Desktop and above*/
 @media screen and (min-width: 1200px) {
     #hero-text{
-    margin-top: 20vh;
-}
+        margin-top: 20vh;
+    }
 }

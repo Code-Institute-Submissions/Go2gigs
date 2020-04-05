@@ -130,6 +130,11 @@ html{
     font-size: 1rem;
 }
 
+/* overload bootstrap table property to overcome display overflow when table first loaded */
+.fixed-table-border{
+    height: 0 !important;
+} 
+
 #thead-custom{
     background-color: #0066cc;
     color: #ffffff; 
@@ -253,10 +258,7 @@ html{
     .fixed-table-container{
         padding-bottom: 3rem !important;
     }
-    /* overload bootstrap table property to overcome display overflow when table first loaded */
-    .fixed-table-border{
-        height: 0 !important;
-    } 
+    
 }
 
 /*Desktop and above*/

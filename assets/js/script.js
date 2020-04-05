@@ -63,7 +63,7 @@ $(document).ready(function () {
         autoSearch = document.getElementById('user-input');
         new google.maps.places.Autocomplete(autoSearch, options);
     }
-  
+
     /**
      * Clear all previous markers from the map array, create the map object
      * Map all locations in locations array to markers array, extend the bounds of the map, fit map to bounds
@@ -304,7 +304,7 @@ $(document).ready(function () {
             if (total > 50) {
                 pages = Math.ceil(total / 50);
             }
-            
+
             dataArr.length = 0;
             locations.length = 0;
 
@@ -367,6 +367,10 @@ $(document).ready(function () {
         player.stopVideo()
     })
 
+    $(window).resize(function () {
+        $('#table').bootstrapTable('resetView')
+    })
+
     /**
      * A function to search for the top hit YouTube playlist when passed an artist name as a parameter
      * Find the playlist ID and load the YouTube player with the playlist
@@ -377,7 +381,6 @@ $(document).ready(function () {
         try {
             const response = await fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&q=${searchTerm}&type=playlist&key=${youtubeAPIKEY}&maxResults=${1}`)
             let data = await response.json();
-            console.log(data);
             let plist = data.items[0].id.playlistId;
             player.loadPlaylist({
                 list: plist

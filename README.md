@@ -58,7 +58,7 @@ Website key features include the following;
     * Play button which plays a **YouTube** playlist for that artist in a modal
     * **Google map** which displays event locations with **Google markers**
 
-* Footer Section - provides links to Go2Gigs social media pages and the songkick affiliate page
+* Footer Section - provides links to **Go2Gigs** social media pages and the songkick affiliate page
 
 ### Structure
 I want to keep the site as minimalist and clutter free as possible so that it is easy to use for the wide ranging demographic and so users are not overwhelmed with information.
@@ -114,7 +114,7 @@ Once the band has scheduled a gig in that city the user could then receive an em
 15. [Google Fonts](https://fonts.google.com/)
 
 ## Testing
-Please see the TEST.md file at this link [TEST.md](https://github.com/Conal84/Go2gigs/TEST.md) to understand how the Go2Gigs website was tested.
+Please see the TEST.md file at this link [TEST.md](TEST.md) to understand how the **Go2Gigs** website was tested.
 
 ## Deployment
 This project was developed using the GitPod IDE, version controlled by committing to git and pushing to GitHub via the GitPod IDE.
@@ -139,7 +139,7 @@ To clone this project from GitHub:
 6. Type git clone, and then paste the URL you copied in Step 3
 7. Press **Enter** your local clone will be created
 
-##Acknowledgements
+## Acknowledgements
 I would like to thank my mentor Simen for his valuable advice and guidance throughout the project.
 
 **This is for educational use**

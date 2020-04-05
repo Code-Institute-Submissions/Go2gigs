@@ -217,6 +217,9 @@ html{
     color: #fff;
 }
 
+#player{
+    padding: 1rem;
+}
 /* Media Queries */
 
 /*iPad Potrait View and above*/

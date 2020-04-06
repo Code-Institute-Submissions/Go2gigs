@@ -275,8 +275,15 @@ $(document).ready(function () {
         catch (err) {
             console.log('fetch failed', err);
         }
+        console.log(dataArr.length);
+        
         $('#table').bootstrapTable({ data: dataArr });
         $('#table').bootstrapTable('load', dataArr);
+        if (dataArr.length > 13){
+            $('#table').bootstrapTable( 'resetView' , {height: 600} );
+        }else{
+            $('#table').bootstrapTable( 'resetView' );
+        }
         initMap();
         unhideScroll();
     }
@@ -333,8 +340,16 @@ $(document).ready(function () {
         catch (err) {
             console.log('fetch failed', err);
         }
+
+        console.log(dataArr.length);
+        
         $('#table').bootstrapTable({ data: dataArr });
         $('#table').bootstrapTable('load', dataArr);
+        if (dataArr.length > 13){
+            $('#table').bootstrapTable( 'resetView' , {height: 600} );
+        }else{
+            $('#table').bootstrapTable( 'resetView' );
+        }
         initMap();
         unhideScroll();
     }

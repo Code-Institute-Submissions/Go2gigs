@@ -20,7 +20,8 @@ The responsive design was also physically tested on personal Iphone, IPad, deskt
 
 W3C CSS & HTML Validators and ICI wen accessibilty checker were used to check the validity and formatting of code.
 
-Fellow student feedback was also key to the testing procedure where other course participants provided me with some valuable tips. This advice included ………
+Fellow student feedback was also key to the testing procedure where other course participants provided me with some valuable tips. 
+This advice included updating my google marker image file path as it was incorrectly linked and the check the opaque overlay of the background image on mbile screen sizes.
 
 ### Responsiveness
 * **Plan:** The website needed to respond to different device sizes and to device orientation.

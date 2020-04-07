@@ -109,7 +109,7 @@ $(document).ready(function () {
         }
         map.fitBounds(bounds);
         map.panToBounds(bounds);
-        new MarkerClusterer(map, markers, { imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m' });
+        let markerCluster = new MarkerClusterer(map, markers, { imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m' });
     }
 
     /**

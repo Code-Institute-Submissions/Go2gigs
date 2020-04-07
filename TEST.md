@@ -84,3 +84,7 @@ another artist or track with a similar name.
 Fix: I have investigated the **YouTube** playlist object returned by the API fetch call to see if there is a popularity rating for the playlist or some other
 way of filtering the playlist to ensure that the correct playlist is found but this data does not exist in the playlist object.
 Verdict: This bug still exists.
+
+Bug: When the user performs an artist search the autocomplete city is not required. A clear instance listener is included in the script file to diable this autocomplete functionality
+when searching by artist. This clear instance throws an error to the console.
+Verdict: THis bug still exists.

@@ -275,18 +275,9 @@ $(document).ready(function () {
         catch (err) {
             console.log('fetch failed', err);
         }
-        console.log(dataArr.length);
         
-        
-        if (dataArr.length > 13){
-            $('#table').bootstrapTable({ data: dataArr });
-            $('#table').bootstrapTable('load', dataArr);
-            $('#table').bootstrapTable('resetView' , {height: 600});
-        }else{
-            $('#table').bootstrapTable({ data: dataArr });
-            $('#table').bootstrapTable('load', dataArr);
-            $('#table').bootstrapTable('resetView');
-        }
+        $('#table').bootstrapTable({ data: dataArr });
+        $('#table').bootstrapTable('load', dataArr);
         initMap();
         unhideScroll();
     }
@@ -343,20 +334,9 @@ $(document).ready(function () {
         catch (err) {
             console.log('fetch failed', err);
         }
-
-        console.log(dataArr.length);
         
         $('#table').bootstrapTable({ data: dataArr });
         $('#table').bootstrapTable('load', dataArr);
-        if (dataArr.length > 13){
-            $('#table').bootstrapTable('resetView', {height: 600});
-            $('#table').bootstrapTable({ data: dataArr });
-            $('#table').bootstrapTable('load', dataArr);
-        }else{
-            $('#table').bootstrapTable('resetView');
-            $('#table').bootstrapTable({ data: dataArr });
-            $('#table').bootstrapTable('load', dataArr);
-        }
         initMap();
         unhideScroll();
     }
